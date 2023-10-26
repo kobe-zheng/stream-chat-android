@@ -28,6 +28,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -111,8 +113,8 @@ public fun MessageListHeader(
     },
     trailingContent: @Composable RowScope.() -> Unit = {
         DefaultMessageListHeaderTrailingContent(
-            channel = channel,
-            currentUser = currentUser,
+            // channel = channel,
+            // currentUser = currentUser,
             onClick = onChannelAvatarClick,
         )
     },
@@ -294,15 +296,28 @@ internal fun DefaultMessageListHeaderSubtitle(
  */
 @Composable
 internal fun DefaultMessageListHeaderTrailingContent(
-    channel: Channel,
-    currentUser: User?,
+    // channel: Channel,
+    // currentUser: User?,
     onClick: () -> Unit,
 ) {
-    ChannelAvatar(
-        modifier = Modifier.size(40.dp),
-        channel = channel,
-        currentUser = currentUser,
-        contentDescription = channel.name,
+    // ChannelAvatar(
+    //     modifier = Modifier.size(40.dp),
+    //     channel = channel,
+    //     currentUser = currentUser,
+    //     contentDescription = channel.name,
+    //     onClick = onClick,
+    // )
+    IconButton(
+        enabled = true,
+        modifier = Modifier
+            .size(32.dp)
+            .padding(4.dp),
+        content = {
+            Icon(
+                painter = painterResource(id = R.drawable.stream_compose_ic_attachments),
+                contentDescription = stringResource(id = R.string.stream_compose_attachments),
+            )
+        },
         onClick = onClick,
     )
 }
