@@ -215,10 +215,13 @@ public class MessageComposerViewModel(
      */
     public fun selectCommand(command: Command): Unit = messageComposerController.selectCommand(command)
 
+    /*
     /**
      * Toggles the visibility of the command suggestion list popup.
      */
     public fun toggleCommandsVisibility(): Unit = messageComposerController.toggleCommandsVisibility()
+
+     */
 
     /**
      * Sets the typing updates buffer.

@@ -270,7 +270,7 @@ class MessagesActivity : BaseConnectedActivity() {
                 .wrapContentHeight(),
             viewModel = composerViewModel,
             statefulStreamMediaRecorder = statefulStreamMediaRecorder,
-            integrations = {},
+            // integrations = {},
             input = { inputState ->
                 MessageInput(
                     modifier = Modifier
