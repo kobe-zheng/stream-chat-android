@@ -129,8 +129,8 @@ public fun MessagesScreen(
 ) {
     val listViewModel = viewModel(MessageListViewModel::class.java, factory = viewModelFactory)
     val composerViewModel = viewModel(MessageComposerViewModel::class.java, factory = viewModelFactory)
-    val attachmentsPickerViewModel =
-        viewModel(AttachmentsPickerViewModel::class.java, factory = viewModelFactory)
+    // val attachmentsPickerViewModel =
+    //     viewModel(AttachmentsPickerViewModel::class.java, factory = viewModelFactory)
 
     val messageMode = listViewModel.messageMode
 
@@ -138,7 +138,7 @@ public fun MessagesScreen(
         composerViewModel.setMessageMode(messageMode)
     }
 
-    val backAction = remember(listViewModel, composerViewModel, attachmentsPickerViewModel) {
+    val backAction = remember(listViewModel, composerViewModel/*, attachmentsPickerViewModel*/) {
         {
             val isInThread = listViewModel.isInThread
             val isShowingOverlay = listViewModel.isShowingOverlay
