@@ -154,6 +154,7 @@ public class MessageComposerViewModel(
     public fun addSelectedAttachments(attachments: List<Attachment>): Unit =
         messageComposerController.addSelectedAttachments(attachments)
 
+    /*
     /**
      * Removes a selected attachment from the list, when the user taps on the cancel/delete button.
      *
@@ -163,6 +164,7 @@ public class MessageComposerViewModel(
      */
     public fun removeSelectedAttachment(attachment: Attachment): Unit =
         messageComposerController.removeSelectedAttachment(attachment)
+     */
 
     /**
      * Sends a given message using our Stream API. Based on the internal state, we either edit an existing message,

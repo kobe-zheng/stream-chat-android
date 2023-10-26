@@ -141,7 +141,7 @@ public fun MessageComposer(
     // onAttachmentsClick: () -> Unit = {},
     onCommandsClick: () -> Unit = {},
     onValueChange: (String) -> Unit = { viewModel.setMessageInput(it) },
-    onAttachmentRemoved: (Attachment) -> Unit = { viewModel.removeSelectedAttachment(it) },
+    // onAttachmentRemoved: (Attachment) -> Unit = { viewModel.removeSelectedAttachment(it) },
     onCancelAction: () -> Unit = { viewModel.dismissMessageActions() },
     onMentionSelected: (User) -> Unit = { viewModel.selectMention(it) },
     onCommandSelected: (Command) -> Unit = { viewModel.selectCommand(it) },
@@ -184,7 +184,7 @@ public fun MessageComposer(
         DefaultComposerInputContent(
             messageComposerState = it,
             onValueChange = onValueChange,
-            onAttachmentRemoved = onAttachmentRemoved,
+            // onAttachmentRemoved = onAttachmentRemoved,
             label = label,
         )
     },
@@ -317,7 +317,7 @@ public fun MessageComposer(
         DefaultComposerInputContent(
             messageComposerState = messageComposerState,
             onValueChange = onValueChange,
-            onAttachmentRemoved = onAttachmentRemoved,
+            // onAttachmentRemoved = onAttachmentRemoved,
             label = label,
         )
     },
@@ -611,7 +611,7 @@ internal fun DefaultComposerLabel(ownCapabilities: Set<String>) {
 private fun RowScope.DefaultComposerInputContent(
     messageComposerState: MessageComposerState,
     onValueChange: (String) -> Unit,
-    onAttachmentRemoved: (Attachment) -> Unit,
+    // onAttachmentRemoved: (Attachment) -> Unit,
     label: @Composable (MessageComposerState) -> Unit,
 ) {
     MessageInput(
@@ -622,7 +622,7 @@ private fun RowScope.DefaultComposerInputContent(
         label = label,
         messageComposerState = messageComposerState,
         onValueChange = onValueChange,
-        onAttachmentRemoved = onAttachmentRemoved,
+        // onAttachmentRemoved = onAttachmentRemoved,
     )
 }
 

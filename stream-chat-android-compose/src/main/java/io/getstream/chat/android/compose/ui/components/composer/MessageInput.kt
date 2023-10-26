@@ -59,7 +59,7 @@ import io.getstream.chat.android.ui.common.state.messages.composer.MessageCompos
 public fun MessageInput(
     messageComposerState: MessageComposerState,
     onValueChange: (String) -> Unit,
-    onAttachmentRemoved: (Attachment) -> Unit,
+    // onAttachmentRemoved: (Attachment) -> Unit,
     modifier: Modifier = Modifier,
     maxLines: Int = DefaultMessageInputMaxLines,
     keyboardOptions: KeyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
@@ -103,7 +103,7 @@ public fun MessageInput(
                             .fillMaxWidth()
                             .wrapContentHeight(),
                         attachments = attachments,
-                        onAttachmentRemoved = onAttachmentRemoved,
+                        onAttachmentRemoved = {}/*onAttachmentRemoved*/,
                     )
 
                     Spacer(modifier = Modifier.size(16.dp))

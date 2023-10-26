@@ -279,7 +279,7 @@ class MessagesActivity : BaseConnectedActivity() {
                         .padding(start = 8.dp),
                     messageComposerState = inputState,
                     onValueChange = { composerViewModel.setMessageInput(it) },
-                    onAttachmentRemoved = { composerViewModel.removeSelectedAttachment(it) },
+                    // onAttachmentRemoved = { composerViewModel.removeSelectedAttachment(it) },
                     label = {
                         Row(
                             Modifier.wrapContentWidth(),
