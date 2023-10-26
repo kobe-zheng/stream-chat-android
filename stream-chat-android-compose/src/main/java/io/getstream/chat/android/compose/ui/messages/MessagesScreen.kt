@@ -212,12 +212,13 @@ public fun MessagesScreen(
                     onSendMessage = remember(composerViewModel) {
                         {
                                 message ->
-                            composerViewModel.sendMessage(
-                                message.copy(
-                                    skipPushNotification = skipPushNotification,
-                                    skipEnrichUrl = skipEnrichUrl,
-                                ),
-                            )
+                            // composerViewModel.sendMessage(
+                            //     message.copy(
+                            //         skipPushNotification = skipPushNotification,
+                            //         skipEnrichUrl = skipEnrichUrl,
+                            //     ),
+                            // )
+                            listViewModel.sendMessage(message)
                         }
                     },
                     statefulStreamMediaRecorder = statefulStreamMediaRecorder,

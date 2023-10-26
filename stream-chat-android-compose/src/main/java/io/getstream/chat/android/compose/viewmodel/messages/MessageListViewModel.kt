@@ -33,10 +33,13 @@ import io.getstream.chat.android.ui.common.state.messages.MessageMode
 import io.getstream.chat.android.ui.common.state.messages.list.DeletedMessageVisibility
 import io.getstream.chat.android.ui.common.state.messages.list.GiphyAction
 import io.getstream.chat.android.ui.common.state.messages.list.MessageFooterVisibility
+import io.getstream.chat.android.ui.common.state.messages.list.MessageItemState
+import io.getstream.chat.android.ui.common.state.messages.list.MessageListItemState
 import io.getstream.chat.android.ui.common.state.messages.list.MessageListState
 import io.getstream.chat.android.ui.common.state.messages.list.NewMessageState
 import io.getstream.log.taggedLogger
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -62,11 +65,33 @@ public class MessageListViewModel(
         get() = if (isInThread) threadMessagesState else messagesState
 
     /**
+     * Current state of the message list.
+     */
+    private val _messageListState: MutableStateFlow<MessageListState> =
+        MutableStateFlow(MessageListState(isLoading = false))
+    private val messageListState: StateFlow<MessageListState> = _messageListState
+
+    /**
      * State of the screen, for [MessageMode.Normal].
      */
-    private val messagesState: MessageListState by messageListController.messageListState
+    private val messagesState: MessageListState by messageListState
         .map { it.copy(messageItems = it.messageItems.reversed()) }
         .asState(viewModelScope, MessageListState())
+
+    /**
+     * Sends a message by adding it to list of messages.
+     */
+    public fun sendMessage(message: Message) {
+        val items = mutableListOf<MessageListItemState>().apply {
+            addAll(_messageListState.value.messageItems)
+        }
+
+        items.add(MessageItemState(message = message.copy(id = message.text), isMine = true))
+
+        _messageListState.value = _messageListState.value.copy(
+            messageItems = items
+        )
+    }
 
     /**
      * State of the screen, for [MessageMode.MessageThread].
