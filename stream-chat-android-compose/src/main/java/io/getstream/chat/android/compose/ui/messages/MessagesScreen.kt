@@ -144,9 +144,9 @@ public fun MessagesScreen(
             val isShowingOverlay = listViewModel.isShowingOverlay
 
             when {
-                attachmentsPickerViewModel.isShowingAttachments -> attachmentsPickerViewModel.changeAttachmentState(
-                    false,
-                )
+                // attachmentsPickerViewModel.isShowingAttachments -> attachmentsPickerViewModel.changeAttachmentState(
+                //     false,
+                // )
 
                 isShowingOverlay -> listViewModel.selectMessage(null)
                 isInThread -> {
@@ -195,6 +195,7 @@ public fun MessagesScreen(
                         .wrapContentHeight()
                         .align(Alignment.Center),
                     viewModel = composerViewModel,
+                    /*
                     onAttachmentsClick = remember(attachmentsPickerViewModel) {
                         {
                             attachmentsPickerViewModel.changeAttachmentState(
@@ -202,6 +203,7 @@ public fun MessagesScreen(
                             )
                         }
                     },
+                     */
                     onCommandsClick = remember(composerViewModel) { { composerViewModel.toggleCommandsVisibility() } },
                     onCancelAction = remember(listViewModel, composerViewModel) {
                         {
@@ -282,10 +284,12 @@ public fun MessagesScreen(
             skipPushNotification = skipPushNotification,
             skipEnrichUrl = skipEnrichUrl,
         )
+        /*
         AttachmentsPickerMenu(
             attachmentsPickerViewModel = attachmentsPickerViewModel,
             composerViewModel = composerViewModel,
         )
+         */
         MessageModerationDialog(
             listViewModel = listViewModel,
             composerViewModel = composerViewModel,
@@ -537,7 +541,7 @@ private fun BoxScope.MessagesScreenReactionsPicker(
         )
     }
 }
-
+/*
 /**
  * Contains the attachments picker menu wrapped inside
  * of an animated composable.
@@ -591,7 +595,7 @@ private fun BoxScope.AttachmentsPickerMenu(
         )
     }
 }
-
+*/
 /**
  * Contains the dialog for a message that needs to be moderated.
  *

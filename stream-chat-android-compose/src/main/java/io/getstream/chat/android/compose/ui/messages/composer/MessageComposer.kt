@@ -138,7 +138,7 @@ public fun MessageComposer(
     modifier: Modifier = Modifier,
     statefulStreamMediaRecorder: StatefulStreamMediaRecorder? = null,
     onSendMessage: (Message) -> Unit = { viewModel.sendMessage(it) },
-    onAttachmentsClick: () -> Unit = {},
+    // onAttachmentsClick: () -> Unit = {},
     onCommandsClick: () -> Unit = {},
     onValueChange: (String) -> Unit = { viewModel.setMessageInput(it) },
     onAttachmentRemoved: (Attachment) -> Unit = { viewModel.removeSelectedAttachment(it) },
@@ -174,7 +174,7 @@ public fun MessageComposer(
     integrations: @Composable RowScope.(MessageComposerState) -> Unit = {
         DefaultComposerIntegrations(
             messageInputState = it,
-            onAttachmentsClick = onAttachmentsClick,
+            // onAttachmentsClick = onAttachmentsClick,
             onCommandsClick = onCommandsClick,
             ownCapabilities = it.ownCapabilities,
         )
@@ -271,7 +271,7 @@ public fun MessageComposer(
     onSendMessage: (String, List<Attachment>) -> Unit,
     modifier: Modifier = Modifier,
     statefulStreamMediaRecorder: StatefulStreamMediaRecorder? = null,
-    onAttachmentsClick: () -> Unit = {},
+    // onAttachmentsClick: () -> Unit = {},
     onCommandsClick: () -> Unit = {},
     onValueChange: (String) -> Unit = {},
     onAttachmentRemoved: (Attachment) -> Unit = {},
@@ -307,7 +307,7 @@ public fun MessageComposer(
     integrations: @Composable RowScope.(MessageComposerState) -> Unit = {
         DefaultComposerIntegrations(
             messageInputState = it,
-            onAttachmentsClick = onAttachmentsClick,
+            // onAttachmentsClick = onAttachmentsClick,
             onCommandsClick = onCommandsClick,
             ownCapabilities = messageComposerState.ownCapabilities,
         )
@@ -502,21 +502,21 @@ internal fun DefaultCommandPopupContent(
 @Composable
 internal fun DefaultComposerIntegrations(
     messageInputState: MessageComposerState,
-    onAttachmentsClick: () -> Unit,
+    // onAttachmentsClick: () -> Unit,
     onCommandsClick: () -> Unit,
     ownCapabilities: Set<String>,
 ) {
     val hasTextInput = messageInputState.inputValue.isNotEmpty()
     val hasAttachments = messageInputState.attachments.isNotEmpty()
-    val hasCommandInput = messageInputState.inputValue.startsWith("/")
+    // val hasCommandInput = messageInputState.inputValue.startsWith("/")
     val hasCommandSuggestions = messageInputState.commandSuggestions.isNotEmpty()
-    val hasMentionSuggestions = messageInputState.mentionSuggestions.isNotEmpty()
+    // val hasMentionSuggestions = messageInputState.mentionSuggestions.isNotEmpty()
 
-    val isAttachmentsButtonEnabled = !hasCommandInput && !hasCommandSuggestions && !hasMentionSuggestions
+    // val isAttachmentsButtonEnabled = !hasCommandInput && !hasCommandSuggestions && !hasMentionSuggestions
     val isCommandsButtonEnabled = !hasTextInput && !hasAttachments
 
     val canSendMessage = ownCapabilities.contains(ChannelCapabilities.SEND_MESSAGE)
-    val canSendAttachments = ownCapabilities.contains(ChannelCapabilities.UPLOAD_FILE)
+    // val canSendAttachments = ownCapabilities.contains(ChannelCapabilities.UPLOAD_FILE)
 
     if (canSendMessage) {
         Row(
@@ -525,6 +525,7 @@ internal fun DefaultComposerIntegrations(
                 .padding(horizontal = 4.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
+            /*
             if (canSendAttachments) {
                 IconButton(
                     enabled = isAttachmentsButtonEnabled,
@@ -545,6 +546,7 @@ internal fun DefaultComposerIntegrations(
                     onClick = onAttachmentsClick,
                 )
             }
+             */
 
             val commandsButtonTint = if (hasCommandSuggestions && isCommandsButtonEnabled) {
                 ChatTheme.colors.primaryAccent
