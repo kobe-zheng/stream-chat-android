@@ -16,8 +16,6 @@
 
 package io.getstream.chat.android.compose.ui.messages.header
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -33,12 +31,10 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -47,19 +43,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.compose.R
-import io.getstream.chat.android.compose.previewdata.PreviewChannelData
-import io.getstream.chat.android.compose.previewdata.PreviewUserData
 import io.getstream.chat.android.compose.ui.components.BackButton
 import io.getstream.chat.android.compose.ui.components.NetworkLoadingIndicator
 import io.getstream.chat.android.compose.ui.components.TypingIndicator
 import io.getstream.chat.android.compose.ui.components.avatar.ChannelAvatar
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
-import io.getstream.chat.android.compose.ui.util.getMembersStatusText
 import io.getstream.chat.android.compose.ui.util.mirrorRtl
 import io.getstream.chat.android.models.Channel
 import io.getstream.chat.android.models.ConnectionState
-import io.getstream.chat.android.models.User
-import io.getstream.chat.android.ui.common.state.messages.MessageMode
 
 /**
  * A clean, decoupled UI element that doesn't rely on ViewModels or our custom architecture setup.
@@ -85,12 +76,12 @@ import io.getstream.chat.android.ui.common.state.messages.MessageMode
  */
 @Composable
 public fun MessageListHeader(
-    channel: Channel,
-    currentUser: User?,
+    // channel: Channel,
+    // currentUser: User?,
     connectionState: ConnectionState,
     modifier: Modifier = Modifier,
-    typingUsers: List<User> = emptyList(),
-    messageMode: MessageMode = MessageMode.Normal,
+    // typingUsers: List<User> = emptyList(),
+    // messageMode: MessageMode = MessageMode.Normal,
     color: Color = ChatTheme.colors.barsBackground,
     shape: Shape = ChatTheme.shapes.header,
     elevation: Dp = ChatTheme.dimens.headerElevation,
@@ -103,10 +94,10 @@ public fun MessageListHeader(
     centerContent: @Composable RowScope.() -> Unit = {
         DefaultMessageListHeaderCenterContent(
             modifier = Modifier.weight(1f),
-            channel = channel,
-            currentUser = currentUser,
-            typingUsers = typingUsers,
-            messageMode = messageMode,
+            // channel = channel,
+            // currentUser = currentUser,
+            // typingUsers = typingUsers,
+            // messageMode = messageMode,
             onHeaderTitleClick = onHeaderTitleClick,
             connectionState = connectionState,
         )
@@ -170,35 +161,40 @@ internal fun DefaultMessageListHeaderLeadingContent(onBackPressed: () -> Unit) {
  */
 @Composable
 public fun DefaultMessageListHeaderCenterContent(
-    channel: Channel,
-    currentUser: User?,
+    // channel: Channel,
+    // currentUser: User?,
     connectionState: ConnectionState,
     modifier: Modifier = Modifier,
-    typingUsers: List<User> = emptyList(),
-    messageMode: MessageMode = MessageMode.Normal,
+    // typingUsers: List<User> = emptyList(),
+    // messageMode: MessageMode = MessageMode.Normal,
     onHeaderTitleClick: (Channel) -> Unit = {},
 ) {
-    val title = when (messageMode) {
-        MessageMode.Normal -> ChatTheme.channelNameFormatter.formatChannelName(channel, currentUser)
-        is MessageMode.MessageThread -> stringResource(id = R.string.stream_compose_thread_title)
-    }
+    val title = "ChatBot"
+    //     when (messageMode) {
+    //     MessageMode.Normal -> ChatTheme.channelNameFormatter.formatChannelName(channel, currentUser)
+    //     is MessageMode.MessageThread -> stringResource(id = R.string.stream_compose_thread_title)
+    // }
 
-    val subtitle = when (messageMode) {
-        MessageMode.Normal -> channel.getMembersStatusText(LocalContext.current, currentUser)
-        is MessageMode.MessageThread -> stringResource(
-            R.string.stream_compose_thread_subtitle,
-            ChatTheme.channelNameFormatter.formatChannelName(channel, currentUser),
-        )
-    }
+    val subtitle = "Initial Implementation"
+    //     when (messageMode) {
+    //     MessageMode.Normal -> channel.getMembersStatusText(LocalContext.current, currentUser)
+    //     is MessageMode.MessageThread -> stringResource(
+    //         R.string.stream_compose_thread_subtitle,
+    //         ChatTheme.channelNameFormatter.formatChannelName(channel, currentUser),
+    //     )
+    // }
 
     Column(
         modifier = modifier
-            .height(IntrinsicSize.Max)
+            .height(IntrinsicSize.Max),
+        /*
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null,
                 onClick = { onHeaderTitleClick(channel) },
             ),
+
+         */
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
@@ -214,7 +210,7 @@ public fun DefaultMessageListHeaderCenterContent(
             is ConnectionState.Connected -> {
                 DefaultMessageListHeaderSubtitle(
                     subtitle = subtitle,
-                    typingUsers = typingUsers,
+                    // typingUsers = typingUsers,
                 )
             }
             is ConnectionState.Connecting -> {
@@ -248,12 +244,51 @@ public fun DefaultMessageListHeaderCenterContent(
 @Composable
 internal fun DefaultMessageListHeaderSubtitle(
     subtitle: String,
-    typingUsers: List<User>,
+    // typingUsers: List<User>,
 ) {
     val textColor = ChatTheme.colors.textLowEmphasis
     val textStyle = ChatTheme.typography.footnote
+    //
+    // if (typingUsers.isEmpty()) {
+    //     Text(
+    //         text = subtitle,
+    //         color = textColor,
+    //         style = textStyle,
+    //         maxLines = 1,
+    //         overflow = TextOverflow.Ellipsis,
+    //     )
+    // } else {
+    //     Row(
+    //         modifier = Modifier,
+    //         horizontalArrangement = Arrangement.spacedBy(6.dp),
+    //         verticalAlignment = Alignment.CenterVertically,
+    //     ) {
+    //         val typingUsersText = LocalContext.current.resources.getQuantityString(
+    //             R.plurals.stream_compose_message_list_header_typing_users,
+    //             typingUsers.size,
+    //             typingUsers.first().name,
+    //             typingUsers.size - 1,
+    //         )
+    //
+    //         TypingIndicator()
+    //
+    //         Text(
+    //             text = typingUsersText,
+    //             color = textColor,
+    //             style = textStyle,
+    //             maxLines = 1,
+    //             overflow = TextOverflow.Ellipsis,
+    //         )
+    //     }
+    // }
 
-    if (typingUsers.isEmpty()) {
+    Row(
+        modifier = Modifier,
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        TypingIndicator()
+
         Text(
             text = subtitle,
             color = textColor,
@@ -261,29 +296,6 @@ internal fun DefaultMessageListHeaderSubtitle(
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
-    } else {
-        Row(
-            modifier = Modifier,
-            horizontalArrangement = Arrangement.spacedBy(6.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            val typingUsersText = LocalContext.current.resources.getQuantityString(
-                R.plurals.stream_compose_message_list_header_typing_users,
-                typingUsers.size,
-                typingUsers.first().name,
-                typingUsers.size - 1,
-            )
-
-            TypingIndicator()
-
-            Text(
-                text = typingUsersText,
-                color = textColor,
-                style = textStyle,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
-        }
     }
 }
 
@@ -330,8 +342,8 @@ private fun MessageListHeaderConnectedPreview() {
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight(),
-            channel = PreviewChannelData.channelWithImage,
-            currentUser = PreviewUserData.user1,
+            // channel = PreviewChannelData.channelWithImage,
+            // currentUser = PreviewUserData.user1,
             connectionState = ConnectionState.Connected,
         )
     }
@@ -345,8 +357,8 @@ private fun MessageListHeaderConnectingPreview() {
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight(),
-            channel = PreviewChannelData.channelWithImage,
-            currentUser = PreviewUserData.user1,
+            // channel = PreviewChannelData.channelWithImage,
+            // currentUser = PreviewUserData.user1,
             connectionState = ConnectionState.Connecting,
         )
     }
@@ -360,8 +372,8 @@ private fun MessageListHeaderOfflinePreview() {
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight(),
-            channel = PreviewChannelData.channelWithImage,
-            currentUser = PreviewUserData.user1,
+            // channel = PreviewChannelData.channelWithImage,
+            // currentUser = PreviewUserData.user1,
             connectionState = ConnectionState.Offline,
         )
     }
@@ -375,9 +387,9 @@ private fun MessageListHeaderUserTypingPreview() {
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight(),
-            channel = PreviewChannelData.channelWithImage,
-            currentUser = PreviewUserData.user1,
-            typingUsers = listOf(PreviewUserData.user2),
+            // channel = PreviewChannelData.channelWithImage,
+            // currentUser = PreviewUserData.user1,
+            // typingUsers = listOf(PreviewUserData.user2),
             connectionState = ConnectionState.Connected,
         )
     }
@@ -391,8 +403,8 @@ private fun MessageListHeaderManyMembersPreview() {
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight(),
-            channel = PreviewChannelData.channelWithManyMembers,
-            currentUser = PreviewUserData.user1,
+            // channel = PreviewChannelData.channelWithManyMembers,
+            // currentUser = PreviewUserData.user1,
             connectionState = ConnectionState.Connected,
         )
     }

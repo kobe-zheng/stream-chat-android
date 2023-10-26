@@ -28,17 +28,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -52,7 +48,6 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessagesViewModelFactory
-import io.getstream.chat.android.guides.R
 import io.getstream.chat.android.guides.catalog.compose.customattachments.factory.dateAttachmentFactory
 import io.getstream.chat.android.guides.catalog.compose.customattachments.factory.quotedDateAttachmentFactory
 import io.getstream.chat.android.models.Attachment
@@ -126,9 +121,9 @@ class MessagesActivity : AppCompatActivity() {
                 topBar = {
                     MessageListHeader(
                         modifier = Modifier.height(56.dp),
-                        channel = messageListViewModel.channel,
-                        currentUser = currentUser,
-                        messageMode = messageMode,
+                        // channel = messageListViewModel.channel,
+                        // currentUser = currentUser,
+                        // messageMode = messageMode,
                         onBackPressed = onBackPressed,
                         connectionState = connectionState,
                     )
@@ -190,31 +185,31 @@ class MessagesActivity : AppCompatActivity() {
             viewModel = viewModel,
             // TODO add this and related entries to docs when documentation effort occurs
             statefulStreamMediaRecorder = statefulStreamMediaRecorder,
-            integrations = {
-                IconButton(
-                    modifier = Modifier
-                        .size(48.dp)
-                        .padding(12.dp),
-                    content = {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_calendar),
-                            contentDescription = null,
-                            tint = ChatTheme.colors.textLowEmphasis,
-                        )
-                    },
-                    onClick = {
-                        MaterialDatePicker.Builder
-                            .datePicker()
-                            .build()
-                            .apply {
-                                show(activity.supportFragmentManager, null)
-                                addOnPositiveButtonClickListener {
-                                    onDateSelected(it)
-                                }
-                            }
-                    },
-                )
-            },
+            // integrations = {
+            //     IconButton(
+            //         modifier = Modifier
+            //             .size(48.dp)
+            //             .padding(12.dp),
+            //         content = {
+            //             Icon(
+            //                 painter = painterResource(id = R.drawable.ic_calendar),
+            //                 contentDescription = null,
+            //                 tint = ChatTheme.colors.textLowEmphasis,
+            //             )
+            //         },
+            //         onClick = {
+            //             MaterialDatePicker.Builder
+            //                 .datePicker()
+            //                 .build()
+            //                 .apply {
+            //                     show(activity.supportFragmentManager, null)
+            //                     addOnPositiveButtonClickListener {
+            //                         onDateSelected(it)
+            //                     }
+            //                 }
+            //         },
+            //     )
+            // },
         )
     }
 

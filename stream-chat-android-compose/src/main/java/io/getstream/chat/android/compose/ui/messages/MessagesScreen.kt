@@ -170,16 +170,16 @@ public fun MessagesScreen(
             topBar = {
                 if (showHeader) {
                     val connectionState by listViewModel.connectionState.collectAsState()
-                    val user by listViewModel.user.collectAsState()
+                    // val user by listViewModel.user.collectAsState()
 
                     MessageListHeader(
                         modifier = Modifier
                             .height(56.dp),
-                        channel = listViewModel.channel,
-                        currentUser = user,
-                        typingUsers = listViewModel.typingUsers,
+                        // channel = listViewModel.channel,
+                        // currentUser = user,
+                        // typingUsers = listViewModel.typingUsers,
                         connectionState = connectionState,
-                        messageMode = messageMode,
+                        // messageMode = messageMode,
                         onBackPressed = backAction,
                         onHeaderTitleClick = onHeaderTitleClick,
                         onChannelAvatarClick = onChannelAvatarClick,
