@@ -72,7 +72,6 @@ import io.getstream.chat.android.compose.ui.attachments.audio.RunningWaveForm
 import io.getstream.chat.android.compose.ui.components.composer.CoolDownIndicator
 import io.getstream.chat.android.compose.ui.components.composer.MessageInput
 import io.getstream.chat.android.compose.ui.components.composer.MessageInputOptions
-import io.getstream.chat.android.compose.ui.components.suggestions.mentions.MentionSuggestionList
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.ui.util.AboveAnchorPopupPositionProvider
 import io.getstream.chat.android.compose.ui.util.mirrorRtl
@@ -80,7 +79,6 @@ import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewM
 import io.getstream.chat.android.models.Attachment
 import io.getstream.chat.android.models.ChannelCapabilities
 import io.getstream.chat.android.models.Message
-import io.getstream.chat.android.models.User
 import io.getstream.chat.android.ui.common.state.messages.Edit
 import io.getstream.chat.android.ui.common.state.messages.composer.MessageComposerState
 import io.getstream.chat.android.ui.common.state.messages.composer.ValidationError
@@ -135,9 +133,9 @@ public fun MessageComposer(
     onValueChange: (String) -> Unit = { viewModel.setMessageInput(it) },
     // onAttachmentRemoved: (Attachment) -> Unit = { viewModel.removeSelectedAttachment(it) },
     onCancelAction: () -> Unit = { viewModel.dismissMessageActions() },
-    onMentionSelected: (User) -> Unit = { viewModel.selectMention(it) },
+    // onMentionSelected: (User) -> Unit = { viewModel.selectMention(it) },
     // onCommandSelected: (Command) -> Unit = { viewModel.selectCommand(it) },
-    onAlsoSendToChannelSelected: (Boolean) -> Unit = { viewModel.setAlsoSendToChannel(it) },
+    // onAlsoSendToChannelSelected: (Boolean) -> Unit = { viewModel.setAlsoSendToChannel(it) },
     onRecordingSaved: (Attachment) -> Unit = { viewModel.addSelectedAttachments(listOf(it)) },
     headerContent: @Composable ColumnScope.(MessageComposerState) -> Unit = {
         DefaultMessageComposerHeaderContent(
@@ -153,12 +151,14 @@ public fun MessageComposer(
         )
     },
      */
+    /*
     mentionPopupContent: @Composable (List<User>) -> Unit = {
         DefaultMentionPopupContent(
             mentionSuggestions = it,
             onMentionSelected = onMentionSelected,
         )
     },
+     */
     // commandPopupContent: @Composable (List<Command>) -> Unit = {
     //     DefaultCommandPopupContent(
     //         commandSuggestions = it,
@@ -214,12 +214,12 @@ public fun MessageComposer(
 
             onSendMessage(messageWithData)
         },
-        onMentionSelected = onMentionSelected,
+        // onMentionSelected = onMentionSelected,
         // onCommandSelected = onCommandSelected,
-        onAlsoSendToChannelSelected = onAlsoSendToChannelSelected,
+        // onAlsoSendToChannelSelected = onAlsoSendToChannelSelected,
         headerContent = headerContent,
         // footerContent = footerContent,
-        mentionPopupContent = mentionPopupContent,
+        // mentionPopupContent = mentionPopupContent,
         // commandPopupContent = commandPopupContent,
         // integrations = integrations,
         input = input,
@@ -272,9 +272,9 @@ public fun MessageComposer(
     onValueChange: (String) -> Unit = {},
     // onAttachmentRemoved: (Attachment) -> Unit = {},
     onCancelAction: () -> Unit = {},
-    onMentionSelected: (User) -> Unit = {},
+    // onMentionSelected: (User) -> Unit = {},
     // onCommandSelected: (Command) -> Unit = {},
-    onAlsoSendToChannelSelected: (Boolean) -> Unit = {},
+    // onAlsoSendToChannelSelected: (Boolean) -> Unit = {},
     onRecordingSaved: (Attachment) -> Unit = {},
     headerContent: @Composable ColumnScope.(MessageComposerState) -> Unit = {
         DefaultMessageComposerHeaderContent(
@@ -288,12 +288,14 @@ public fun MessageComposer(
     //         onAlsoSendToChannelSelected = onAlsoSendToChannelSelected,
     //     )
     // },
+    /*
     mentionPopupContent: @Composable (List<User>) -> Unit = {
         DefaultMentionPopupContent(
             mentionSuggestions = it,
             onMentionSelected = onMentionSelected,
         )
     },
+    */
     /*
     commandPopupContent: @Composable (List<Command>) -> Unit = {
         DefaultCommandPopupContent(
@@ -340,7 +342,7 @@ public fun MessageComposer(
         )
     },
 ) {
-    val (_, _, activeAction, validationErrors, mentionSuggestions) = messageComposerState
+    val (_, _, _, validationErrors, _) = messageComposerState
     val snackbarHostState = remember { SnackbarHostState() }
 
     val isRecording = statefulStreamMediaRecorder?.mediaRecorderState?.value
@@ -392,9 +394,9 @@ public fun MessageComposer(
             SnackbarPopup(snackbarHostState = snackbarHostState)
         }
 
-        if (mentionSuggestions.isNotEmpty()) {
-            mentionPopupContent(mentionSuggestions)
-        }
+        // if (mentionSuggestions.isNotEmpty()) {
+        //     mentionPopupContent(mentionSuggestions)
+        // }
         //
         // if (commandSuggestions.isNotEmpty()) {
         //     commandPopupContent(commandSuggestions)
@@ -464,6 +466,7 @@ public fun DefaultMessageComposerFooterContent(
 }
  */
 
+/*
 /**
  * Represents the default mention suggestion list popup shown above the message composer.
  *
@@ -480,6 +483,8 @@ internal fun DefaultMentionPopupContent(
         onMentionSelected = { onMentionSelected(it) },
     )
 }
+*/
+
 /*
 /**
  * Represents the default command suggestion list popup shown above the message composer.
