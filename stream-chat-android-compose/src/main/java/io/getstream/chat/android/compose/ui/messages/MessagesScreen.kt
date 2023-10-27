@@ -24,7 +24,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -32,12 +31,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import io.getstream.chat.android.compose.R
-import io.getstream.chat.android.compose.ui.components.SimpleDialog
-import io.getstream.chat.android.compose.ui.components.moderatedmessage.ModeratedMessageDialog
 import io.getstream.chat.android.compose.ui.messages.composer.MessageComposer
 import io.getstream.chat.android.compose.ui.messages.header.MessageListHeader
 import io.getstream.chat.android.compose.ui.messages.list.MessageList
@@ -48,16 +43,7 @@ import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewM
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessagesViewModelFactory
 import io.getstream.chat.android.models.Channel
-import io.getstream.chat.android.models.Message
-import io.getstream.chat.android.ui.common.state.messages.Delete
-import io.getstream.chat.android.ui.common.state.messages.Edit
-import io.getstream.chat.android.ui.common.state.messages.Flag
 import io.getstream.chat.android.ui.common.state.messages.MessageMode
-import io.getstream.chat.android.ui.common.state.messages.Resend
-import io.getstream.chat.android.ui.common.state.messages.list.DeleteMessage
-import io.getstream.chat.android.ui.common.state.messages.list.EditMessage
-import io.getstream.chat.android.ui.common.state.messages.list.SelectedMessageFailedModerationState
-import io.getstream.chat.android.ui.common.state.messages.list.SendAnyway
 
 /**
  * Default root Messages screen component, that provides the necessary ViewModels and
@@ -88,8 +74,8 @@ public fun MessagesScreen(
     onBackPressed: () -> Unit = {},
     onHeaderTitleClick: (channel: Channel) -> Unit = {},
     onChannelAvatarClick: () -> Unit = {},
-    skipPushNotification: Boolean = false,
-    skipEnrichUrl: Boolean = false,
+    // skipPushNotification: Boolean = false,
+    // skipEnrichUrl: Boolean = false,
     // testTagsAsResourceId: Boolean = false,
     threadMessagesStart: ThreadMessagesStart = ThreadMessagesStart.BOTTOM,
     // statefulStreamMediaRecorder: StatefulStreamMediaRecorder? = null,
@@ -260,13 +246,16 @@ public fun MessagesScreen(
             composerViewModel = composerViewModel,
         )
          */
+        /*
         MessageModerationDialog(
             listViewModel = listViewModel,
             composerViewModel = composerViewModel,
             skipPushNotification = skipPushNotification,
             skipEnrichUrl = skipEnrichUrl,
         )
+
         MessageDialogs(listViewModel = listViewModel)
+         */
     }
 }
 /*
@@ -568,6 +557,7 @@ private fun BoxScope.AttachmentsPickerMenu(
     }
 }
 */
+/*
 /**
  * Contains the dialog for a message that needs to be moderated.
  *
@@ -620,6 +610,7 @@ private fun MessageModerationDialog(
     }
 }
 
+
 /**
  * Contains the message dialogs used to prompt the
  * user with message flagging and deletion actions
@@ -655,3 +646,4 @@ private fun MessageDialogs(listViewModel: MessageListViewModel) {
         )
     }
 }
+ */
