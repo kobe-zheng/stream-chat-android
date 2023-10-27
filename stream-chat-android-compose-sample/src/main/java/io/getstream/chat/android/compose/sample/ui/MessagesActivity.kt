@@ -103,7 +103,7 @@ class MessagesActivity : BaseConnectedActivity() {
             ChatTheme(dateFormatter = ChatApp.dateFormatter) {
                 MessagesScreen(
                     viewModelFactory = factory,
-                    testTagsAsResourceId = true,
+                    // testTagsAsResourceId = true,
                     onBackPressed = { finish() },
                     onHeaderTitleClick = {},
                     // TODO

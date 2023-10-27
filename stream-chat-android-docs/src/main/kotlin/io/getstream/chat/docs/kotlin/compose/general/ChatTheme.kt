@@ -41,7 +41,7 @@ private object ChatThemeUsageSnippet {
                         onBackPressed = { finish() },
                         onHeaderTitleClick = {},
                         //TODO add this and related entries to docs when documentation effort occurs
-                        statefulStreamMediaRecorder = statefulStreamMediaRecorder,
+                        // statefulStreamMediaRecorder = statefulStreamMediaRecorder,
                     )
                 }
             }
@@ -82,7 +82,7 @@ private object ChatThemeCustomizationSnippet {
                         onBackPressed = { finish() },
                         onHeaderTitleClick = {},
                         //TODO add this and related entries to docs when documentation effort occurs
-                        statefulStreamMediaRecorder = statefulStreamMediaRecorder,
+                        // statefulStreamMediaRecorder = statefulStreamMediaRecorder,
                     )
                 }
             }

@@ -45,7 +45,7 @@ private object ProvidingCustomReactionsSnippet {
                         onBackPressed = { finish() },
                         onHeaderTitleClick = {},
                         //TODO add this and related entries to docs when documentation effort occurs
-                        statefulStreamMediaRecorder = statefulStreamMediaRecorder,
+                        // statefulStreamMediaRecorder = statefulStreamMediaRecorder,
                     )
                 }
             }

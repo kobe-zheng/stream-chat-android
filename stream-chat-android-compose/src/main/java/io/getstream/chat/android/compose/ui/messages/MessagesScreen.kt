@@ -47,16 +47,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import io.getstream.chat.android.compose.R
 import io.getstream.chat.android.compose.state.mediagallerypreview.MediaGalleryPreviewResultType
 import io.getstream.chat.android.compose.state.messageoptions.MessageOptionItemState
-import io.getstream.chat.android.compose.state.messages.attachments.StatefulStreamMediaRecorder
 import io.getstream.chat.android.compose.ui.components.SimpleDialog
 import io.getstream.chat.android.compose.ui.components.messageoptions.defaultMessageOptionsState
 import io.getstream.chat.android.compose.ui.components.moderatedmessage.ModeratedMessageDialog
@@ -121,9 +117,9 @@ public fun MessagesScreen(
     onChannelAvatarClick: () -> Unit = {},
     skipPushNotification: Boolean = false,
     skipEnrichUrl: Boolean = false,
-    testTagsAsResourceId: Boolean = false,
+    // testTagsAsResourceId: Boolean = false,
     threadMessagesStart: ThreadMessagesStart = ThreadMessagesStart.BOTTOM,
-    statefulStreamMediaRecorder: StatefulStreamMediaRecorder? = null,
+    // statefulStreamMediaRecorder: StatefulStreamMediaRecorder? = null,
 ) {
     val listViewModel = viewModel(MessageListViewModel::class.java, factory = viewModelFactory)
     val composerViewModel = viewModel(MessageComposerViewModel::class.java, factory = viewModelFactory)
@@ -162,8 +158,8 @@ public fun MessagesScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .semantics { this.testTagsAsResourceId = testTagsAsResourceId }
-            .testTag("Stream_MessagesScreen"),
+            // .semantics { this.testTagsAsResourceId = testTagsAsResourceId }
+            // .testTag("Stream_MessagesScreen"),
     ) {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
@@ -229,7 +225,7 @@ public fun MessagesScreen(
 
             MessageList(
                 modifier = Modifier
-                    .testTag("Stream_MessagesList")
+                    // .testTag("Stream_MessagesList")
                     .fillMaxSize()
                     .background(ChatTheme.colors.appBackground)
                     .padding(it),
