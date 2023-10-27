@@ -18,7 +18,6 @@ package io.getstream.chat.android.compose.ui.messages.composer
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
@@ -51,7 +50,6 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import io.getstream.chat.android.compose.R
 import io.getstream.chat.android.compose.ui.components.composer.CoolDownIndicator
 import io.getstream.chat.android.compose.ui.components.composer.MessageInput
-import io.getstream.chat.android.compose.ui.components.composer.MessageInputOptions
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.ui.util.AboveAnchorPopupPositionProvider
 import io.getstream.chat.android.compose.ui.util.mirrorRtl
@@ -110,12 +108,12 @@ public fun MessageComposer(
     // onCommandSelected: (Command) -> Unit = { viewModel.selectCommand(it) },
     // onAlsoSendToChannelSelected: (Boolean) -> Unit = { viewModel.setAlsoSendToChannel(it) },
     // onRecordingSaved: (Attachment) -> Unit = { viewModel.addSelectedAttachments(listOf(it)) },
-    headerContent: @Composable ColumnScope.(MessageComposerState) -> Unit = {
-        DefaultMessageComposerHeaderContent(
-            messageComposerState = it,
-            onCancelAction = onCancelAction,
-        )
-    },
+    // headerContent: @Composable ColumnScope.(MessageComposerState) -> Unit = {
+    //     DefaultMessageComposerHeaderContent(
+    //         messageComposerState = it,
+    //         onCancelAction = onCancelAction,
+    //     )
+    // },
     /*
     footerContent: @Composable ColumnScope.(MessageComposerState) -> Unit = {
         DefaultMessageComposerFooterContent(
@@ -191,7 +189,7 @@ public fun MessageComposer(
         // onMentionSelected = onMentionSelected,
         // onCommandSelected = onCommandSelected,
         // onAlsoSendToChannelSelected = onAlsoSendToChannelSelected,
-        headerContent = headerContent,
+        // headerContent = headerContent,
         // footerContent = footerContent,
         // mentionPopupContent = mentionPopupContent,
         // commandPopupContent = commandPopupContent,
@@ -250,12 +248,12 @@ public fun MessageComposer(
     // onCommandSelected: (Command) -> Unit = {},
     // onAlsoSendToChannelSelected: (Boolean) -> Unit = {},
     // onRecordingSaved: (Attachment) -> Unit = {},
-    headerContent: @Composable ColumnScope.(MessageComposerState) -> Unit = {
-        DefaultMessageComposerHeaderContent(
-            messageComposerState = it,
-            onCancelAction = onCancelAction,
-        )
-    },
+    // headerContent: @Composable ColumnScope.(MessageComposerState) -> Unit = {
+    //     DefaultMessageComposerHeaderContent(
+    //         messageComposerState = it,
+    //         onCancelAction = onCancelAction,
+    //     )
+    // },
     // footerContent: @Composable ColumnScope.(MessageComposerState) -> Unit = {
     //     DefaultMessageComposerFooterContent(
     //         messageComposerState = it,
@@ -335,7 +333,7 @@ public fun MessageComposer(
         color = ChatTheme.colors.barsBackground,
     ) {
         Column(Modifier.padding(vertical = 4.dp)) {
-            headerContent(messageComposerState)
+            // headerContent(messageComposerState)
 
             Row(
                 Modifier.fillMaxWidth(),
@@ -382,6 +380,7 @@ public fun MessageComposer(
     }
 }
 
+/*
 /**
  * Represents the default content shown at the top of the message composer component.
  *
@@ -405,6 +404,7 @@ public fun DefaultMessageComposerHeaderContent(
         )
     }
 }
+ */
 
 /*
 /**
