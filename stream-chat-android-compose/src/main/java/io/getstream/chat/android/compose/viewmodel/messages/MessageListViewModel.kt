@@ -87,6 +87,7 @@ public class MessageListViewModel(
         }
 
         items.add(MessageItemState(message = message.copy(id = message.text), isMine = true))
+        items.add(MessageItemState(message = message.copy(text = message.text + " from bot", id = message.text + " from bot"), isMine = false))
 
         _messageListState.value = _messageListState.value.copy(
             messageItems = items
