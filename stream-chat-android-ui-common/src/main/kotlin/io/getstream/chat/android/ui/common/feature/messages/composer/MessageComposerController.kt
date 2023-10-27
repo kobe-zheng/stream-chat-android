@@ -370,53 +370,53 @@ public class MessageComposerController(
                 handleMentionSuggestions()
             }.launchIn(scope)
 
-        selectedAttachments.onEach { selectedAttachments ->
-            state.value = state.value.copy(attachments = selectedAttachments)
-        }.launchIn(scope)
+        // selectedAttachments.onEach { selectedAttachments ->
+        //     state.value = state.value.copy(attachments = selectedAttachments)
+        // }.launchIn(scope)
 
-        lastActiveAction.onEach { activeAction ->
-            state.value = state.value.copy(action = activeAction)
-        }.launchIn(scope)
+        // lastActiveAction.onEach { activeAction ->
+        //     state.value = state.value.copy(action = activeAction)
+        // }.launchIn(scope)
 
-        validationErrors.onEach { validationErrors ->
-            state.value = state.value.copy(validationErrors = validationErrors)
-        }.launchIn(scope)
+        // validationErrors.onEach { validationErrors ->
+        //     state.value = state.value.copy(validationErrors = validationErrors)
+        // }.launchIn(scope)
 
-        mentionSuggestions.onEach { mentionSuggestions ->
-            state.value = state.value.copy(mentionSuggestions = mentionSuggestions)
-        }.launchIn(scope)
+        // mentionSuggestions.onEach { mentionSuggestions ->
+        //     state.value = state.value.copy(mentionSuggestions = mentionSuggestions)
+        // }.launchIn(scope)
 
-        commandSuggestions.onEach { commandSuggestions ->
-            state.value = state.value.copy(commandSuggestions = commandSuggestions)
-        }.launchIn(scope)
-
-        cooldownTimer.onEach { cooldownTimer ->
-            state.value = state.value.copy(coolDownTime = cooldownTimer)
-        }.launchIn(scope)
-
-        messageMode.onEach { messageMode ->
-            state.value = state.value.copy(messageMode = messageMode)
-        }.launchIn(scope)
-
-        alsoSendToChannel.onEach { alsoSendToChannel ->
-            state.value = state.value.copy(alsoSendToChannel = alsoSendToChannel)
-        }.launchIn(scope)
-
+        // commandSuggestions.onEach { commandSuggestions ->
+        //     state.value = state.value.copy(commandSuggestions = commandSuggestions)
+        // }.launchIn(scope)
+        //
+        // cooldownTimer.onEach { cooldownTimer ->
+        //     state.value = state.value.copy(coolDownTime = cooldownTimer)
+        // }.launchIn(scope)
+        //
+        // messageMode.onEach { messageMode ->
+        //     state.value = state.value.copy(messageMode = messageMode)
+        // }.launchIn(scope)
+        //
+        // alsoSendToChannel.onEach { alsoSendToChannel ->
+        //     state.value = state.value.copy(alsoSendToChannel = alsoSendToChannel)
+        // }.launchIn(scope)
+        //
         ownCapabilities.onEach { ownCapabilities ->
             state.value = state.value.copy(ownCapabilities = ownCapabilities)
         }.launchIn(scope)
 
-        chatClient.clientState.user.onEach { currentUser ->
-            state.value = state.value.copy(currentUser = currentUser)
-        }.launchIn(scope)
-
-        audioRecordingController.recordingState.onEach { recording ->
-            logger.d { "[onRecordingState] recording: $recording" }
-            state.value = state.value.copy(recording = recording)
-            if (recording is RecordingState.Complete) {
-                selectedAttachments.value = selectedAttachments.value + recording.attachment
-            }
-        }.launchIn(scope)
+        // chatClient.clientState.user.onEach { currentUser ->
+        //     state.value = state.value.copy(currentUser = currentUser)
+        // }.launchIn(scope)
+        //
+        // audioRecordingController.recordingState.onEach { recording ->
+        //     logger.d { "[onRecordingState] recording: $recording" }
+        //     state.value = state.value.copy(recording = recording)
+        //     if (recording is RecordingState.Complete) {
+        //         selectedAttachments.value = selectedAttachments.value + recording.attachment
+        //     }
+        // }.launchIn(scope)
     }
 
     /**

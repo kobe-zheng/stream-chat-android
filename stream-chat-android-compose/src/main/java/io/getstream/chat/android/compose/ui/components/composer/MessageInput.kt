@@ -69,14 +69,14 @@ public fun MessageInput(
     innerTrailingContent: @Composable RowScope.() -> Unit = {},
 ) {
     val (value, attachments, activeAction) = messageComposerState
-    val canSendMessage = messageComposerState.ownCapabilities.contains(ChannelCapabilities.SEND_MESSAGE)
+    // val canSendMessage = messageComposerState.ownCapabilities.contains(ChannelCapabilities.SEND_MESSAGE)
 
     InputField(
         modifier = modifier,
         value = value,
         maxLines = maxLines,
         onValueChange = onValueChange,
-        enabled = canSendMessage,
+        enabled = true,
         innerPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
         keyboardOptions = keyboardOptions,
         decorationBox = { innerTextField ->

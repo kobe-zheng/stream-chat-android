@@ -17,17 +17,18 @@
 package io.getstream.chat.android.compose.viewmodel.messages
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import io.getstream.chat.android.compose.util.extensions.asState
 import io.getstream.chat.android.models.Attachment
 import io.getstream.chat.android.models.Message
 import io.getstream.chat.android.ui.common.feature.messages.composer.MessageComposerController
-import io.getstream.chat.android.ui.common.state.messages.Edit
-import io.getstream.chat.android.ui.common.state.messages.MessageAction
-import io.getstream.chat.android.ui.common.state.messages.MessageMode
-import io.getstream.chat.android.ui.common.state.messages.Reply
 import io.getstream.chat.android.ui.common.state.messages.composer.MessageComposerState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 
 /**
  * ViewModel responsible for handling the composing and sending of messages.
@@ -42,11 +43,24 @@ public class MessageComposerViewModel(
     private val messageComposerController: MessageComposerController,
 ) : ViewModel() {
 
-    private val _messageComposerState: MutableStateFlow<MessageComposerState> = MutableStateFlow(MessageComposerState())
+    private var _messageComposerState: MutableStateFlow<MessageComposerState> = MutableStateFlow(MessageComposerState())
+
+    private val _newState: MutableStateFlow<MessageComposerState> = MutableStateFlow(MessageComposerState(
+        ownCapabilities = setOf()
+    ))
     /**
      * The full UI state that has all the required data.
      */
-    public val messageComposerState: StateFlow<MessageComposerState> = messageComposerController.state
+    public val messageComposerState: StateFlow<MessageComposerState> = _newState
+
+
+    //     _messageComposerState.stateIn(
+    //     scope = viewModelScope,
+    //     started = SharingStarted.WhileSubscribed(),
+    //     initialValue = MessageComposerState(),
+    // )
+
+        // _messageComposerState.asStateFlow()
 
     /**
      * UI state of the current composer input.
