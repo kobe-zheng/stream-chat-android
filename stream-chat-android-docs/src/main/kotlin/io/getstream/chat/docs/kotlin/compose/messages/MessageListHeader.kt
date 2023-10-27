@@ -47,23 +47,23 @@ private object MessageListHeaderUsageSnippet {
 
             setContent {
                 ChatTheme {
-                    val channel = listViewModel.channel
-                    val currentUser by listViewModel.user.collectAsState()
+                    // val channel = listViewModel.channel
+                    // val currentUser by listViewModel.user.collectAsState()
                     val connectionState by listViewModel.connectionState.collectAsState()
-                    val messageMode = listViewModel.messageMode
+                    // val messageMode = listViewModel.messageMode
 
                     // Load the data for the header here
 
                     Column(Modifier.fillMaxSize()) {
                         MessageListHeader(
                             modifier = Modifier.wrapContentHeight(),
-                            channel = channel,
-                            currentUser = currentUser,
+                            // channel = channel,
+                            // currentUser = currentUser,
                             connectionState = connectionState,
-                            messageMode = messageMode,
+                            // messageMode = messageMode,
                             onBackPressed = { },
-                            onHeaderTitleClick = { },
-                            onChannelAvatarClick = { },
+                            // onHeaderTitleClick = { },
+                            // onChannelAvatarClick = { },
                         )
 
                         // Rest of your UI
@@ -94,21 +94,21 @@ private object MessageListHeaderHandlingActionsSnippet {
 
             setContent {
                 ChatTheme {
-                    val channel = listViewModel.channel
-                    val currentUser by listViewModel.user.collectAsState()
+                    // val channel = listViewModel.channel
+                    // val currentUser by listViewModel.user.collectAsState()
                     val connectionState by listViewModel.connectionState.collectAsState()
 
                     MessageListHeader(
-                        channel = channel,
-                        currentUser = currentUser,
+                        // channel = channel,
+                        // currentUser = currentUser,
                         connectionState = connectionState,
                         onBackPressed = { finish() },
-                        onHeaderTitleClick = {
-                            // Handle clicks on the header title
-                        },
-                        onChannelAvatarClick = {
-                            // Handle clicks on the channel avatar
-                        },
+                        // onHeaderTitleClick = {
+                        //     // Handle clicks on the header title
+                        // },
+                        // onChannelAvatarClick = {
+                        //     // Handle clicks on the channel avatar
+                        // },
                         // Content
                     )
                 }
@@ -142,8 +142,8 @@ private object MessageListHeaderCustomizationSnippet {
                     val connectionState by listViewModel.connectionState.collectAsState()
 
                     MessageListHeader(
-                        channel = channel,
-                        currentUser = currentUser,
+                        // channel = channel,
+                        // currentUser = currentUser,
                         leadingContent = {
                             ChannelAvatar(
                                 modifier = Modifier.size(40.dp),

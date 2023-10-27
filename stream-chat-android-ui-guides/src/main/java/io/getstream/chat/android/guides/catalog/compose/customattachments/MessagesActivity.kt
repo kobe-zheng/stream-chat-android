@@ -51,7 +51,6 @@ import io.getstream.chat.android.compose.viewmodel.messages.MessagesViewModelFac
 import io.getstream.chat.android.guides.catalog.compose.customattachments.factory.dateAttachmentFactory
 import io.getstream.chat.android.guides.catalog.compose.customattachments.factory.quotedDateAttachmentFactory
 import io.getstream.chat.android.models.Attachment
-import io.getstream.chat.android.ui.common.state.messages.MessageMode
 import io.getstream.chat.android.ui.common.state.messages.Reply
 import io.getstream.sdk.chat.audio.recording.DefaultStreamMediaRecorder
 import io.getstream.sdk.chat.audio.recording.StreamMediaRecorder
@@ -109,8 +108,8 @@ class MessagesActivity : AppCompatActivity() {
         val messageListViewModel = viewModel(MessageListViewModel::class.java, factory = factory)
         val composerViewModel = viewModel(MessageComposerViewModel::class.java, factory = factory)
 
-        val messageMode = messageListViewModel.messageMode
-        val currentUser by messageListViewModel.user.collectAsState()
+        // val messageMode = messageListViewModel.messageMode
+        // val currentUser by messageListViewModel.user.collectAsState()
         val connectionState by messageListViewModel.connectionState.collectAsState()
 
         BackHandler(enabled = true, onBack = onBackPressed)
@@ -152,10 +151,10 @@ class MessagesActivity : AppCompatActivity() {
                         .background(ChatTheme.colors.appBackground)
                         .fillMaxSize(),
                     viewModel = messageListViewModel,
-                    onThreadClick = { message ->
-                        composerViewModel.setMessageMode(MessageMode.MessageThread(message))
-                        messageListViewModel.openMessageThread(message)
-                    },
+                    // onThreadClick = { message ->
+                    //     composerViewModel.setMessageMode(MessageMode.MessageThread(message))
+                    //     messageListViewModel.openMessageThread(message)
+                    // },
                     onLongItemClick = {
                         composerViewModel.performMessageAction(Reply(it))
                     },
@@ -184,7 +183,7 @@ class MessagesActivity : AppCompatActivity() {
                 .wrapContentHeight(),
             viewModel = viewModel,
             // TODO add this and related entries to docs when documentation effort occurs
-            statefulStreamMediaRecorder = statefulStreamMediaRecorder,
+            // statefulStreamMediaRecorder = statefulStreamMediaRecorder,
             // integrations = {
             //     IconButton(
             //         modifier = Modifier

@@ -42,8 +42,6 @@ import io.getstream.chat.android.compose.ui.util.rememberMessageListState
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessagesViewModelFactory
-import io.getstream.chat.android.models.Channel
-import io.getstream.chat.android.ui.common.state.messages.MessageMode
 
 /**
  * Default root Messages screen component, that provides the necessary ViewModels and
@@ -85,30 +83,32 @@ public fun MessagesScreen(
     // val attachmentsPickerViewModel =
     //     viewModel(AttachmentsPickerViewModel::class.java, factory = viewModelFactory)
 
-    val messageMode = listViewModel.messageMode
+    // val messageMode = listViewModel.messageMode
 
-    if (messageMode is MessageMode.MessageThread) {
-        composerViewModel.setMessageMode(messageMode)
-    }
+    // if (messageMode is MessageMode.MessageThread) {
+    //     composerViewModel.setMessageMode(messageMode)
+    // }
 
     val backAction = remember(listViewModel, composerViewModel/*, attachmentsPickerViewModel*/) {
         {
-            val isInThread = listViewModel.isInThread
-            val isShowingOverlay = listViewModel.isShowingOverlay
+            // val isInThread = listViewModel.isInThread
+            // val isShowingOverlay = listViewModel.isShowingOverlay
 
-            when {
-                // attachmentsPickerViewModel.isShowingAttachments -> attachmentsPickerViewModel.changeAttachmentState(
-                //     false,
-                // )
+            // when {
+            //     // attachmentsPickerViewModel.isShowingAttachments -> attachmentsPickerViewModel.changeAttachmentState(
+            //     //     false,
+            //     // )
+            //
+            //     isShowingOverlay -> listViewModel.selectMessage(null)
+            //     isInThread -> {
+            //         listViewModel.leaveThread()
+            //         composerViewModel.leaveThread()
+            //     }
+            //
+            //     else -> onBackPressed()
+            // }
 
-                isShowingOverlay -> listViewModel.selectMessage(null)
-                isInThread -> {
-                    listViewModel.leaveThread()
-                    composerViewModel.leaveThread()
-                }
-
-                else -> onBackPressed()
-            }
+            onBackPressed()
         }
     }
 

@@ -232,7 +232,7 @@ public class MessageListViewModel(
     }
 
     /**
-     *  Changes the current [messageMode] to be [Thread] with [ThreadState] and Loads thread data using ChatClient
+     *  Changes the current messageMode to be [Thread] with [ThreadState] and Loads thread data using ChatClient
      *  directly. The data is observed by using [ThreadState].
      *
      * @param message The selected message with a thread.
@@ -373,7 +373,7 @@ public class MessageListViewModel(
     }
 
     /**
-     * Leaves the thread we're in and resets the state of the [messageMode] and both of the [MessageListState]s.
+     * Leaves the thread we're in and resets the state of the messageMode and both of the [MessageListState]s.
      */
     public fun leaveThread() {
         messageListController.enterNormalMode()
