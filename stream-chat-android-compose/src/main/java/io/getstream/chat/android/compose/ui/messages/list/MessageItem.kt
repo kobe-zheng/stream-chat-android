@@ -119,10 +119,10 @@ public fun MessageItem(
     onLongItemClick: (Message) -> Unit,
     modifier: Modifier = Modifier,
     // onReactionsClick: (Message) -> Unit = {},
-    onThreadClick: (Message) -> Unit = {},
-    onGiphyActionClick: (GiphyAction) -> Unit = {},
-    onQuotedMessageClick: (Message) -> Unit = {},
-    onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
+    // onThreadClick: (Message) -> Unit = {},
+    // onGiphyActionClick: (GiphyAction) -> Unit = {},
+    // onQuotedMessageClick: (Message) -> Unit = {},
+    // onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
     leadingContent: @Composable RowScope.(MessageItemState) -> Unit = {
         DefaultMessageItemLeadingContent(messageItem = it)
     },
@@ -136,9 +136,9 @@ public fun MessageItem(
         DefaultMessageItemCenterContent(
             messageItem = it,
             onLongItemClick = onLongItemClick,
-            onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
-            onGiphyActionClick = onGiphyActionClick,
-            onQuotedMessageClick = onQuotedMessageClick,
+            // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
+            // onGiphyActionClick = onGiphyActionClick,
+            // onQuotedMessageClick = onQuotedMessageClick,
         )
     },
     footerContent: @Composable ColumnScope.(MessageItemState) -> Unit = {
@@ -151,16 +151,16 @@ public fun MessageItem(
     val message = messageItem.message
     val focusState = messageItem.focusState
 
-    val clickModifier = if (message.isDeleted()) {
-        Modifier
-    } else {
-        Modifier.combinedClickable(
-            interactionSource = remember { MutableInteractionSource() },
-            indication = null,
-            onClick = { if (message.isThreadStart()) onThreadClick(message) },
-            onLongClick = { if (!message.isUploading()) onLongItemClick(message) },
-        )
-    }
+    // val clickModifier = if (message.isDeleted()) {
+    //     Modifier
+    // } else {
+    //     Modifier.combinedClickable(
+    //         interactionSource = remember { MutableInteractionSource() },
+    //         indication = null,
+    //         onClick = { if (message.isThreadStart()) onThreadClick(message) },
+    //         onLongClick = { if (!message.isUploading()) onLongItemClick(message) },
+    //     )
+    // }
 
     val backgroundColor =
         if (focusState is MessageFocused || message.pinned) ChatTheme.colors.highlight else Color.Transparent
@@ -196,7 +196,7 @@ public fun MessageItem(
         Row(
             modifier
                 .widthIn(max = 300.dp)
-                .then(clickModifier),
+                // .then(clickModifier),
         ) {
             leadingContent(messageItem)
 
@@ -396,32 +396,41 @@ internal fun DefaultMessageItemTrailingContent(
 internal fun DefaultMessageItemCenterContent(
     messageItem: MessageItemState,
     onLongItemClick: (Message) -> Unit = {},
-    onGiphyActionClick: (GiphyAction) -> Unit = {},
-    onQuotedMessageClick: (Message) -> Unit = {},
-    onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
+    // onGiphyActionClick: (GiphyAction) -> Unit = {},
+    // onQuotedMessageClick: (Message) -> Unit = {},
+    // onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
 ) {
     val modifier = Modifier.widthIn(max = ChatTheme.dimens.messageItemMaxWidth)
-    if (messageItem.message.isEmojiOnlyWithoutBubble()) {
-        EmojiMessageContent(
-            modifier = modifier,
-            messageItem = messageItem,
-            onLongItemClick = onLongItemClick,
-            onGiphyActionClick = onGiphyActionClick,
-            onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
-            onQuotedMessageClick = onQuotedMessageClick,
-        )
-    } else {
-        RegularMessageContent(
-            modifier = modifier,
-            messageItem = messageItem,
-            onLongItemClick = onLongItemClick,
-            onGiphyActionClick = onGiphyActionClick,
-            onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
-            onQuotedMessageClick = onQuotedMessageClick,
-        )
-    }
+    // if (messageItem.message.isEmojiOnlyWithoutBubble()) {
+    //     EmojiMessageContent(
+    //         modifier = modifier,
+    //         messageItem = messageItem,
+    //         onLongItemClick = onLongItemClick,
+    //         onGiphyActionClick = onGiphyActionClick,
+    //         onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
+    //         onQuotedMessageClick = onQuotedMessageClick,
+    //     )
+    // } else {
+    //     RegularMessageContent(
+    //         modifier = modifier,
+    //         messageItem = messageItem,
+    //         onLongItemClick = onLongItemClick,
+    //         onGiphyActionClick = onGiphyActionClick,
+    //         onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
+    //         onQuotedMessageClick = onQuotedMessageClick,
+    //     )
+    // }
+    RegularMessageContent(
+        modifier = modifier,
+        messageItem = messageItem,
+        onLongItemClick = onLongItemClick,
+        // onGiphyActionClick = onGiphyActionClick,
+        // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
+        // onQuotedMessageClick = onQuotedMessageClick,
+    )
 }
 
+/*
 /**
  * Message content when the message consists only of emoji.
  *
@@ -474,6 +483,7 @@ internal fun EmojiMessageContent(
         }
     }
 }
+ */
 
 /**
  * Message content for messages which consist of more than just emojis.
@@ -490,9 +500,9 @@ internal fun RegularMessageContent(
     messageItem: MessageItemState,
     modifier: Modifier = Modifier,
     onLongItemClick: (Message) -> Unit = {},
-    onGiphyActionClick: (GiphyAction) -> Unit = {},
-    onQuotedMessageClick: (Message) -> Unit = {},
-    onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
+    // onGiphyActionClick: (GiphyAction) -> Unit = {},
+    // onQuotedMessageClick: (Message) -> Unit = {},
+    // onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
 ) {
     val message = messageItem.message
     val position = messageItem.groupPosition
@@ -528,9 +538,9 @@ internal fun RegularMessageContent(
                     message = message,
                     currentUser = messageItem.currentUser,
                     onLongItemClick = onLongItemClick,
-                    onGiphyActionClick = onGiphyActionClick,
-                    onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
-                    onQuotedMessageClick = onQuotedMessageClick,
+                    // onGiphyActionClick = onGiphyActionClick,
+                    // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
+                    // onQuotedMessageClick = onQuotedMessageClick,
                 )
             },
         )
@@ -545,9 +555,9 @@ internal fun RegularMessageContent(
                         message = message,
                         currentUser = messageItem.currentUser,
                         onLongItemClick = onLongItemClick,
-                        onGiphyActionClick = onGiphyActionClick,
-                        onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
-                        onQuotedMessageClick = onQuotedMessageClick,
+                        // onGiphyActionClick = onGiphyActionClick,
+                        // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
+                        // onQuotedMessageClick = onQuotedMessageClick,
                     )
                 },
             )
@@ -576,21 +586,21 @@ internal fun DefaultMessageTextContent(
     message: Message,
     currentUser: User?,
     onLongItemClick: (Message) -> Unit,
-    onQuotedMessageClick: (Message) -> Unit,
+    // onQuotedMessageClick: (Message) -> Unit,
 ) {
-    val quotedMessage = message.replyTo
+    // val quotedMessage = message.replyTo
 
     Column {
-        if (quotedMessage != null) {
-            QuotedMessage(
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                message = quotedMessage,
-                currentUser = currentUser,
-                replyMessage = message,
-                onLongItemClick = { onLongItemClick(message) },
-                onQuotedMessageClick = onQuotedMessageClick,
-            )
-        }
+        // if (quotedMessage != null) {
+        //     QuotedMessage(
+        //         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+        //         message = quotedMessage,
+        //         currentUser = currentUser,
+        //         replyMessage = message,
+        //         onLongItemClick = { onLongItemClick(message) },
+        //         onQuotedMessageClick = onQuotedMessageClick,
+        //     )
+        // }
         MessageText(
             message = message,
             currentUser = currentUser,

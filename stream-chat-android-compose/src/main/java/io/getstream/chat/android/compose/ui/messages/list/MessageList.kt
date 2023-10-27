@@ -28,8 +28,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.compose.R
-import io.getstream.chat.android.compose.state.mediagallerypreview.MediaGalleryPreviewResult
-import io.getstream.chat.android.compose.state.mediagallerypreview.MediaGalleryPreviewResultType
 import io.getstream.chat.android.compose.ui.components.LoadingIndicator
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.ui.util.rememberMessageListState
@@ -81,7 +79,7 @@ public fun MessageList(
     messagesLazyListState: MessagesLazyListState =
         rememberMessageListState(parentMessageId = viewModel.currentMessagesState.parentMessageId),
     threadMessagesStart: ThreadMessagesStart = ThreadMessagesStart.BOTTOM,
-    onThreadClick: (Message) -> Unit = { viewModel.openMessageThread(it) },
+    // onThreadClick: (Message) -> Unit = { viewModel.openMessageThread(it) },
     onLongItemClick: (Message) -> Unit = { viewModel.selectMessage(it) },
     // onReactionsClick: (Message) -> Unit = { viewModel.selectReactions(it) },
     onMessagesPageStartReached: () -> Unit = { viewModel.loadOlderMessages() },
@@ -94,6 +92,7 @@ public fun MessageList(
             parentMessageId = message.parentId,
         )
     },
+    /*
     onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {
         if (it?.resultType == MediaGalleryPreviewResultType.SHOW_IN_CHAT) {
             viewModel.scrollToMessage(
@@ -102,6 +101,7 @@ public fun MessageList(
             )
         }
     },
+     */
     onMessagesPageEndReached: (String) -> Unit = { viewModel.onBottomEndRegionReached(it) },
     onScrollToBottomClicked: (() -> Unit) -> Unit = { viewModel.scrollToBottom(scrollToBottom = it) },
     loadingContent: @Composable () -> Unit = { DefaultMessageListLoadingIndicator(modifier) },
@@ -117,12 +117,12 @@ public fun MessageList(
     itemContent: @Composable (MessageListItemState) -> Unit = { messageListItem ->
         DefaultMessageContainer(
             messageListItemState = messageListItem,
-            onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
-            onThreadClick = onThreadClick,
+            // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
+            // onThreadClick = onThreadClick,
             onLongItemClick = onLongItemClick,
             // onReactionsClick = onReactionsClick,
             // onGiphyActionClick = onGiphyActionClick,
-            onQuotedMessageClick = onQuotedMessageClick,
+            // onQuotedMessageClick = onQuotedMessageClick,
         )
     },
 ) {
@@ -137,13 +137,13 @@ public fun MessageList(
         onLongItemClick = onLongItemClick,
         // onReactionsClick = onReactionsClick,
         onScrolledToBottom = onScrollToBottom,
-        onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
+        // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
         itemContent = itemContent,
         helperContent = helperContent,
         loadingMoreContent = loadingMoreContent,
         loadingContent = loadingContent,
         emptyContent = emptyContent,
-        onQuotedMessageClick = onQuotedMessageClick,
+        // onQuotedMessageClick = onQuotedMessageClick,
         onMessagesPageEndReached = onMessagesPageEndReached,
         onScrollToBottom = onScrollToBottomClicked,
     )
@@ -163,21 +163,21 @@ public fun MessageList(
 @Composable
 internal fun DefaultMessageContainer(
     messageListItemState: MessageListItemState,
-    onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
-    onThreadClick: (Message) -> Unit,
+    // onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
+    // onThreadClick: (Message) -> Unit,
     onLongItemClick: (Message) -> Unit,
     // onReactionsClick: (Message) -> Unit = {},
     // onGiphyActionClick: (GiphyAction) -> Unit = {},
-    onQuotedMessageClick: (Message) -> Unit,
+    // onQuotedMessageClick: (Message) -> Unit,
 ) {
     MessageContainer(
         messageListItemState = messageListItemState,
         onLongItemClick = onLongItemClick,
         // onReactionsClick = onReactionsClick,
-        onThreadClick = onThreadClick,
+        // onThreadClick = onThreadClick,
         // onGiphyActionClick = onGiphyActionClick,
-        onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
-        onQuotedMessageClick = onQuotedMessageClick,
+        // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
+        // onQuotedMessageClick = onQuotedMessageClick,
     )
 }
 
@@ -253,12 +253,12 @@ public fun MessageList(
     onMessagesPageStartReached: () -> Unit = {},
     onLastVisibleMessageChanged: (Message) -> Unit = {},
     onScrolledToBottom: () -> Unit = {},
-    onThreadClick: (Message) -> Unit = {},
+    // onThreadClick: (Message) -> Unit = {},
     onLongItemClick: (Message) -> Unit = {},
     // onReactionsClick: (Message) -> Unit = {},
-    onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
+    // onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
     // onGiphyActionClick: (GiphyAction) -> Unit = {},
-    onQuotedMessageClick: (Message) -> Unit = {},
+    // onQuotedMessageClick: (Message) -> Unit = {},
     onMessagesPageEndReached: (String) -> Unit = {},
     onScrollToBottom: (() -> Unit) -> Unit = {},
     loadingContent: @Composable () -> Unit = { DefaultMessageListLoadingIndicator(modifier) },
@@ -275,11 +275,11 @@ public fun MessageList(
         DefaultMessageContainer(
             messageListItemState = it,
             onLongItemClick = onLongItemClick,
-            onThreadClick = onThreadClick,
+            // onThreadClick = onThreadClick,
             // onReactionsClick = onReactionsClick,
             // onGiphyActionClick = onGiphyActionClick,
-            onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
-            onQuotedMessageClick = onQuotedMessageClick,
+            // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
+            // onQuotedMessageClick = onQuotedMessageClick,
         )
     },
 ) {

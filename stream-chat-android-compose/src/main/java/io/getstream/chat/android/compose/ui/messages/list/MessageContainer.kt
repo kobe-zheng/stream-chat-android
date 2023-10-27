@@ -32,14 +32,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.compose.R
-import io.getstream.chat.android.compose.state.mediagallerypreview.MediaGalleryPreviewResult
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.messages.MessagesViewModelFactory
 import io.getstream.chat.android.models.Message
 import io.getstream.chat.android.ui.common.feature.messages.list.MessageListController
 import io.getstream.chat.android.ui.common.state.messages.list.DateSeparatorItemState
 import io.getstream.chat.android.ui.common.state.messages.list.EmptyThreadPlaceholderItemState
-import io.getstream.chat.android.ui.common.state.messages.list.GiphyAction
 import io.getstream.chat.android.ui.common.state.messages.list.MessageItemState
 import io.getstream.chat.android.ui.common.state.messages.list.MessageListItemState
 import io.getstream.chat.android.ui.common.state.messages.list.SystemMessageItemState
@@ -70,10 +68,10 @@ public fun MessageContainer(
     messageListItemState: MessageListItemState,
     onLongItemClick: (Message) -> Unit = {},
     // onReactionsClick: (Message) -> Unit = {},
-    onThreadClick: (Message) -> Unit = {},
-    onGiphyActionClick: (GiphyAction) -> Unit = {},
-    onQuotedMessageClick: (Message) -> Unit = {},
-    onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
+    // onThreadClick: (Message) -> Unit = {},
+    // onGiphyActionClick: (GiphyAction) -> Unit = {},
+    // onQuotedMessageClick: (Message) -> Unit = {},
+    // onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
     dateSeparatorContent: @Composable (DateSeparatorItemState) -> Unit = {
         DefaultMessageDateSeparatorContent(dateSeparator = it)
     },
@@ -88,10 +86,10 @@ public fun MessageContainer(
             messageItem = it,
             onLongItemClick = onLongItemClick,
             // onReactionsClick = onReactionsClick,
-            onThreadClick = onThreadClick,
-            onGiphyActionClick = onGiphyActionClick,
-            onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
-            onQuotedMessageClick = onQuotedMessageClick,
+            // onThreadClick = onThreadClick,
+            // onGiphyActionClick = onGiphyActionClick,
+            // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
+            // onQuotedMessageClick = onQuotedMessageClick,
         )
     },
     typingIndicatorContent: @Composable (TypingItemState) -> Unit = { },
@@ -208,18 +206,18 @@ internal fun DefaultMessageItem(
     messageItem: MessageItemState,
     onLongItemClick: (Message) -> Unit,
     // onReactionsClick: (Message) -> Unit = {},
-    onThreadClick: (Message) -> Unit,
-    onGiphyActionClick: (GiphyAction) -> Unit,
-    onQuotedMessageClick: (Message) -> Unit,
-    onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
+    // onThreadClick: (Message) -> Unit,
+    // onGiphyActionClick: (GiphyAction) -> Unit,
+    // onQuotedMessageClick: (Message) -> Unit,
+    // onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
 ) {
     MessageItem(
         messageItem = messageItem,
         onLongItemClick = onLongItemClick,
         // onReactionsClick = onReactionsClick,
-        onThreadClick = onThreadClick,
-        onGiphyActionClick = onGiphyActionClick,
-        onQuotedMessageClick = onQuotedMessageClick,
-        onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
+        // onThreadClick = onThreadClick,
+        // onGiphyActionClick = onGiphyActionClick,
+        // onQuotedMessageClick = onQuotedMessageClick,
+        // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
     )
 }

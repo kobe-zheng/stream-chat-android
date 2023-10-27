@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-@file:OptIn(ExperimentalComposeUiApi::class)
-
 package io.getstream.chat.android.compose.ui.messages
 
 import androidx.activity.compose.BackHandler
@@ -33,13 +31,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import io.getstream.chat.android.compose.R
-import io.getstream.chat.android.compose.state.mediagallerypreview.MediaGalleryPreviewResultType
 import io.getstream.chat.android.compose.ui.components.SimpleDialog
 import io.getstream.chat.android.compose.ui.components.moderatedmessage.ModeratedMessageDialog
 import io.getstream.chat.android.compose.ui.messages.composer.MessageComposer
@@ -57,7 +53,6 @@ import io.getstream.chat.android.ui.common.state.messages.Delete
 import io.getstream.chat.android.ui.common.state.messages.Edit
 import io.getstream.chat.android.ui.common.state.messages.Flag
 import io.getstream.chat.android.ui.common.state.messages.MessageMode
-import io.getstream.chat.android.ui.common.state.messages.Reply
 import io.getstream.chat.android.ui.common.state.messages.Resend
 import io.getstream.chat.android.ui.common.state.messages.list.DeleteMessage
 import io.getstream.chat.android.ui.common.state.messages.list.EditMessage
@@ -210,13 +205,14 @@ public fun MessagesScreen(
                 viewModel = listViewModel,
                 messagesLazyListState = rememberMessageListState(parentMessageId = currentState.parentMessageId),
                 threadMessagesStart = threadMessagesStart,
-                onThreadClick = remember(composerViewModel, listViewModel) {
-                    {
-                            message ->
-                        composerViewModel.setMessageMode(MessageMode.MessageThread(message))
-                        listViewModel.openMessageThread(message)
-                    }
-                },
+                // onThreadClick = remember(composerViewModel, listViewModel) {
+                //     {
+                //             message ->
+                //         composerViewModel.setMessageMode(MessageMode.MessageThread(message))
+                //         listViewModel.openMessageThread(message)
+                //     }
+                // },
+                /*
                 onMediaGalleryPreviewResult = remember(listViewModel, composerViewModel) {
                     {
                             result ->
@@ -247,6 +243,7 @@ public fun MessagesScreen(
                         }
                     }
                 },
+                 */
             )
         }
         /*

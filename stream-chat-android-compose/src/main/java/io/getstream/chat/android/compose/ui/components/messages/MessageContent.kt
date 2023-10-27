@@ -55,15 +55,15 @@ public fun MessageContent(
     currentUser: User?,
     modifier: Modifier = Modifier,
     onLongItemClick: (Message) -> Unit = {},
-    onGiphyActionClick: (GiphyAction) -> Unit = {},
-    onQuotedMessageClick: (Message) -> Unit = {},
-    onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
-    giphyEphemeralContent: @Composable () -> Unit = {
-        DefaultMessageGiphyContent(
-            message = message,
-            onGiphyActionClick = onGiphyActionClick,
-        )
-    },
+    // onGiphyActionClick: (GiphyAction) -> Unit = {},
+    // onQuotedMessageClick: (Message) -> Unit = {},
+    // onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
+    // giphyEphemeralContent: @Composable () -> Unit = {
+    //     DefaultMessageGiphyContent(
+    //         message = message,
+    //         onGiphyActionClick = onGiphyActionClick,
+    //     )
+    // },
     deletedMessageContent: @Composable () -> Unit = {
         DefaultMessageDeletedContent(modifier = modifier)
     },
@@ -72,13 +72,13 @@ public fun MessageContent(
             message = message,
             currentUser = currentUser,
             onLongItemClick = onLongItemClick,
-            onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
-            onQuotedMessageClick = onQuotedMessageClick,
+            // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
+            // onQuotedMessageClick = onQuotedMessageClick,
         )
     },
 ) {
     when {
-        message.isGiphyEphemeral() -> giphyEphemeralContent()
+        // message.isGiphyEphemeral() -> giphyEphemeralContent()
         message.isDeleted() -> deletedMessageContent()
         else -> regularMessageContent()
     }
@@ -137,14 +137,14 @@ internal fun DefaultMessageContent(
     message: Message,
     currentUser: User?,
     onLongItemClick: (Message) -> Unit,
-    onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
-    onQuotedMessageClick: (Message) -> Unit,
+    // onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
+    // onQuotedMessageClick: (Message) -> Unit,
 ) {
     Column {
         MessageAttachmentsContent(
             message = message,
             onLongItemClick = onLongItemClick,
-            onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
+            // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
         )
 
         if (message.text.isNotEmpty()) {
@@ -152,7 +152,7 @@ internal fun DefaultMessageContent(
                 message = message,
                 currentUser = currentUser,
                 onLongItemClick = onLongItemClick,
-                onQuotedMessageClick = onQuotedMessageClick,
+                // onQuotedMessageClick = onQuotedMessageClick,
             )
         }
     }

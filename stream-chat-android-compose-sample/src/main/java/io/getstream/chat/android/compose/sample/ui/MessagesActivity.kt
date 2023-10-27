@@ -49,7 +49,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.compose.sample.ChatApp
 import io.getstream.chat.android.compose.sample.R
-import io.getstream.chat.android.compose.state.mediagallerypreview.MediaGalleryPreviewResultType
 import io.getstream.chat.android.compose.state.messages.attachments.StatefulStreamMediaRecorder
 import io.getstream.chat.android.compose.ui.components.composer.MessageInput
 import io.getstream.chat.android.compose.ui.components.messageoptions.defaultMessageOptionsState
@@ -66,8 +65,6 @@ import io.getstream.chat.android.compose.viewmodel.messages.AttachmentsPickerVie
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessagesViewModelFactory
-import io.getstream.chat.android.ui.common.state.messages.MessageMode
-import io.getstream.chat.android.ui.common.state.messages.Reply
 import io.getstream.chat.android.ui.common.state.messages.list.DeletedMessageVisibility
 import io.getstream.chat.android.ui.common.state.messages.list.SelectedMessageOptionsState
 import io.getstream.chat.android.ui.common.state.messages.list.SelectedMessageReactionsPickerState
@@ -150,26 +147,26 @@ class MessagesActivity : BaseConnectedActivity() {
                         .fillMaxSize(),
                     viewModel = listViewModel,
                     messagesLazyListState = if (listViewModel.isInThread) rememberMessageListState() else lazyListState,
-                    onThreadClick = { message ->
-                        composerViewModel.setMessageMode(MessageMode.MessageThread(message))
-                        listViewModel.openMessageThread(message)
-                    },
-                    onMediaGalleryPreviewResult = { result ->
-                        when (result?.resultType) {
-                            MediaGalleryPreviewResultType.QUOTE -> {
-                                val message = listViewModel.getMessageById(result.messageId)
-
-                                if (message != null) {
-                                    composerViewModel.performMessageAction(Reply(message))
-                                }
-                            }
-
-                            MediaGalleryPreviewResultType.SHOW_IN_CHAT -> {
-                            }
-
-                            null -> Unit
-                        }
-                    },
+                    // onThreadClick = { message ->
+                    //     composerViewModel.setMessageMode(MessageMode.MessageThread(message))
+                    //     listViewModel.openMessageThread(message)
+                    // },
+                    // onMediaGalleryPreviewResult = { result ->
+                    //     when (result?.resultType) {
+                    //         MediaGalleryPreviewResultType.QUOTE -> {
+                    //             val message = listViewModel.getMessageById(result.messageId)
+                    //
+                    //             if (message != null) {
+                    //                 composerViewModel.performMessageAction(Reply(message))
+                    //             }
+                    //         }
+                    //
+                    //         MediaGalleryPreviewResultType.SHOW_IN_CHAT -> {
+                    //         }
+                    //
+                    //         null -> Unit
+                    //     }
+                    // },
                 )
             }
 
