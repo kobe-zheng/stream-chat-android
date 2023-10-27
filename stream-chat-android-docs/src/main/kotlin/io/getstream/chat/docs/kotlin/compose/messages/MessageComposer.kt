@@ -248,10 +248,10 @@ private object MessageComposerCustomizationSnippet {
                                         val state = composerViewModel.messageComposerState.value
 
                                         composerViewModel.sendMessage(
-                                            // composerViewModel.buildNewMessage(
-                                            //     state.inputValue,
-                                            //     state.attachments
-                                            // )
+                                            composerViewModel.buildNewMessage(
+                                                state.inputValue,
+                                                state.attachments
+                                            )
                                         )
                                     },
                                 painter = painterResource(id = R.drawable.stream_compose_ic_send),
