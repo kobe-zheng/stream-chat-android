@@ -16,19 +16,15 @@
 
 package io.getstream.chat.android.compose.viewmodel.messages
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import io.getstream.chat.android.compose.util.extensions.asState
 import io.getstream.chat.android.models.Attachment
 import io.getstream.chat.android.models.Message
 import io.getstream.chat.android.ui.common.feature.messages.composer.MessageComposerController
 import io.getstream.chat.android.ui.common.state.messages.composer.MessageComposerState
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 
 /**
  * ViewModel responsible for handling the composing and sending of messages.
@@ -43,15 +39,12 @@ public class MessageComposerViewModel(
     private val messageComposerController: MessageComposerController,
 ) : ViewModel() {
 
-    private var _messageComposerState: MutableStateFlow<MessageComposerState> = MutableStateFlow(MessageComposerState())
+    private val _messageComposerState: MutableStateFlow<MessageComposerState> = MutableStateFlow(MessageComposerState())
 
-    private val _newState: MutableStateFlow<MessageComposerState> = MutableStateFlow(MessageComposerState(
-        ownCapabilities = setOf()
-    ))
     /**
      * The full UI state that has all the required data.
      */
-    public val messageComposerState: StateFlow<MessageComposerState> = _newState
+    public val messageComposerState: StateFlow<MessageComposerState> = _messageComposerState
 
 
     //     _messageComposerState.stateIn(
@@ -62,10 +55,11 @@ public class MessageComposerViewModel(
 
         // _messageComposerState.asStateFlow()
 
+    private val _input: MutableStateFlow<String> = MutableStateFlow("")
     /**
      * UI state of the current composer input.
      */
-    public val input: MutableStateFlow<String> = messageComposerController.input
+    public val input: MutableStateFlow<String> = _input
 
     // /**
     //  * If the message will be shown in the channel after it is sent.
@@ -122,7 +116,17 @@ public class MessageComposerViewModel(
      *
      * @param value Current state value.
      */
-    public fun setMessageInput(value: String): Unit = messageComposerController.setMessageInput(value)
+    public fun setMessageInput(value: String) {
+        this._input.update {
+            value
+        }
+        this._messageComposerState.update {
+            it.copy(
+                inputValue = value
+            )
+        }
+    }
+        // messageComposerController.setMessageInput(value)
 
     // /**
     //  * Called when the "Also send as a direct message" checkbox is checked or unchecked.
@@ -184,7 +188,10 @@ public class MessageComposerViewModel(
      *
      * @param message The message to send.
      */
-    public fun sendMessage(message: Message): Unit = messageComposerController.sendMessage(message)
+    public fun sendMessage(message: Message) {
+        Log.d("SENT MESSAGE", message.toString())
+        clearData()
+    }
 
     /**
      * Builds a new [Message] to send to our API. Based on the internal state, we use the current action's message and

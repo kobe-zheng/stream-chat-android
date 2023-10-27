@@ -68,7 +68,7 @@ public fun MessageInput(
     innerLeadingContent: @Composable RowScope.() -> Unit = {},
     innerTrailingContent: @Composable RowScope.() -> Unit = {},
 ) {
-    val (value, attachments, activeAction) = messageComposerState
+    val (value) = messageComposerState
     // val canSendMessage = messageComposerState.ownCapabilities.contains(ChannelCapabilities.SEND_MESSAGE)
 
     InputField(
@@ -81,32 +81,32 @@ public fun MessageInput(
         keyboardOptions = keyboardOptions,
         decorationBox = { innerTextField ->
             Column {
-                if (activeAction is Reply) {
-                    QuotedMessage(
-                        modifier = Modifier.padding(horizontal = 4.dp),
-                        message = activeAction.message,
-                        currentUser = messageComposerState.currentUser,
-                        replyMessage = null,
-                        onLongItemClick = {},
-                        onQuotedMessageClick = {},
-                    )
+                // if (activeAction is Reply) {
+                //     QuotedMessage(
+                //         modifier = Modifier.padding(horizontal = 4.dp),
+                //         message = activeAction.message,
+                //         currentUser = messageComposerState.currentUser,
+                //         replyMessage = null,
+                //         onLongItemClick = {},
+                //         onQuotedMessageClick = {},
+                //     )
+                //
+                //     Spacer(modifier = Modifier.size(16.dp))
+                // }
 
-                    Spacer(modifier = Modifier.size(16.dp))
-                }
-
-                if (attachments.isNotEmpty() && activeAction !is Edit) {
-                    val previewFactory = ChatTheme.attachmentFactories.firstOrNull { it.canHandle(attachments) }
-
-                    previewFactory?.previewContent?.invoke(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .wrapContentHeight(),
-                        attachments = attachments,
-                        onAttachmentRemoved = {}/*onAttachmentRemoved*/,
-                    )
-
-                    Spacer(modifier = Modifier.size(16.dp))
-                }
+                // if (attachments.isNotEmpty() && activeAction !is Edit) {
+                //     val previewFactory = ChatTheme.attachmentFactories.firstOrNull { it.canHandle(attachments) }
+                //
+                //     previewFactory?.previewContent?.invoke(
+                //         modifier = Modifier
+                //             .fillMaxWidth()
+                //             .wrapContentHeight(),
+                //         attachments = attachments,
+                //         onAttachmentRemoved = {}/*onAttachmentRemoved*/,
+                //     )
+                //
+                //     Spacer(modifier = Modifier.size(16.dp))
+                // }
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
