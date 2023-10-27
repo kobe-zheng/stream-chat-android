@@ -174,6 +174,7 @@ public fun MessagesScreen(
                             //     ),
                             // )
                             listViewModel.sendMessage(message)
+                            composerViewModel.clearData()
                         }
                     },
                     // statefulStreamMediaRecorder = statefulStreamMediaRecorder,

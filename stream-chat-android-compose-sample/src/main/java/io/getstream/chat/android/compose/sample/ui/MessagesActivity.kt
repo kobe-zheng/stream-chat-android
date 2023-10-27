@@ -125,139 +125,139 @@ class MessagesActivity : BaseConnectedActivity() {
         super.onDestroy()
         streamMediaRecorder.stopRecording()
     }
-
-    @Composable
-    fun MyCustomUi() {
-        val isShowingAttachments = attachmentsPickerViewModel.isShowingAttachments
-        val selectedMessageState = listViewModel.currentMessagesState.selectedMessageState
-        val user by listViewModel.user.collectAsState()
-        val lazyListState = rememberMessageListState()
-
-        Box(modifier = Modifier.fillMaxSize()) {
-            Scaffold(
-                modifier = Modifier.fillMaxSize(),
-                bottomBar = {
-                    MyCustomComposer()
-                },
-            ) {
-                MessageList(
-                    modifier = Modifier
-                        .padding(it)
-                        .background(ChatTheme.colors.appBackground)
-                        .fillMaxSize(),
-                    viewModel = listViewModel,
-                    messagesLazyListState = if (listViewModel.isInThread) rememberMessageListState() else lazyListState,
-                    // onThreadClick = { message ->
-                    //     composerViewModel.setMessageMode(MessageMode.MessageThread(message))
-                    //     listViewModel.openMessageThread(message)
-                    // },
-                    // onMediaGalleryPreviewResult = { result ->
-                    //     when (result?.resultType) {
-                    //         MediaGalleryPreviewResultType.QUOTE -> {
-                    //             val message = listViewModel.getMessageById(result.messageId)
-                    //
-                    //             if (message != null) {
-                    //                 composerViewModel.performMessageAction(Reply(message))
-                    //             }
-                    //         }
-                    //
-                    //         MediaGalleryPreviewResultType.SHOW_IN_CHAT -> {
-                    //         }
-                    //
-                    //         null -> Unit
-                    //     }
-                    // },
-                )
-            }
-
-            if (isShowingAttachments) {
-                AttachmentsPicker(
-                    attachmentsPickerViewModel = attachmentsPickerViewModel,
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .height(350.dp),
-                    onAttachmentsSelected = { attachments ->
-                        attachmentsPickerViewModel.changeAttachmentState(false)
-                        composerViewModel.addSelectedAttachments(attachments)
-                    },
-                    onDismiss = {
-                        attachmentsPickerViewModel.changeAttachmentState(false)
-                        attachmentsPickerViewModel.dismissAttachments()
-                    },
-                )
-            }
-
-            if (selectedMessageState != null) {
-                val selectedMessage = selectedMessageState.message
-                when (selectedMessageState) {
-                    is SelectedMessageOptionsState -> {
-                        SelectedMessageMenu(
-                            modifier = Modifier
-                                .align(Alignment.Center)
-                                .padding(horizontal = 20.dp)
-                                .wrapContentSize(),
-                            shape = ChatTheme.shapes.attachment,
-                            messageOptions = defaultMessageOptionsState(
-                                selectedMessage = selectedMessage,
-                                currentUser = user,
-                                isInThread = listViewModel.isInThread,
-                                ownCapabilities = selectedMessageState.ownCapabilities,
-                            ),
-                            message = selectedMessage,
-                            ownCapabilities = selectedMessageState.ownCapabilities,
-                            onMessageAction = { action ->
-                                composerViewModel.performMessageAction(action)
-                                listViewModel.performMessageAction(action)
-                            },
-                            onShowMoreReactionsSelected = {
-                                listViewModel.selectExtendedReactions(selectedMessage)
-                            },
-                            onDismiss = { listViewModel.removeOverlay() },
-                        )
-                    }
-
-                    is SelectedMessageReactionsState -> {
-                        SelectedReactionsMenu(
-                            modifier = Modifier
-                                .align(Alignment.Center)
-                                .padding(horizontal = 20.dp)
-                                .wrapContentSize(),
-                            shape = ChatTheme.shapes.attachment,
-                            message = selectedMessage,
-                            currentUser = user,
-                            onMessageAction = { action ->
-                                composerViewModel.performMessageAction(action)
-                                listViewModel.performMessageAction(action)
-                            },
-                            onShowMoreReactionsSelected = {
-                                listViewModel.selectExtendedReactions(selectedMessage)
-                            },
-                            onDismiss = { listViewModel.removeOverlay() },
-                            ownCapabilities = selectedMessageState.ownCapabilities,
-                        )
-                    }
-
-                    is SelectedMessageReactionsPickerState -> {
-                        ReactionsPicker(
-                            modifier = Modifier
-                                .align(Alignment.Center)
-                                .padding(horizontal = 20.dp)
-                                .wrapContentSize(),
-                            shape = ChatTheme.shapes.attachment,
-                            message = selectedMessage,
-                            onMessageAction = { action ->
-                                composerViewModel.performMessageAction(action)
-                                listViewModel.performMessageAction(action)
-                            },
-                            onDismiss = { listViewModel.removeOverlay() },
-                        )
-                    }
-
-                    else -> Unit
-                }
-            }
-        }
-    }
+    //
+    // @Composable
+    // fun MyCustomUi() {
+    //     val isShowingAttachments = attachmentsPickerViewModel.isShowingAttachments
+    //     val selectedMessageState = listViewModel.currentMessagesState.selectedMessageState
+    //     val user by listViewModel.user.collectAsState()
+    //     val lazyListState = rememberMessageListState()
+    //
+    //     Box(modifier = Modifier.fillMaxSize()) {
+    //         Scaffold(
+    //             modifier = Modifier.fillMaxSize(),
+    //             bottomBar = {
+    //                 MyCustomComposer()
+    //             },
+    //         ) {
+    //             MessageList(
+    //                 modifier = Modifier
+    //                     .padding(it)
+    //                     .background(ChatTheme.colors.appBackground)
+    //                     .fillMaxSize(),
+    //                 viewModel = listViewModel,
+    //                 messagesLazyListState = if (listViewModel.isInThread) rememberMessageListState() else lazyListState,
+    //                 // onThreadClick = { message ->
+    //                 //     composerViewModel.setMessageMode(MessageMode.MessageThread(message))
+    //                 //     listViewModel.openMessageThread(message)
+    //                 // },
+    //                 // onMediaGalleryPreviewResult = { result ->
+    //                 //     when (result?.resultType) {
+    //                 //         MediaGalleryPreviewResultType.QUOTE -> {
+    //                 //             val message = listViewModel.getMessageById(result.messageId)
+    //                 //
+    //                 //             if (message != null) {
+    //                 //                 composerViewModel.performMessageAction(Reply(message))
+    //                 //             }
+    //                 //         }
+    //                 //
+    //                 //         MediaGalleryPreviewResultType.SHOW_IN_CHAT -> {
+    //                 //         }
+    //                 //
+    //                 //         null -> Unit
+    //                 //     }
+    //                 // },
+    //             )
+    //         }
+    //
+    //         if (isShowingAttachments) {
+    //             AttachmentsPicker(
+    //                 attachmentsPickerViewModel = attachmentsPickerViewModel,
+    //                 modifier = Modifier
+    //                     .align(Alignment.BottomCenter)
+    //                     .height(350.dp),
+    //                 onAttachmentsSelected = { attachments ->
+    //                     attachmentsPickerViewModel.changeAttachmentState(false)
+    //                     composerViewModel.addSelectedAttachments(attachments)
+    //                 },
+    //                 onDismiss = {
+    //                     attachmentsPickerViewModel.changeAttachmentState(false)
+    //                     attachmentsPickerViewModel.dismissAttachments()
+    //                 },
+    //             )
+    //         }
+    //
+    //         if (selectedMessageState != null) {
+    //             val selectedMessage = selectedMessageState.message
+    //             when (selectedMessageState) {
+    //                 is SelectedMessageOptionsState -> {
+    //                     SelectedMessageMenu(
+    //                         modifier = Modifier
+    //                             .align(Alignment.Center)
+    //                             .padding(horizontal = 20.dp)
+    //                             .wrapContentSize(),
+    //                         shape = ChatTheme.shapes.attachment,
+    //                         messageOptions = defaultMessageOptionsState(
+    //                             selectedMessage = selectedMessage,
+    //                             currentUser = user,
+    //                             isInThread = listViewModel.isInThread,
+    //                             ownCapabilities = selectedMessageState.ownCapabilities,
+    //                         ),
+    //                         message = selectedMessage,
+    //                         ownCapabilities = selectedMessageState.ownCapabilities,
+    //                         onMessageAction = { action ->
+    //                             composerViewModel.performMessageAction(action)
+    //                             listViewModel.performMessageAction(action)
+    //                         },
+    //                         onShowMoreReactionsSelected = {
+    //                             listViewModel.selectExtendedReactions(selectedMessage)
+    //                         },
+    //                         onDismiss = { listViewModel.removeOverlay() },
+    //                     )
+    //                 }
+    //
+    //                 is SelectedMessageReactionsState -> {
+    //                     SelectedReactionsMenu(
+    //                         modifier = Modifier
+    //                             .align(Alignment.Center)
+    //                             .padding(horizontal = 20.dp)
+    //                             .wrapContentSize(),
+    //                         shape = ChatTheme.shapes.attachment,
+    //                         message = selectedMessage,
+    //                         currentUser = user,
+    //                         onMessageAction = { action ->
+    //                             composerViewModel.performMessageAction(action)
+    //                             listViewModel.performMessageAction(action)
+    //                         },
+    //                         onShowMoreReactionsSelected = {
+    //                             listViewModel.selectExtendedReactions(selectedMessage)
+    //                         },
+    //                         onDismiss = { listViewModel.removeOverlay() },
+    //                         ownCapabilities = selectedMessageState.ownCapabilities,
+    //                     )
+    //                 }
+    //
+    //                 is SelectedMessageReactionsPickerState -> {
+    //                     ReactionsPicker(
+    //                         modifier = Modifier
+    //                             .align(Alignment.Center)
+    //                             .padding(horizontal = 20.dp)
+    //                             .wrapContentSize(),
+    //                         shape = ChatTheme.shapes.attachment,
+    //                         message = selectedMessage,
+    //                         onMessageAction = { action ->
+    //                             composerViewModel.performMessageAction(action)
+    //                             listViewModel.performMessageAction(action)
+    //                         },
+    //                         onDismiss = { listViewModel.removeOverlay() },
+    //                     )
+    //                 }
+    //
+    //                 else -> Unit
+    //             }
+    //         }
+    //     }
+    // }
 
     @Composable
     fun MyCustomComposer() {

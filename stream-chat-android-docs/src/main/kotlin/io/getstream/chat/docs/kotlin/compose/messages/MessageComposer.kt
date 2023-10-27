@@ -83,20 +83,17 @@ private object MessageComposerUsageSnippet {
                             .fillMaxWidth()
                             .wrapContentHeight(),
                         //TODO add this and related entries to docs when documentation effort occurs
-                        statefulStreamMediaRecorder = statefulStreamMediaRecorder,
+                        // statefulStreamMediaRecorder = statefulStreamMediaRecorder,
                         viewModel = composerViewModel, // 3 - provide ViewModel
                         // 4 - customize actions
-                        onAttachmentsClick = { attachmentsPickerViewModel.changeAttachmentState(true) },
-                        onCancelAction = {
-                            listViewModel.dismissAllMessageActions()
-                            composerViewModel.dismissMessageActions()
-                        }
+                        // onAttachmentsClick = { attachmentsPickerViewModel.changeAttachmentState(true) },
+                        // onCancelAction = {
+                        //     listViewModel.dismissAllMessageActions()
+                        //     composerViewModel.dismissMessageActions()
+                        // }
                     )
                 }
-            ) {
-                // 5 - the rest of your UI
-                // ...
-            }
+            ) {}
         }
     }
 }
@@ -110,7 +107,7 @@ private object MessageComposerHandlingActionsSnippet {
 
         //TODO add this and related entries to docs when documentation effort occurs
         private val streamMediaRecorder: StreamMediaRecorder by lazy { DefaultStreamMediaRecorder(applicationContext) }
-        private val statefulStreamMediaRecorder by lazy { StatefulStreamMediaRecorder(streamMediaRecorder) }
+        // private val statefulStreamMediaRecorder by lazy { StatefulStreamMediaRecorder(streamMediaRecorder) }
 
         val factory by lazy {
             MessagesViewModelFactory(
@@ -128,17 +125,17 @@ private object MessageComposerHandlingActionsSnippet {
                 ChatTheme {
                     MessageComposer(
                         viewModel = viewModel,
-                        onSendMessage = { viewModel.sendMessage(it) },
-                        onAttachmentsClick = {},
-                        onCommandsClick = {},
+                        onSendMessage = { viewModel.sendMessage() },
+                        // onAttachmentsClick = {},
+                        // onCommandsClick = {},
                         onValueChange = { viewModel.setMessageInput(it) },
-                        onAttachmentRemoved = { viewModel.removeSelectedAttachment(it) },
-                        onCancelAction = { viewModel.dismissMessageActions() },
-                        onMentionSelected = { viewModel.selectMention(it) },
-                        onCommandSelected = { viewModel.selectCommand(it) },
-                        onAlsoSendToChannelSelected = { viewModel.setAlsoSendToChannel(it) },
+                        // onAttachmentRemoved = { viewModel.removeSelectedAttachment(it) },
+                        // onCancelAction = { viewModel.dismissMessageActions() },
+                        // onMentionSelected = { viewModel.selectMention(it) },
+                        // onCommandSelected = { viewModel.selectCommand(it) },
+                        // onAlsoSendToChannelSelected = { viewModel.setAlsoSendToChannel(it) },
                         //TODO add this and related entries to docs when documentation effort occurs
-                        statefulStreamMediaRecorder = statefulStreamMediaRecorder,
+                        // statefulStreamMediaRecorder = statefulStreamMediaRecorder,
                     )
                 }
             }
@@ -212,8 +209,8 @@ private object MessageComposerCustomizationSnippet {
                     .wrapContentHeight(),
                 viewModel = composerViewModel,
                 //TODO add this and related entries to docs when documentation effort occurs
-                statefulStreamMediaRecorder = statefulStreamMediaRecorder,
-                integrations = {},
+                // statefulStreamMediaRecorder = statefulStreamMediaRecorder,
+                // integrations = {},
                 input = { inputState ->
                     MessageInput(
                         modifier = Modifier
@@ -222,7 +219,7 @@ private object MessageComposerCustomizationSnippet {
                             .padding(start = 8.dp),
                         messageComposerState = inputState,
                         onValueChange = { composerViewModel.setMessageInput(it) },
-                        onAttachmentRemoved = { composerViewModel.removeSelectedAttachment(it) },
+                        // onAttachmentRemoved = { composerViewModel.removeSelectedAttachment(it) },
                         label = { // create a custom label with an icon
                             Row(
                                 Modifier.wrapContentWidth(),
@@ -251,10 +248,10 @@ private object MessageComposerCustomizationSnippet {
                                         val state = composerViewModel.messageComposerState.value
 
                                         composerViewModel.sendMessage(
-                                            composerViewModel.buildNewMessage(
-                                                state.inputValue,
-                                                state.attachments
-                                            )
+                                            // composerViewModel.buildNewMessage(
+                                            //     state.inputValue,
+                                            //     state.attachments
+                                            // )
                                         )
                                     },
                                 painter = painterResource(id = R.drawable.stream_compose_ic_send),
