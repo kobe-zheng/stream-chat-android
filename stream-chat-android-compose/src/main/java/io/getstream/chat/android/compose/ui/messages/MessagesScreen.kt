@@ -203,12 +203,12 @@ public fun MessagesScreen(
                     },
                      */
                     // onCommandsClick = remember(composerViewModel) { { composerViewModel.toggleCommandsVisibility() } },
-                    onCancelAction = remember(listViewModel, composerViewModel) {
-                        {
-                            listViewModel.dismissAllMessageActions()
-                            composerViewModel.dismissMessageActions()
-                        }
-                    },
+                    // onCancelAction = remember(listViewModel, composerViewModel) {
+                    //     {
+                    //         listViewModel.dismissAllMessageActions()
+                    //         composerViewModel.dismissMessageActions()
+                    //     }
+                    // },
                     onSendMessage = remember(composerViewModel) {
                         {
                                 message ->

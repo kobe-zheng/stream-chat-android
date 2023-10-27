@@ -103,7 +103,7 @@ public fun MessageComposer(
     // onCommandsClick: () -> Unit = {},
     onValueChange: (String) -> Unit = { viewModel.setMessageInput(it) },
     // onAttachmentRemoved: (Attachment) -> Unit = { viewModel.removeSelectedAttachment(it) },
-    onCancelAction: () -> Unit = { viewModel.dismissMessageActions() },
+    // onCancelAction: () -> Unit = { viewModel.dismissMessageActions() },
     // onMentionSelected: (User) -> Unit = { viewModel.selectMention(it) },
     // onCommandSelected: (Command) -> Unit = { viewModel.selectCommand(it) },
     // onAlsoSendToChannelSelected: (Boolean) -> Unit = { viewModel.setAlsoSendToChannel(it) },
