@@ -19,21 +19,11 @@
 package io.getstream.chat.android.compose.ui.messages
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.AnimationConstants
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.MaterialTheme
@@ -41,9 +31,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -52,13 +40,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import io.getstream.chat.android.compose.R
 import io.getstream.chat.android.compose.state.mediagallerypreview.MediaGalleryPreviewResultType
-import io.getstream.chat.android.compose.state.messageoptions.MessageOptionItemState
 import io.getstream.chat.android.compose.ui.components.SimpleDialog
-import io.getstream.chat.android.compose.ui.components.messageoptions.defaultMessageOptionsState
 import io.getstream.chat.android.compose.ui.components.moderatedmessage.ModeratedMessageDialog
-import io.getstream.chat.android.compose.ui.components.reactionpicker.ReactionsPicker
-import io.getstream.chat.android.compose.ui.components.selectedmessage.SelectedMessageMenu
-import io.getstream.chat.android.compose.ui.components.selectedmessage.SelectedReactionsMenu
 import io.getstream.chat.android.compose.ui.messages.composer.MessageComposer
 import io.getstream.chat.android.compose.ui.messages.header.MessageListHeader
 import io.getstream.chat.android.compose.ui.messages.list.MessageList
@@ -79,12 +62,7 @@ import io.getstream.chat.android.ui.common.state.messages.Resend
 import io.getstream.chat.android.ui.common.state.messages.list.DeleteMessage
 import io.getstream.chat.android.ui.common.state.messages.list.EditMessage
 import io.getstream.chat.android.ui.common.state.messages.list.SelectedMessageFailedModerationState
-import io.getstream.chat.android.ui.common.state.messages.list.SelectedMessageOptionsState
-import io.getstream.chat.android.ui.common.state.messages.list.SelectedMessageReactionsPickerState
-import io.getstream.chat.android.ui.common.state.messages.list.SelectedMessageReactionsState
-import io.getstream.chat.android.ui.common.state.messages.list.SelectedMessageState
 import io.getstream.chat.android.ui.common.state.messages.list.SendAnyway
-import io.getstream.chat.android.ui.common.state.messages.updateMessage
 
 /**
  * Default root Messages screen component, that provides the necessary ViewModels and
@@ -271,13 +249,14 @@ public fun MessagesScreen(
                 },
             )
         }
-
+        /*
         MessageMenus(
             listViewModel = listViewModel,
             composerViewModel = composerViewModel,
             skipPushNotification = skipPushNotification,
             skipEnrichUrl = skipEnrichUrl,
         )
+        */
         /*
         AttachmentsPickerMenu(
             attachmentsPickerViewModel = attachmentsPickerViewModel,
@@ -293,7 +272,7 @@ public fun MessagesScreen(
         MessageDialogs(listViewModel = listViewModel)
     }
 }
-
+/*
 /**
  * Contains the various menus and pickers the user
  * can use to interact with messages.
@@ -471,6 +450,7 @@ private fun BoxScope.MessagesScreenMenus(
     }
 }
 
+
 /**
  * Contains the reactions picker wrapped inside
  * of an animated composable.
@@ -535,6 +515,7 @@ private fun BoxScope.MessagesScreenReactionsPicker(
         )
     }
 }
+ */
 /*
 /**
  * Contains the attachments picker menu wrapped inside
