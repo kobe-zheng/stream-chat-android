@@ -19,7 +19,6 @@ package io.getstream.chat.android.compose.ui.messages.composer
 import android.Manifest
 import android.os.Build
 import android.widget.Toast
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -32,9 +31,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.material.Checkbox
-import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.SnackbarDuration
@@ -65,7 +61,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -87,7 +82,6 @@ import io.getstream.chat.android.models.ChannelCapabilities
 import io.getstream.chat.android.models.Message
 import io.getstream.chat.android.models.User
 import io.getstream.chat.android.ui.common.state.messages.Edit
-import io.getstream.chat.android.ui.common.state.messages.MessageMode
 import io.getstream.chat.android.ui.common.state.messages.composer.MessageComposerState
 import io.getstream.chat.android.ui.common.state.messages.composer.ValidationError
 import io.getstream.chat.android.ui.common.utils.MediaStringUtil
@@ -151,12 +145,14 @@ public fun MessageComposer(
             onCancelAction = onCancelAction,
         )
     },
+    /*
     footerContent: @Composable ColumnScope.(MessageComposerState) -> Unit = {
         DefaultMessageComposerFooterContent(
             messageComposerState = it,
             onAlsoSendToChannelSelected = onAlsoSendToChannelSelected,
         )
     },
+     */
     mentionPopupContent: @Composable (List<User>) -> Unit = {
         DefaultMentionPopupContent(
             mentionSuggestions = it,
@@ -222,7 +218,7 @@ public fun MessageComposer(
         // onCommandSelected = onCommandSelected,
         onAlsoSendToChannelSelected = onAlsoSendToChannelSelected,
         headerContent = headerContent,
-        footerContent = footerContent,
+        // footerContent = footerContent,
         mentionPopupContent = mentionPopupContent,
         // commandPopupContent = commandPopupContent,
         // integrations = integrations,
@@ -286,12 +282,12 @@ public fun MessageComposer(
             onCancelAction = onCancelAction,
         )
     },
-    footerContent: @Composable ColumnScope.(MessageComposerState) -> Unit = {
-        DefaultMessageComposerFooterContent(
-            messageComposerState = it,
-            onAlsoSendToChannelSelected = onAlsoSendToChannelSelected,
-        )
-    },
+    // footerContent: @Composable ColumnScope.(MessageComposerState) -> Unit = {
+    //     DefaultMessageComposerFooterContent(
+    //         messageComposerState = it,
+    //         onAlsoSendToChannelSelected = onAlsoSendToChannelSelected,
+    //     )
+    // },
     mentionPopupContent: @Composable (List<User>) -> Unit = {
         DefaultMentionPopupContent(
             mentionSuggestions = it,
@@ -389,7 +385,7 @@ public fun MessageComposer(
                 trailingContent(messageComposerState)
             }
 
-            footerContent(messageComposerState)
+            // footerContent(messageComposerState)
         }
 
         if (snackbarHostState.currentSnackbarData != null) {
@@ -430,6 +426,7 @@ public fun DefaultMessageComposerHeaderContent(
     }
 }
 
+/*
 /**
  * Represents the default content shown at the bottom of the message composer component.
  *
@@ -465,6 +462,7 @@ public fun DefaultMessageComposerFooterContent(
         }
     }
 }
+ */
 
 /**
  * Represents the default mention suggestion list popup shown above the message composer.
