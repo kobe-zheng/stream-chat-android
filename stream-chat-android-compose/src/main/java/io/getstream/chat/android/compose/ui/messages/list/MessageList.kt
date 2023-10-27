@@ -35,7 +35,6 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.ui.util.rememberMessageListState
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.chat.android.models.Message
-import io.getstream.chat.android.ui.common.state.messages.list.GiphyAction
 import io.getstream.chat.android.ui.common.state.messages.list.MessageListItemState
 import io.getstream.chat.android.ui.common.state.messages.list.MessageListState
 
@@ -88,7 +87,7 @@ public fun MessageList(
     onMessagesPageStartReached: () -> Unit = { viewModel.loadOlderMessages() },
     onLastVisibleMessageChanged: (Message) -> Unit = { viewModel.updateLastSeenMessage(it) },
     onScrollToBottom: () -> Unit = { viewModel.clearNewMessageState() },
-    onGiphyActionClick: (GiphyAction) -> Unit = { viewModel.performGiphyAction(it) },
+    // onGiphyActionClick: (GiphyAction) -> Unit = { viewModel.performGiphyAction(it) },
     onQuotedMessageClick: (Message) -> Unit = { message ->
         viewModel.scrollToMessage(
             messageId = message.id,
@@ -122,7 +121,7 @@ public fun MessageList(
             onThreadClick = onThreadClick,
             onLongItemClick = onLongItemClick,
             // onReactionsClick = onReactionsClick,
-            onGiphyActionClick = onGiphyActionClick,
+            // onGiphyActionClick = onGiphyActionClick,
             onQuotedMessageClick = onQuotedMessageClick,
         )
     },
@@ -168,7 +167,7 @@ internal fun DefaultMessageContainer(
     onThreadClick: (Message) -> Unit,
     onLongItemClick: (Message) -> Unit,
     // onReactionsClick: (Message) -> Unit = {},
-    onGiphyActionClick: (GiphyAction) -> Unit,
+    // onGiphyActionClick: (GiphyAction) -> Unit = {},
     onQuotedMessageClick: (Message) -> Unit,
 ) {
     MessageContainer(
@@ -176,7 +175,7 @@ internal fun DefaultMessageContainer(
         onLongItemClick = onLongItemClick,
         // onReactionsClick = onReactionsClick,
         onThreadClick = onThreadClick,
-        onGiphyActionClick = onGiphyActionClick,
+        // onGiphyActionClick = onGiphyActionClick,
         onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
         onQuotedMessageClick = onQuotedMessageClick,
     )
@@ -256,9 +255,9 @@ public fun MessageList(
     onScrolledToBottom: () -> Unit = {},
     onThreadClick: (Message) -> Unit = {},
     onLongItemClick: (Message) -> Unit = {},
-    onReactionsClick: (Message) -> Unit = {},
+    // onReactionsClick: (Message) -> Unit = {},
     onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
-    onGiphyActionClick: (GiphyAction) -> Unit = {},
+    // onGiphyActionClick: (GiphyAction) -> Unit = {},
     onQuotedMessageClick: (Message) -> Unit = {},
     onMessagesPageEndReached: (String) -> Unit = {},
     onScrollToBottom: (() -> Unit) -> Unit = {},
@@ -278,7 +277,7 @@ public fun MessageList(
             onLongItemClick = onLongItemClick,
             onThreadClick = onThreadClick,
             // onReactionsClick = onReactionsClick,
-            onGiphyActionClick = onGiphyActionClick,
+            // onGiphyActionClick = onGiphyActionClick,
             onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
             onQuotedMessageClick = onQuotedMessageClick,
         )
