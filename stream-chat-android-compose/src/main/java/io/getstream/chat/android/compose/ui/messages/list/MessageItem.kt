@@ -118,7 +118,7 @@ public fun MessageItem(
     messageItem: MessageItemState,
     onLongItemClick: (Message) -> Unit,
     modifier: Modifier = Modifier,
-    onReactionsClick: (Message) -> Unit = {},
+    // onReactionsClick: (Message) -> Unit = {},
     onThreadClick: (Message) -> Unit = {},
     onGiphyActionClick: (GiphyAction) -> Unit = {},
     onQuotedMessageClick: (Message) -> Unit = {},
@@ -129,7 +129,7 @@ public fun MessageItem(
     headerContent: @Composable ColumnScope.(MessageItemState) -> Unit = {
         DefaultMessageItemHeaderContent(
             messageItem = it,
-            onReactionsClick = onReactionsClick,
+            // onReactionsClick = onReactionsClick,
         )
     },
     centerContent: @Composable ColumnScope.(MessageItemState) -> Unit = {
@@ -258,7 +258,7 @@ internal fun RowScope.DefaultMessageItemLeadingContent(
 @Composable
 internal fun DefaultMessageItemHeaderContent(
     messageItem: MessageItemState,
-    onReactionsClick: (Message) -> Unit = {},
+    // onReactionsClick: (Message) -> Unit = {},
 ) {
     val message = messageItem.message
     val currentUser = messageItem.currentUser
@@ -295,36 +295,36 @@ internal fun DefaultMessageItemHeaderContent(
         )
     }
 
-    if (!message.isDeleted()) {
-        val ownReactions = message.ownReactions
-        val reactionCounts = message.reactionCounts.ifEmpty { return }
-        val iconFactory = ChatTheme.reactionIconFactory
-        reactionCounts
-            .filter { iconFactory.isReactionSupported(it.key) }
-            .takeIf { it.isNotEmpty() }
-            ?.map { it.key }
-            ?.map { type ->
-                val isSelected = ownReactions.any { it.type == type }
-                val reactionIcon = iconFactory.createReactionIcon(type)
-                ReactionOptionItemState(
-                    painter = reactionIcon.getPainter(isSelected),
-                    type = type,
-                )
-            }
-            ?.let { options ->
-                MessageReactions(
-                    modifier = Modifier
-                        .clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = rememberRipple(bounded = false),
-                        ) {
-                            onReactionsClick(message)
-                        }
-                        .padding(horizontal = 4.dp, vertical = 2.dp),
-                    options = options,
-                )
-            }
-    }
+    // if (!message.isDeleted()) {
+    //     val ownReactions = message.ownReactions
+    //     val reactionCounts = message.reactionCounts.ifEmpty { return }
+    //     val iconFactory = ChatTheme.reactionIconFactory
+    //     reactionCounts
+    //         .filter { iconFactory.isReactionSupported(it.key) }
+    //         .takeIf { it.isNotEmpty() }
+    //         ?.map { it.key }
+    //         ?.map { type ->
+    //             val isSelected = ownReactions.any { it.type == type }
+    //             val reactionIcon = iconFactory.createReactionIcon(type)
+    //             ReactionOptionItemState(
+    //                 painter = reactionIcon.getPainter(isSelected),
+    //                 type = type,
+    //             )
+    //         }
+    //         ?.let { options ->
+    //             MessageReactions(
+    //                 modifier = Modifier
+    //                     .clickable(
+    //                         interactionSource = remember { MutableInteractionSource() },
+    //                         indication = rememberRipple(bounded = false),
+    //                     ) {
+    //                         onReactionsClick(message)
+    //                     }
+    //                     .padding(horizontal = 4.dp, vertical = 2.dp),
+    //                 options = options,
+    //             )
+    //         }
+    // }
 }
 
 /**

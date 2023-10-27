@@ -69,7 +69,7 @@ import io.getstream.chat.android.ui.common.state.messages.list.TypingItemState
 public fun MessageContainer(
     messageListItemState: MessageListItemState,
     onLongItemClick: (Message) -> Unit = {},
-    onReactionsClick: (Message) -> Unit = {},
+    // onReactionsClick: (Message) -> Unit = {},
     onThreadClick: (Message) -> Unit = {},
     onGiphyActionClick: (GiphyAction) -> Unit = {},
     onQuotedMessageClick: (Message) -> Unit = {},
@@ -87,7 +87,7 @@ public fun MessageContainer(
         DefaultMessageItem(
             messageItem = it,
             onLongItemClick = onLongItemClick,
-            onReactionsClick = onReactionsClick,
+            // onReactionsClick = onReactionsClick,
             onThreadClick = onThreadClick,
             onGiphyActionClick = onGiphyActionClick,
             onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
@@ -207,7 +207,7 @@ internal fun DefaultSystemMessageContent(systemMessageState: SystemMessageItemSt
 internal fun DefaultMessageItem(
     messageItem: MessageItemState,
     onLongItemClick: (Message) -> Unit,
-    onReactionsClick: (Message) -> Unit = {},
+    // onReactionsClick: (Message) -> Unit = {},
     onThreadClick: (Message) -> Unit,
     onGiphyActionClick: (GiphyAction) -> Unit,
     onQuotedMessageClick: (Message) -> Unit,
@@ -216,7 +216,7 @@ internal fun DefaultMessageItem(
     MessageItem(
         messageItem = messageItem,
         onLongItemClick = onLongItemClick,
-        onReactionsClick = onReactionsClick,
+        // onReactionsClick = onReactionsClick,
         onThreadClick = onThreadClick,
         onGiphyActionClick = onGiphyActionClick,
         onQuotedMessageClick = onQuotedMessageClick,
