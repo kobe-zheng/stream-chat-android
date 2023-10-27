@@ -16,12 +16,8 @@
 
 package io.getstream.chat.android.compose.ui.messages.composer
 
-import android.Manifest
-import android.os.Build
 import android.widget.Toast
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
@@ -43,18 +39,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Bottom
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.PointerEventPass
-import androidx.compose.ui.input.pointer.changedToUp
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
@@ -64,8 +53,6 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.rememberMultiplePermissionsState
-import io.getstream.chat.android.client.errors.extractCause
 import io.getstream.chat.android.compose.R
 import io.getstream.chat.android.compose.state.messages.attachments.StatefulStreamMediaRecorder
 import io.getstream.chat.android.compose.ui.attachments.audio.RunningWaveForm
@@ -76,19 +63,13 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.ui.util.AboveAnchorPopupPositionProvider
 import io.getstream.chat.android.compose.ui.util.mirrorRtl
 import io.getstream.chat.android.compose.viewmodel.messages.MessageComposerViewModel
-import io.getstream.chat.android.models.Attachment
 import io.getstream.chat.android.models.ChannelCapabilities
 import io.getstream.chat.android.models.Message
 import io.getstream.chat.android.ui.common.state.messages.Edit
 import io.getstream.chat.android.ui.common.state.messages.composer.MessageComposerState
 import io.getstream.chat.android.ui.common.state.messages.composer.ValidationError
 import io.getstream.chat.android.ui.common.utils.MediaStringUtil
-import io.getstream.log.Priority
-import io.getstream.log.StreamLog
-import io.getstream.log.streamLog
 import io.getstream.sdk.chat.audio.recording.MediaRecorderState
-import kotlinx.coroutines.launch
-import java.util.Date
 
 /**
  * Default MessageComposer component that relies on [MessageComposerViewModel] to handle data and
@@ -136,7 +117,7 @@ public fun MessageComposer(
     // onMentionSelected: (User) -> Unit = { viewModel.selectMention(it) },
     // onCommandSelected: (Command) -> Unit = { viewModel.selectCommand(it) },
     // onAlsoSendToChannelSelected: (Boolean) -> Unit = { viewModel.setAlsoSendToChannel(it) },
-    onRecordingSaved: (Attachment) -> Unit = { viewModel.addSelectedAttachments(listOf(it)) },
+    // onRecordingSaved: (Attachment) -> Unit = { viewModel.addSelectedAttachments(listOf(it)) },
     headerContent: @Composable ColumnScope.(MessageComposerState) -> Unit = {
         DefaultMessageComposerHeaderContent(
             messageComposerState = it,
@@ -192,16 +173,15 @@ public fun MessageComposer(
             value = it.inputValue,
             coolDownTime = it.coolDownTime,
             validationErrors = it.validationErrors,
-            attachments = it.attachments,
+            // attachments = it.attachments,
             ownCapabilities = it.ownCapabilities,
             isInEditMode = it.action is Edit,
-            onSendMessage = { input, attachments ->
-                val message = viewModel.buildNewMessage(input, attachments)
-
+            onSendMessage = { input ->
+                val message = viewModel.buildNewMessage(input)
                 onSendMessage(message)
             },
-            onRecordingSaved = onRecordingSaved,
-            statefulStreamMediaRecorder = statefulStreamMediaRecorder,
+            // onRecordingSaved = onRecordingSaved,
+            // statefulStreamMediaRecorder = statefulStreamMediaRecorder,
         )
     },
 ) {
@@ -209,8 +189,8 @@ public fun MessageComposer(
 
     MessageComposer(
         modifier = modifier,
-        onSendMessage = { text, attachments ->
-            val messageWithData = viewModel.buildNewMessage(text, attachments)
+        onSendMessage = { text ->
+            val messageWithData = viewModel.buildNewMessage(text)
 
             onSendMessage(messageWithData)
         },
@@ -264,7 +244,7 @@ public fun MessageComposer(
 @Composable
 public fun MessageComposer(
     messageComposerState: MessageComposerState,
-    onSendMessage: (String, List<Attachment>) -> Unit,
+    onSendMessage: (String) -> Unit,
     modifier: Modifier = Modifier,
     statefulStreamMediaRecorder: StatefulStreamMediaRecorder? = null,
     // onAttachmentsClick: () -> Unit = {},
@@ -275,7 +255,7 @@ public fun MessageComposer(
     // onMentionSelected: (User) -> Unit = {},
     // onCommandSelected: (Command) -> Unit = {},
     // onAlsoSendToChannelSelected: (Boolean) -> Unit = {},
-    onRecordingSaved: (Attachment) -> Unit = {},
+    // onRecordingSaved: (Attachment) -> Unit = {},
     headerContent: @Composable ColumnScope.(MessageComposerState) -> Unit = {
         DefaultMessageComposerHeaderContent(
             messageComposerState = it,
@@ -333,12 +313,12 @@ public fun MessageComposer(
             value = it.inputValue,
             coolDownTime = it.coolDownTime,
             validationErrors = it.validationErrors,
-            attachments = it.attachments,
+            // attachments = it.attachments,
             onSendMessage = onSendMessage,
             ownCapabilities = messageComposerState.ownCapabilities,
             isInEditMode = it.action is Edit,
-            onRecordingSaved = onRecordingSaved,
-            statefulStreamMediaRecorder = statefulStreamMediaRecorder,
+            // onRecordingSaved = onRecordingSaved,
+            // statefulStreamMediaRecorder = statefulStreamMediaRecorder,
         )
     },
 ) {
@@ -731,22 +711,22 @@ internal fun RowScope.DefaultMessageComposerAudioRecordingContent(
 internal fun DefaultMessageComposerTrailingContent(
     value: String,
     coolDownTime: Int,
-    attachments: List<Attachment>,
+    // attachments: List<Attachment>,
     validationErrors: List<ValidationError>,
     ownCapabilities: Set<String>,
     isInEditMode: Boolean,
-    onSendMessage: (String, List<Attachment>) -> Unit,
-    onRecordingSaved: (Attachment) -> Unit,
-    statefulStreamMediaRecorder: StatefulStreamMediaRecorder?,
+    onSendMessage: (String) -> Unit,
+    // onRecordingSaved: (Attachment) -> Unit,
+    // statefulStreamMediaRecorder: StatefulStreamMediaRecorder?,
 ) {
     val isSendButtonEnabled = ownCapabilities.contains(ChannelCapabilities.SEND_MESSAGE)
-    val isInputValid by lazy { (value.isNotBlank() || attachments.isNotEmpty()) && validationErrors.isEmpty() }
+    val isInputValid by lazy { (value.isNotBlank()) && validationErrors.isEmpty() }
     val sendButtonDescription = stringResource(id = R.string.stream_compose_cd_send_button)
-    val recordAudioButtonDescription = stringResource(id = R.string.stream_compose_cd_record_audio_message)
-    var permissionsRequested by rememberSaveable { mutableStateOf(false) }
+    // val recordAudioButtonDescription = stringResource(id = R.string.stream_compose_cd_record_audio_message)
+    // var permissionsRequested by rememberSaveable { mutableStateOf(false) }
 
-    val isRecording = statefulStreamMediaRecorder?.mediaRecorderState?.value
-
+    // val isRecording = statefulStreamMediaRecorder?.mediaRecorderState?.value
+/*
     // TODO test permissions on lower APIs etc
     val storageAndRecordingPermissionState = rememberMultiplePermissionsState(
         permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -765,20 +745,25 @@ internal fun DefaultMessageComposerTrailingContent(
         // TODO should we track this or always ask?
         permissionsRequested = true
     }
-    val coroutineScope = rememberCoroutineScope()
 
-    val context = LocalContext.current
+ */
+    // val coroutineScope = rememberCoroutineScope()
+
+    // val context = LocalContext.current
 
     if (coolDownTime > 0 && !isInEditMode) {
         CoolDownIndicator(coolDownTime = coolDownTime)
     } else {
+        /*
         Row(
             modifier = Modifier
                 .height(44.dp)
                 .padding(horizontal = 4.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
+
             // TODO don't show if the own ability to send attachments isn't given
+
             if (statefulStreamMediaRecorder != null) {
                 Box(
                     modifier = Modifier
@@ -850,6 +835,7 @@ internal fun DefaultMessageComposerTrailingContent(
                 }
             }
         }
+         */
 
         IconButton(
             modifier = Modifier
@@ -867,7 +853,7 @@ internal fun DefaultMessageComposerTrailingContent(
             },
             onClick = {
                 if (isInputValid) {
-                    onSendMessage(value, attachments)
+                    onSendMessage(value)
                 }
             },
         )
