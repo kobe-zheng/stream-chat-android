@@ -146,7 +146,7 @@ public fun MessageComposer(
         )
     },
      */
-    label: @Composable (MessageComposerState) -> Unit = { DefaultComposerLabel(it.ownCapabilities) },
+    label: @Composable (MessageComposerState) -> Unit = { DefaultComposerLabel() },
     input: @Composable RowScope.(MessageComposerState) -> Unit = {
         DefaultComposerInputContent(
             messageComposerState = it,
@@ -198,7 +198,7 @@ public fun MessageComposer(
         // audioRecordingContent = audioRecordingContent,
         trailingContent = trailingContent,
         messageComposerState = messageComposerState,
-        onCancelAction = onCancelAction,
+        // onCancelAction = onCancelAction,
         // statefulStreamMediaRecorder = statefulStreamMediaRecorder,
     )
 }
@@ -243,7 +243,7 @@ public fun MessageComposer(
     // onCommandsClick: () -> Unit = {},
     onValueChange: (String) -> Unit = {},
     // onAttachmentRemoved: (Attachment) -> Unit = {},
-    onCancelAction: () -> Unit = {},
+    // onCancelAction: () -> Unit = {},
     // onMentionSelected: (User) -> Unit = {},
     // onCommandSelected: (Command) -> Unit = {},
     // onAlsoSendToChannelSelected: (Boolean) -> Unit = {},
@@ -288,7 +288,7 @@ public fun MessageComposer(
     },
 
      */
-    label: @Composable (MessageComposerState) -> Unit = { DefaultComposerLabel(messageComposerState.ownCapabilities) },
+    label: @Composable (MessageComposerState) -> Unit = { DefaultComposerLabel() },
     input: @Composable RowScope.(MessageComposerState) -> Unit = {
         DefaultComposerInputContent(
             messageComposerState = messageComposerState,
@@ -580,16 +580,16 @@ internal fun DefaultComposerIntegrations(
  * For a full list @see [ChannelCapabilities].
  */
 @Composable
-internal fun DefaultComposerLabel(ownCapabilities: Set<String>) {
-    val text =
-        if (ownCapabilities.contains(ChannelCapabilities.SEND_MESSAGE)) {
-            stringResource(id = R.string.stream_compose_message_label)
-        } else {
-            stringResource(id = R.string.stream_compose_cannot_send_messages_label)
-        }
+internal fun DefaultComposerLabel(/*ownCapabilities: Set<String>*/) {
+    // val text =
+    //     if (ownCapabilities.contains(ChannelCapabilities.SEND_MESSAGE)) {
+    //         stringResource(id = R.string.stream_compose_message_label)
+    //     } else {
+    //         stringResource(id = R.string.stream_compose_cannot_send_messages_label)
+    //     }
 
     Text(
-        text = text,
+        text = "Ask Penny a question about this property",
         color = ChatTheme.colors.textLowEmphasis,
     )
 }

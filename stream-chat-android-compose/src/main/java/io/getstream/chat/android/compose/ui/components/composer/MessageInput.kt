@@ -35,7 +35,6 @@ import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.compose.ui.components.messages.QuotedMessage
 import io.getstream.chat.android.compose.ui.messages.composer.DefaultComposerLabel
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
-import io.getstream.chat.android.models.Attachment
 import io.getstream.chat.android.models.ChannelCapabilities
 import io.getstream.chat.android.ui.common.state.messages.Edit
 import io.getstream.chat.android.ui.common.state.messages.Reply
@@ -64,7 +63,7 @@ public fun MessageInput(
     maxLines: Int = DefaultMessageInputMaxLines,
     keyboardOptions: KeyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
     label: @Composable (MessageComposerState) -> Unit = {
-        DefaultComposerLabel(ownCapabilities = messageComposerState.ownCapabilities)
+        DefaultComposerLabel()
     },
     innerLeadingContent: @Composable RowScope.() -> Unit = {},
     innerTrailingContent: @Composable RowScope.() -> Unit = {},
