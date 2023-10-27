@@ -72,8 +72,8 @@ public fun MessagesScreen(
     viewModelFactory: MessagesViewModelFactory,
     showHeader: Boolean = true,
     onBackPressed: () -> Unit = {},
-    onHeaderTitleClick: (channel: Channel) -> Unit = {},
-    onChannelAvatarClick: () -> Unit = {},
+    // onHeaderTitleClick: (channel: Channel) -> Unit = {},
+    onInformationIconClick: () -> Unit = {},
     // skipPushNotification: Boolean = false,
     // skipEnrichUrl: Boolean = false,
     // testTagsAsResourceId: Boolean = false,
@@ -136,8 +136,8 @@ public fun MessagesScreen(
                         connectionState = connectionState,
                         // messageMode = messageMode,
                         onBackPressed = backAction,
-                        onHeaderTitleClick = onHeaderTitleClick,
-                        onChannelAvatarClick = onChannelAvatarClick,
+                        // onHeaderTitleClick = onHeaderTitleClick,
+                        onInformationIconClick = onInformationIconClick,
                     )
                 }
             },

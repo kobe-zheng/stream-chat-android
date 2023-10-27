@@ -102,7 +102,7 @@ class MessagesActivity : BaseConnectedActivity() {
                     viewModelFactory = factory,
                     // testTagsAsResourceId = true,
                     onBackPressed = { finish() },
-                    onHeaderTitleClick = {},
+                    // onHeaderTitleClick = {},
                     // TODO
                     // statefulStreamMediaRecorder = statefulStreamMediaRecorder
                 )

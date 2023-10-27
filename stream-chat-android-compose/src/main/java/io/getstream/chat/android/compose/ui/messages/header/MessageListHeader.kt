@@ -49,7 +49,6 @@ import io.getstream.chat.android.compose.ui.components.TypingIndicator
 import io.getstream.chat.android.compose.ui.components.avatar.ChannelAvatar
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.ui.util.mirrorRtl
-import io.getstream.chat.android.models.Channel
 import io.getstream.chat.android.models.ConnectionState
 
 /**
@@ -86,8 +85,8 @@ public fun MessageListHeader(
     shape: Shape = ChatTheme.shapes.header,
     elevation: Dp = ChatTheme.dimens.headerElevation,
     onBackPressed: () -> Unit = {},
-    onHeaderTitleClick: (Channel) -> Unit = {},
-    onChannelAvatarClick: () -> Unit = {},
+    // onHeaderTitleClick: (Channel) -> Unit = {},
+    onInformationIconClick: () -> Unit = {},
     leadingContent: @Composable RowScope.() -> Unit = {
         DefaultMessageListHeaderLeadingContent(onBackPressed = onBackPressed)
     },
@@ -98,7 +97,7 @@ public fun MessageListHeader(
             // currentUser = currentUser,
             // typingUsers = typingUsers,
             // messageMode = messageMode,
-            onHeaderTitleClick = onHeaderTitleClick,
+            // onHeaderTitleClick = onHeaderTitleClick,
             connectionState = connectionState,
         )
     },
@@ -106,7 +105,7 @@ public fun MessageListHeader(
         DefaultMessageListHeaderTrailingContent(
             // channel = channel,
             // currentUser = currentUser,
-            onClick = onChannelAvatarClick,
+            onClick = onInformationIconClick,
         )
     },
 ) {
@@ -167,7 +166,7 @@ public fun DefaultMessageListHeaderCenterContent(
     modifier: Modifier = Modifier,
     // typingUsers: List<User> = emptyList(),
     // messageMode: MessageMode = MessageMode.Normal,
-    onHeaderTitleClick: (Channel) -> Unit = {},
+    // onHeaderTitleClick: (Channel) -> Unit = {},
 ) {
     val title = "ChatBot"
     //     when (messageMode) {
