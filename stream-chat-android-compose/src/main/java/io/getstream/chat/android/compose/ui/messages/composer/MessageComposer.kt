@@ -17,14 +17,12 @@
 package io.getstream.chat.android.compose.ui.messages.composer
 
 import android.widget.Toast
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
@@ -37,13 +35,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Bottom
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
@@ -54,8 +49,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import io.getstream.chat.android.compose.R
-import io.getstream.chat.android.compose.state.messages.attachments.StatefulStreamMediaRecorder
-import io.getstream.chat.android.compose.ui.attachments.audio.RunningWaveForm
 import io.getstream.chat.android.compose.ui.components.composer.CoolDownIndicator
 import io.getstream.chat.android.compose.ui.components.composer.MessageInput
 import io.getstream.chat.android.compose.ui.components.composer.MessageInputOptions
@@ -69,7 +62,6 @@ import io.getstream.chat.android.ui.common.state.messages.Edit
 import io.getstream.chat.android.ui.common.state.messages.composer.MessageComposerState
 import io.getstream.chat.android.ui.common.state.messages.composer.ValidationError
 import io.getstream.chat.android.ui.common.utils.MediaStringUtil
-import io.getstream.sdk.chat.audio.recording.MediaRecorderState
 
 /**
  * Default MessageComposer component that relies on [MessageComposerViewModel] to handle data and
@@ -107,7 +99,7 @@ import io.getstream.sdk.chat.audio.recording.MediaRecorderState
 public fun MessageComposer(
     viewModel: MessageComposerViewModel,
     modifier: Modifier = Modifier,
-    statefulStreamMediaRecorder: StatefulStreamMediaRecorder? = null,
+    // statefulStreamMediaRecorder: StatefulStreamMediaRecorder? = null,
     onSendMessage: (Message) -> Unit = { viewModel.sendMessage(it) },
     // onAttachmentsClick: () -> Unit = {},
     // onCommandsClick: () -> Unit = {},
@@ -165,9 +157,11 @@ public fun MessageComposer(
             label = label,
         )
     },
+    /*
     audioRecordingContent: @Composable RowScope.(StatefulStreamMediaRecorder) -> Unit = {
         DefaultMessageComposerAudioRecordingContent(it)
     },
+     */
     trailingContent: @Composable (MessageComposerState) -> Unit = {
         DefaultMessageComposerTrailingContent(
             value = it.inputValue,
@@ -203,11 +197,11 @@ public fun MessageComposer(
         // commandPopupContent = commandPopupContent,
         // integrations = integrations,
         input = input,
-        audioRecordingContent = audioRecordingContent,
+        // audioRecordingContent = audioRecordingContent,
         trailingContent = trailingContent,
         messageComposerState = messageComposerState,
         onCancelAction = onCancelAction,
-        statefulStreamMediaRecorder = statefulStreamMediaRecorder,
+        // statefulStreamMediaRecorder = statefulStreamMediaRecorder,
     )
 }
 
@@ -246,7 +240,7 @@ public fun MessageComposer(
     messageComposerState: MessageComposerState,
     onSendMessage: (String) -> Unit,
     modifier: Modifier = Modifier,
-    statefulStreamMediaRecorder: StatefulStreamMediaRecorder? = null,
+    // statefulStreamMediaRecorder: StatefulStreamMediaRecorder? = null,
     // onAttachmentsClick: () -> Unit = {},
     // onCommandsClick: () -> Unit = {},
     onValueChange: (String) -> Unit = {},
@@ -305,9 +299,12 @@ public fun MessageComposer(
             label = label,
         )
     },
+    /*
     audioRecordingContent: @Composable RowScope.(StatefulStreamMediaRecorder) -> Unit = {
         DefaultMessageComposerAudioRecordingContent(it)
     },
+
+     */
     trailingContent: @Composable (MessageComposerState) -> Unit = {
         DefaultMessageComposerTrailingContent(
             value = it.inputValue,
@@ -325,7 +322,7 @@ public fun MessageComposer(
     val (_, _, _, validationErrors, _) = messageComposerState
     val snackbarHostState = remember { SnackbarHostState() }
 
-    val isRecording = statefulStreamMediaRecorder?.mediaRecorderState?.value
+    // val isRecording = statefulStreamMediaRecorder?.mediaRecorderState?.value
 
     MessageInputValidationError(
         validationErrors = validationErrors,
@@ -357,12 +354,13 @@ public fun MessageComposer(
                 Spacer(
                     modifier = Modifier.size(16.dp),
                 )
-
-                if (isRecording == MediaRecorderState.RECORDING) {
-                    audioRecordingContent(statefulStreamMediaRecorder)
-                } else {
-                    input(messageComposerState)
-                }
+                //
+                // if (isRecording == MediaRecorderState.RECORDING) {
+                //     audioRecordingContent(statefulStreamMediaRecorder)
+                // } else {
+                //     input(messageComposerState)
+                // }
+                input(messageComposerState)
 
                 trailingContent(messageComposerState)
             }
@@ -623,6 +621,7 @@ private fun RowScope.DefaultComposerInputContent(
     )
 }
 
+/*
 /**
  * Used to display audio recording information while audio recording is in progress.
  *
@@ -691,6 +690,7 @@ internal fun RowScope.DefaultMessageComposerAudioRecordingContent(
         )
     }
 }
+ */
 
 /**
  * Represents the default trailing content for the Composer, which represent a send button or a cooldown timer.

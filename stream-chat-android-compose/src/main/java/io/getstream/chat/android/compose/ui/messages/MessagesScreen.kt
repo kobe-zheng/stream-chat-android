@@ -221,7 +221,7 @@ public fun MessagesScreen(
                             listViewModel.sendMessage(message)
                         }
                     },
-                    statefulStreamMediaRecorder = statefulStreamMediaRecorder,
+                    // statefulStreamMediaRecorder = statefulStreamMediaRecorder,
                 )
             },
         ) {

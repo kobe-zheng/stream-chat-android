@@ -269,7 +269,7 @@ class MessagesActivity : BaseConnectedActivity() {
                 .fillMaxWidth()
                 .wrapContentHeight(),
             viewModel = composerViewModel,
-            statefulStreamMediaRecorder = statefulStreamMediaRecorder,
+            // statefulStreamMediaRecorder = statefulStreamMediaRecorder,
             // integrations = {},
             input = { inputState ->
                 MessageInput(
