@@ -589,7 +589,7 @@ internal fun DefaultComposerLabel(/*ownCapabilities: Set<String>*/) {
     //     }
 
     Text(
-        text = "Ask Penny a question about this property",
+        text = "Ask a question about this location",
         color = ChatTheme.colors.textLowEmphasis,
     )
 }
