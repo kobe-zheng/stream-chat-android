@@ -52,7 +52,7 @@ import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.client.utils.message.isDeleted
 import io.getstream.chat.android.client.utils.message.isGiphyEphemeral
 import io.getstream.chat.android.compose.R
-import io.getstream.chat.android.compose.ui.components.avatar.UserAvatar
+import io.getstream.chat.android.compose.ui.components.avatar.IconPlaceholder
 import io.getstream.chat.android.compose.ui.components.messages.MessageBubble
 import io.getstream.chat.android.compose.ui.components.messages.MessageContent
 import io.getstream.chat.android.compose.ui.components.messages.MessageFooter
@@ -211,7 +211,6 @@ internal fun RowScope.DefaultMessageItemLeadingContent(
 ) {
     val modifier = Modifier
         .padding(start = 8.dp, end = 8.dp)
-        .size(24.dp)
         .align(Alignment.Bottom)
 
     if (!messageItem.isMine &&
@@ -221,12 +220,11 @@ internal fun RowScope.DefaultMessageItemLeadingContent(
                 messageItem.groupPosition.contains(MessagePosition.NONE)
             )
     ) {
-        UserAvatar(
-            modifier = modifier,
-            user = messageItem.message.user,
-            textStyle = ChatTheme.typography.captionBold,
-            showOnlineIndicator = false,
-        )
+        Box (
+            modifier = modifier
+        ){
+            IconPlaceholder()
+        }
     } else {
         Spacer(modifier = modifier)
     }

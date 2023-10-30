@@ -16,17 +16,30 @@
 
 package io.getstream.chat.android.compose.ui.components.avatar
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
+import io.getstream.chat.android.compose.R
 import io.getstream.chat.android.compose.previewdata.PreviewUserData
 import io.getstream.chat.android.compose.state.OnlineIndicatorAlignment
 import io.getstream.chat.android.compose.ui.components.OnlineIndicator
@@ -81,6 +94,42 @@ public fun UserAvatar(
             onlineIndicator()
         }
     }
+}
+
+@Composable
+public fun IconPlaceholder(
+    modifier: Modifier = Modifier,
+    shape: Shape = CircleShape,
+) {
+    Box(
+        modifier = modifier.size(32.dp)
+    ) {
+        Image(
+            modifier = modifier.clip(shape),
+            contentScale = ContentScale.FillBounds,
+            painter = painterResource(id = R.drawable.stream_compose_preview_avatar),
+            contentDescription = "Avatar Icon",
+        )
+    }
+    // Box(
+    //     modifier = modifier
+    //         .height(32.dp)
+    //         .width(32.dp)
+    // ) {
+    //     Box(
+    //         modifier = Modifier.fillMaxSize()
+    //             .clip(shape)
+    //             .background(color = ChatTheme.colors.primaryAccent),
+    //     ) {
+    //         Text(
+    //             modifier = Modifier
+    //                 .align(Alignment.Center),
+    //             text = "P+",
+    //             color = Color.White,
+    //         )
+    //     }
+    // }
+    
 }
 
 /**
