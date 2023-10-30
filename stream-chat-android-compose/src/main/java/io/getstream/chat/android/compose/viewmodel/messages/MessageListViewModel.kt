@@ -49,7 +49,7 @@ public class MessageListViewModel(
     internal val messageListController: MessageListController,
 ) : ViewModel() {
 
-    private val logger by taggedLogger("Chat:MessageListVM")
+    // private val logger by taggedLogger("Chat:MessageListVM")
 
     /**
      * State handler for the UI, which holds all the information the UI needs to render messages.
@@ -57,7 +57,8 @@ public class MessageListViewModel(
      * It chooses between [threadMessagesState] and [messagesState] based on if we're in a thread or not.
      */
     public val currentMessagesState: MessageListState
-        get() = if (isInThread) threadMessagesState else messagesState
+        // get() = if (isInThread) threadMessagesState else messagesState
+        get() = messagesState
 
     /**
      * Current state of the message list.
@@ -89,76 +90,76 @@ public class MessageListViewModel(
         )
     }
 
-    /**
-     * State of the screen, for [MessageMode.MessageThread].
-     */
-    private val threadMessagesState: MessageListState by messageListController.threadListState
-        .map { it.copy(messageItems = it.messageItems.reversed()) }
-        .asState(viewModelScope, MessageListState())
+    // /**
+    //  * State of the screen, for [MessageMode.MessageThread].
+    //  */
+    // private val threadMessagesState: MessageListState by messageListController.threadListState
+    //     .map { it.copy(messageItems = it.messageItems.reversed()) }
+    //     .asState(viewModelScope, MessageListState())
 
-    /**
-     * Holds the current [MessageMode] that's used for the messages list. [MessageMode.Normal] by default.
-     */
-    public val messageMode: MessageMode by messageListController.mode.asState(viewModelScope)
+    // /**
+    //  * Holds the current [MessageMode] that's used for the messages list. [MessageMode.Normal] by default.
+    //  */
+    // public val messageMode: MessageMode by messageListController.mode.asState(viewModelScope)
 
-    /**
-     * The information for the current [Channel].
-     */
-    public val channel: Channel by messageListController.channel.asState(viewModelScope)
+    // /**
+    //  * The information for the current [Channel].
+    //  */
+    // public val channel: Channel by messageListController.channel.asState(viewModelScope)
 
-    /**
-     * The list of typing users.
-     */
-    public val typingUsers: List<User> by messageListController.typingUsers.asState(viewModelScope)
+    // /**
+    //  * The list of typing users.
+    //  */
+    // public val typingUsers: List<User> by messageListController.typingUsers.asState(viewModelScope)
 
-    /**
-     * Set of currently active [MessageAction]s. Used to show things like edit, reply, delete and similar actions.
-     */
-    public val messageActions: Set<MessageAction> by messageListController.messageActions.asState(viewModelScope)
+    // /**
+    //  * Set of currently active [MessageAction]s. Used to show things like edit, reply, delete and similar actions.
+    //  */
+    // public val messageActions: Set<MessageAction> by messageListController.messageActions.asState(viewModelScope)
 
-    /**
-     * Gives us information if we're currently in the [Thread] message mode.
-     */
-    public val isInThread: Boolean
-        get() = messageListController.isInThread
+    // /**
+    //  * Gives us information if we're currently in the [Thread] message mode.
+    //  */
+    // public val isInThread: Boolean
+    //     get() = messageListController.isInThread
 
-    /**
-     * Gives us information if we have selected a message.
-     */
-    public val isShowingOverlay: Boolean
-        get() = currentMessagesState.selectedMessageState != null
+    // /**
+    //  * Gives us information if we have selected a message.
+    //  */
+    // public val isShowingOverlay: Boolean
+    //     get() = currentMessagesState.selectedMessageState != null
 
     /**
      * Gives us information about the online state of the device.
      */
     public val connectionState: StateFlow<ConnectionState> = messageListController.connectionState
 
-    /**
-     * Gives us information about the online state of the device.
-     */
-    public val isOnline: Flow<Boolean> = messageListController.connectionState.map { it is ConnectionState.Connected }
+    // /**
+    //  * Gives us information about the online state of the device.
+    //  */
+    // public val isOnline: Flow<Boolean> = messageListController.connectionState.map { it is ConnectionState.Connected }
 
     /**
      * Gives us information about the logged in user state.
      */
     public val user: StateFlow<User?> = messageListController.user
 
-    /**
-     * Determines whether we should show system messages or not.
-     */
-    public val showSystemMessagesState: Boolean by messageListController.showSystemMessagesState.asState(viewModelScope)
+    // /**
+    //  * Determines whether we should show system messages or not.
+    //  */
+    // public val showSystemMessagesState: Boolean by messageListController.showSystemMessagesState.asState(viewModelScope)
 
-    /**
-     * Regulates the message footer visibility.
-     */
-    public val messageFooterVisibilityState: MessageFooterVisibility by messageListController
-        .messageFooterVisibilityState.asState(viewModelScope)
+    // /**
+    //  * Regulates the message footer visibility.
+    //  */
+    // public val messageFooterVisibilityState: MessageFooterVisibility by messageListController
+    //     .messageFooterVisibilityState.asState(viewModelScope)
 
-    /**
-     * Regulates the visibility of deleted messages.
-     */
-    public val deletedMessageVisibilityState: DeletedMessageVisibility by messageListController
-        .deletedMessageVisibilityState.asState(viewModelScope)
+    // /**
+    //  * Regulates the visibility of deleted messages.
+    //  */
+    // public val deletedMessageVisibilityState: DeletedMessageVisibility by messageListController
+    //     .deletedMessageVisibilityState.asState(viewModelScope)
 
     /**
      * Attempts to update the last seen message in the channel or thread. We only update the last seen message the first
@@ -174,7 +175,7 @@ public class MessageListViewModel(
         baseMessageId: String,
         messageLimit: Int = messageListController.messageLimit,
     ) {
-        logger.i { "[onBottomEndRegionReached] baseMessageId: $baseMessageId, messageLimit: $messageLimit" }
+        // logger.i { "[onBottomEndRegionReached] baseMessageId: $baseMessageId, messageLimit: $messageLimit" }
         loadNewerMessages(baseMessageId, messageLimit)
     }
 
@@ -199,14 +200,14 @@ public class MessageListViewModel(
         messageListController.loadOlderMessages(messageLimit)
     }
 
-    /**
-     * Triggered when the user long taps on and selects a message.
-     *
-     * @param message The selected message.
-     */
-    public fun selectMessage(message: Message?) {
-        messageListController.selectMessage(message)
-    }
+    // /**
+    //  * Triggered when the user long taps on and selects a message.
+    //  *
+    //  * @param message The selected message.
+    //  */
+    // public fun selectMessage(message: Message?) {
+    //     messageListController.selectMessage(message)
+    // }
 
     // /**
     //  * Triggered when the user taps on and selects message reactions.
@@ -389,15 +390,15 @@ public class MessageListViewModel(
         messageListController.clearNewMessageState()
     }
 
-    /**
-     * Returns a message with the given ID from the [currentMessagesState].
-     *
-     * @param messageId The ID of the selected message.
-     * @return The [Message] with the ID, if it exists.
-     */
-    public fun getMessageById(messageId: String): Message? {
-        return messageListController.getMessageFromListStateById(messageId)
-    }
+    // /**
+    //  * Returns a message with the given ID from the [currentMessagesState].
+    //  *
+    //  * @param messageId The ID of the selected message.
+    //  * @return The [Message] with the ID, if it exists.
+    //  */
+    // public fun getMessageById(messageId: String): Message? {
+    //     return messageListController.getMessageFromListStateById(messageId)
+    // }
 
     // /**
     //  * Executes one of the actions for the given ephemeral giphy message.
