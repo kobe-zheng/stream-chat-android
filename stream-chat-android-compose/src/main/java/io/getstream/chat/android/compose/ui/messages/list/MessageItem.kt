@@ -38,27 +38,20 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.BottomEnd
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import io.getstream.chat.android.client.utils.message.isDeleted
-import io.getstream.chat.android.client.utils.message.isGiphyEphemeral
-import io.getstream.chat.android.compose.R
 import io.getstream.chat.android.compose.ui.components.avatar.IconPlaceholder
 import io.getstream.chat.android.compose.ui.components.messages.MessageBubble
 import io.getstream.chat.android.compose.ui.components.messages.MessageContent
 import io.getstream.chat.android.compose.ui.components.messages.MessageFooter
 import io.getstream.chat.android.compose.ui.components.messages.MessageText
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
-import io.getstream.chat.android.compose.ui.util.isFailed
 import io.getstream.chat.android.models.Message
 import io.getstream.chat.android.models.User
 import io.getstream.chat.android.ui.common.state.messages.list.MessageFocused
@@ -100,7 +93,7 @@ import io.getstream.chat.android.ui.common.state.messages.list.MessagePosition
 @Composable
 public fun MessageItem(
     messageItem: MessageItemState,
-    onLongItemClick: (Message) -> Unit,
+    // onLongItemClick: (Message) -> Unit,
     modifier: Modifier = Modifier,
     // onReactionsClick: (Message) -> Unit = {},
     // onThreadClick: (Message) -> Unit = {},
@@ -119,7 +112,7 @@ public fun MessageItem(
     centerContent: @Composable ColumnScope.(MessageItemState) -> Unit = {
         DefaultMessageItemCenterContent(
             messageItem = it,
-            onLongItemClick = onLongItemClick,
+            // onLongItemClick = onLongItemClick,
             // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
             // onGiphyActionClick = onGiphyActionClick,
             // onQuotedMessageClick = onQuotedMessageClick,
@@ -140,7 +133,7 @@ public fun MessageItem(
             interactionSource = remember { MutableInteractionSource() },
             indication = null,
             onClick = { },
-            onLongClick = { onLongItemClick(message) },
+            // onLongClick = { onLongItemClick(message) },
         )
 
     val backgroundColor =
@@ -389,7 +382,7 @@ internal fun DefaultMessageItemTrailingContent(
 @Composable
 internal fun DefaultMessageItemCenterContent(
     messageItem: MessageItemState,
-    onLongItemClick: (Message) -> Unit = {},
+    // onLongItemClick: (Message) -> Unit = {},
     // onGiphyActionClick: (GiphyAction) -> Unit = {},
     // onQuotedMessageClick: (Message) -> Unit = {},
     // onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
@@ -417,7 +410,7 @@ internal fun DefaultMessageItemCenterContent(
     RegularMessageContent(
         modifier = modifier,
         messageItem = messageItem,
-        onLongItemClick = onLongItemClick,
+        // onLongItemClick = onLongItemClick,
         // onGiphyActionClick = onGiphyActionClick,
         // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
         // onQuotedMessageClick = onQuotedMessageClick,
@@ -493,79 +486,103 @@ internal fun EmojiMessageContent(
 internal fun RegularMessageContent(
     messageItem: MessageItemState,
     modifier: Modifier = Modifier,
-    onLongItemClick: (Message) -> Unit = {},
+    // onLongItemClick: (Message) -> Unit = {},
     // onGiphyActionClick: (GiphyAction) -> Unit = {},
     // onQuotedMessageClick: (Message) -> Unit = {},
     // onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
 ) {
     val message = messageItem.message
-    val position = messageItem.groupPosition
+    // val position = messageItem.groupPosition
     val ownsMessage = messageItem.isMine
 
-    val messageBubbleShape = when {
-        position.contains(MessagePosition.TOP) || position.contains(MessagePosition.MIDDLE) -> RoundedCornerShape(16.dp)
-        else -> {
+    // val messageBubbleShape = when {
+    //     position.contains(MessagePosition.TOP) || position.contains(MessagePosition.MIDDLE) -> RoundedCornerShape(16.dp)
+    //     else -> {
+    //         if (ownsMessage) ChatTheme.shapes.myMessageBubble else ChatTheme.shapes.otherMessageBubble
+    //     }
+    // }
+    val messageBubbleShape =
             if (ownsMessage) ChatTheme.shapes.myMessageBubble else ChatTheme.shapes.otherMessageBubble
-        }
+
+    // val messageBubbleColor = when {
+    //     message.isGiphyEphemeral() -> ChatTheme.colors.giphyMessageBackground
+    //     message.isDeleted() -> when (ownsMessage) {
+    //         true -> ChatTheme.ownMessageTheme.deletedBackgroundColor
+    //         else -> ChatTheme.otherMessageTheme.deletedBackgroundColor
+    //     }
+    //     else -> when (ownsMessage) {
+    //         true -> ChatTheme.ownMessageTheme.backgroundColor
+    //         else -> ChatTheme.otherMessageTheme.backgroundColor
+    //     }
+    // }
+    // TODO: Change theme color of message bubbles
+    val messageBubbleColor = when (ownsMessage) {
+        true -> Color.Blue
+        else -> Color(0xFFD3D3D3)
     }
 
-    val messageBubbleColor = when {
-        message.isGiphyEphemeral() -> ChatTheme.colors.giphyMessageBackground
-        message.isDeleted() -> when (ownsMessage) {
-            true -> ChatTheme.ownMessageTheme.deletedBackgroundColor
-            else -> ChatTheme.otherMessageTheme.deletedBackgroundColor
-        }
-        else -> when (ownsMessage) {
-            true -> ChatTheme.ownMessageTheme.backgroundColor
-            else -> ChatTheme.otherMessageTheme.backgroundColor
-        }
-    }
-
-    if (!messageItem.isFailed()) {
-        MessageBubble(
-            modifier = modifier,
-            shape = messageBubbleShape,
-            color = messageBubbleColor,
-            border = if (messageItem.isMine) null else BorderStroke(1.dp, ChatTheme.colors.borders),
-            content = {
-                MessageContent(
-                    message = message,
-                    currentUser = messageItem.currentUser,
-                    onLongItemClick = onLongItemClick,
-                    // onGiphyActionClick = onGiphyActionClick,
-                    // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
-                    // onQuotedMessageClick = onQuotedMessageClick,
-                )
-            },
-        )
-    } else {
-        Box(modifier = modifier) {
-            MessageBubble(
-                modifier = Modifier.padding(end = 12.dp),
-                shape = messageBubbleShape,
-                color = messageBubbleColor,
-                content = {
-                    MessageContent(
-                        message = message,
-                        currentUser = messageItem.currentUser,
-                        onLongItemClick = onLongItemClick,
-                        // onGiphyActionClick = onGiphyActionClick,
-                        // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
-                        // onQuotedMessageClick = onQuotedMessageClick,
-                    )
-                },
+    MessageBubble(
+        modifier = modifier,
+        shape = messageBubbleShape,
+        color = messageBubbleColor,
+        // border = if (messageItem.isMine) null else BorderStroke(1.dp, ChatTheme.colors.borders),
+        content = {
+            MessageContent(
+                message = message,
+                currentUser = messageItem.currentUser,
+                // onLongItemClick = onLongItemClick,
+                // onGiphyActionClick = onGiphyActionClick,
+                // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
+                // onQuotedMessageClick = onQuotedMessageClick,
             )
+        },
+    )
 
-            Icon(
-                modifier = Modifier
-                    .size(24.dp)
-                    .align(BottomEnd),
-                painter = painterResource(id = R.drawable.stream_compose_ic_error),
-                contentDescription = null,
-                tint = ChatTheme.colors.errorAccent,
-            )
-        }
-    }
+    // if (!messageItem.isFailed()) {
+    //     MessageBubble(
+    //         modifier = modifier,
+    //         shape = messageBubbleShape,
+    //         color = messageBubbleColor,
+    //         border = if (messageItem.isMine) null else BorderStroke(1.dp, ChatTheme.colors.borders),
+    //         content = {
+    //             MessageContent(
+    //                 message = message,
+    //                 currentUser = messageItem.currentUser,
+    //                 onLongItemClick = onLongItemClick,
+    //                 // onGiphyActionClick = onGiphyActionClick,
+    //                 // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
+    //                 // onQuotedMessageClick = onQuotedMessageClick,
+    //             )
+    //         },
+    //     )
+    // } else {
+    //     Box(modifier = modifier) {
+    //         MessageBubble(
+    //             modifier = Modifier.padding(end = 12.dp),
+    //             shape = messageBubbleShape,
+    //             color = messageBubbleColor,
+    //             content = {
+    //                 MessageContent(
+    //                     message = message,
+    //                     currentUser = messageItem.currentUser,
+    //                     onLongItemClick = onLongItemClick,
+    //                     // onGiphyActionClick = onGiphyActionClick,
+    //                     // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
+    //                     // onQuotedMessageClick = onQuotedMessageClick,
+    //                 )
+    //             },
+    //         )
+    //
+    //         Icon(
+    //             modifier = Modifier
+    //                 .size(24.dp)
+    //                 .align(BottomEnd),
+    //             painter = painterResource(id = R.drawable.stream_compose_ic_error),
+    //             contentDescription = null,
+    //             tint = ChatTheme.colors.errorAccent,
+    //         )
+    //     }
+    // }
 }
 
 /**
@@ -579,7 +596,7 @@ internal fun RegularMessageContent(
 internal fun DefaultMessageTextContent(
     message: Message,
     currentUser: User?,
-    onLongItemClick: (Message) -> Unit,
+    // onLongItemClick: (Message) -> Unit,
     // onQuotedMessageClick: (Message) -> Unit,
 ) {
     // val quotedMessage = message.replyTo
@@ -598,7 +615,7 @@ internal fun DefaultMessageTextContent(
         MessageText(
             message = message,
             currentUser = currentUser,
-            onLongItemClick = onLongItemClick,
+            // onLongItemClick = onLongItemClick,
         )
     }
 }

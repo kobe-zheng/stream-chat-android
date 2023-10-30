@@ -66,7 +66,7 @@ import io.getstream.chat.android.ui.common.state.messages.list.TypingItemState
 @Composable
 public fun MessageContainer(
     messageListItemState: MessageListItemState,
-    onLongItemClick: (Message) -> Unit = {},
+    // onLongItemClick: (Message) -> Unit = {},
     // onReactionsClick: (Message) -> Unit = {},
     // onThreadClick: (Message) -> Unit = {},
     // onGiphyActionClick: (GiphyAction) -> Unit = {},
@@ -84,7 +84,7 @@ public fun MessageContainer(
     messageItemContent: @Composable (MessageItemState) -> Unit = {
         DefaultMessageItem(
             messageItem = it,
-            onLongItemClick = onLongItemClick,
+            // onLongItemClick = onLongItemClick,
             // onReactionsClick = onReactionsClick,
             // onThreadClick = onThreadClick,
             // onGiphyActionClick = onGiphyActionClick,
@@ -204,7 +204,7 @@ internal fun DefaultSystemMessageContent(systemMessageState: SystemMessageItemSt
 @Composable
 internal fun DefaultMessageItem(
     messageItem: MessageItemState,
-    onLongItemClick: (Message) -> Unit,
+    // onLongItemClick: (Message) -> Unit,
     // onReactionsClick: (Message) -> Unit = {},
     // onThreadClick: (Message) -> Unit,
     // onGiphyActionClick: (GiphyAction) -> Unit,
@@ -213,7 +213,7 @@ internal fun DefaultMessageItem(
 ) {
     MessageItem(
         messageItem = messageItem,
-        onLongItemClick = onLongItemClick,
+        // onLongItemClick = onLongItemClick,
         // onReactionsClick = onReactionsClick,
         // onThreadClick = onThreadClick,
         // onGiphyActionClick = onGiphyActionClick,

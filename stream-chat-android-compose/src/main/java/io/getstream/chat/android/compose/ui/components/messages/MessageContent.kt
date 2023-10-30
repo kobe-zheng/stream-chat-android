@@ -54,7 +54,7 @@ public fun MessageContent(
     message: Message,
     currentUser: User?,
     modifier: Modifier = Modifier,
-    onLongItemClick: (Message) -> Unit = {},
+    // onLongItemClick: (Message) -> Unit = {},
     // onGiphyActionClick: (GiphyAction) -> Unit = {},
     // onQuotedMessageClick: (Message) -> Unit = {},
     // onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
@@ -64,24 +64,25 @@ public fun MessageContent(
     //         onGiphyActionClick = onGiphyActionClick,
     //     )
     // },
-    deletedMessageContent: @Composable () -> Unit = {
-        DefaultMessageDeletedContent(modifier = modifier)
-    },
+    // deletedMessageContent: @Composable () -> Unit = {
+    //     DefaultMessageDeletedContent(modifier = modifier)
+    // },
     regularMessageContent: @Composable () -> Unit = {
         DefaultMessageContent(
             message = message,
             currentUser = currentUser,
-            onLongItemClick = onLongItemClick,
+            // onLongItemClick = onLongItemClick,
             // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
             // onQuotedMessageClick = onQuotedMessageClick,
         )
     },
 ) {
-    when {
-        // message.isGiphyEphemeral() -> giphyEphemeralContent()
-        message.isDeleted() -> deletedMessageContent()
-        else -> regularMessageContent()
-    }
+    // when {
+    //     // message.isGiphyEphemeral() -> giphyEphemeralContent()
+    //     message.isDeleted() -> deletedMessageContent()
+    //     else -> regularMessageContent()
+    // }
+    regularMessageContent()
 }
 
 /**
@@ -101,28 +102,28 @@ internal fun DefaultMessageGiphyContent(
     )
 }
 
-/**
- * Represents the default deleted message content.
- *
- * @param modifier Modifier for styling.
- */
-@Composable
-internal fun DefaultMessageDeletedContent(
-    modifier: Modifier,
-) {
-    Text(
-        modifier = modifier
-            .padding(
-                start = 12.dp,
-                end = 12.dp,
-                top = 8.dp,
-                bottom = 8.dp,
-            ),
-        text = stringResource(id = R.string.stream_compose_message_deleted),
-        color = ChatTheme.colors.textLowEmphasis,
-        style = ChatTheme.typography.footnoteItalic,
-    )
-}
+// /**
+//  * Represents the default deleted message content.
+//  *
+//  * @param modifier Modifier for styling.
+//  */
+// @Composable
+// internal fun DefaultMessageDeletedContent(
+//     modifier: Modifier,
+// ) {
+//     Text(
+//         modifier = modifier
+//             .padding(
+//                 start = 12.dp,
+//                 end = 12.dp,
+//                 top = 8.dp,
+//                 bottom = 8.dp,
+//             ),
+//         text = stringResource(id = R.string.stream_compose_message_deleted),
+//         color = ChatTheme.colors.textLowEmphasis,
+//         style = ChatTheme.typography.footnoteItalic,
+//     )
+// }
 
 /**
  * Represents the default regular message content that can contain attachments and text.
@@ -136,24 +137,30 @@ internal fun DefaultMessageDeletedContent(
 internal fun DefaultMessageContent(
     message: Message,
     currentUser: User?,
-    onLongItemClick: (Message) -> Unit,
+    // onLongItemClick: (Message) -> Unit,
     // onMediaGalleryPreviewResult: (MediaGalleryPreviewResult?) -> Unit = {},
     // onQuotedMessageClick: (Message) -> Unit,
 ) {
     Column {
-        MessageAttachmentsContent(
-            message = message,
-            onLongItemClick = onLongItemClick,
-            // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
-        )
+        // MessageAttachmentsContent(
+        //     message = message,
+        //     onLongItemClick = onLongItemClick,
+        //     // onMediaGalleryPreviewResult = onMediaGalleryPreviewResult,
+        // )
 
-        if (message.text.isNotEmpty()) {
-            DefaultMessageTextContent(
-                message = message,
-                currentUser = currentUser,
-                onLongItemClick = onLongItemClick,
-                // onQuotedMessageClick = onQuotedMessageClick,
-            )
-        }
+        // if (message.text.isNotEmpty()) {
+        //     DefaultMessageTextContent(
+        //         message = message,
+        //         currentUser = currentUser,
+        //         onLongItemClick = onLongItemClick,
+        //         // onQuotedMessageClick = onQuotedMessageClick,
+        //     )
+        // }
+        DefaultMessageTextContent(
+            message = message,
+            currentUser = currentUser,
+            // onLongItemClick = onLongItemClick,
+            // onQuotedMessageClick = onQuotedMessageClick,
+        )
     }
 }

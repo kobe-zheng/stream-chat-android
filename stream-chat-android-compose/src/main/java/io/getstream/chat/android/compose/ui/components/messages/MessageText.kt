@@ -16,8 +16,6 @@
 
 package io.getstream.chat.android.compose.ui.components.messages
 
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicText
@@ -27,8 +25,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
@@ -36,10 +34,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
-import io.getstream.chat.android.compose.ui.util.buildAnnotatedMessageText
-import io.getstream.chat.android.compose.ui.util.isEmojiOnlyWithoutBubble
-import io.getstream.chat.android.compose.ui.util.isFewEmoji
-import io.getstream.chat.android.compose.ui.util.isSingleEmoji
 import io.getstream.chat.android.models.Message
 import io.getstream.chat.android.models.User
 import io.getstream.chat.android.ui.common.utils.extensions.isMine
@@ -62,69 +56,88 @@ public fun MessageText(
     message: Message,
     currentUser: User?,
     modifier: Modifier = Modifier,
-    onLongItemClick: (Message) -> Unit,
+    // onLongItemClick: (Message) -> Unit,
 ) {
-    val context = LocalContext.current
+    // val context = LocalContext.current
 
+    // TODO: Make sure to change text color
     val textColor = if (message.isMine(currentUser)) {
-        ChatTheme.ownMessageTheme.textStyle.color
+        Color.White
     } else {
-        ChatTheme.otherMessageTheme.textStyle.color
+        Color.Black
     }
-    val styledText = buildAnnotatedMessageText(message.text, textColor)
-    val annotations = styledText.getStringAnnotations(0, styledText.lastIndex)
+    // val styledText = buildAnnotatedMessageText(message.text, textColor)
+    // val annotations = styledText.getStringAnnotations(0, styledText.lastIndex)
 
     // TODO: Fix emoji font padding once this is resolved and exposed: https://issuetracker.google.com/issues/171394808
-    val style = when {
-        message.isSingleEmoji() -> ChatTheme.typography.singleEmoji
-        message.isFewEmoji() -> ChatTheme.typography.emojiOnly
-        else -> if (message.isMine(currentUser)) {
+    // val style = when {
+    //     message.isSingleEmoji() -> ChatTheme.typography.singleEmoji
+    //     message.isFewEmoji() -> ChatTheme.typography.emojiOnly
+    //     else -> if (message.isMine(currentUser)) {
+    //         ChatTheme.ownMessageTheme.textStyle
+    //     } else {
+    //         ChatTheme.otherMessageTheme.textStyle
+    //     }
+    // }
+    val style =
+        if (message.isMine(currentUser)) {
             ChatTheme.ownMessageTheme.textStyle
         } else {
             ChatTheme.otherMessageTheme.textStyle
         }
-    }
 
-    if (annotations.isNotEmpty()) {
-        ClickableText(
-            modifier = modifier
-                .padding(
-                    start = 12.dp,
-                    end = 12.dp,
-                    top = 8.dp,
-                    bottom = 8.dp,
-                ),
-            text = styledText,
-            style = style,
-            onLongPress = { onLongItemClick(message) },
-        ) { position ->
-            val targetUrl = annotations.firstOrNull {
-                position in it.start..it.end
-            }?.item
-
-            if (targetUrl != null && targetUrl.isNotEmpty()) {
-                context.startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse(targetUrl),
-                    ),
-                )
-            }
-        }
-    } else {
-        val horizontalPadding = if (message.isEmojiOnlyWithoutBubble()) 0.dp else 12.dp
-        val verticalPadding = if (message.isEmojiOnlyWithoutBubble()) 0.dp else 8.dp
-        Text(
-            modifier = modifier
-                .padding(
-                    horizontal = horizontalPadding,
-                    vertical = verticalPadding,
-                )
-                .clipToBounds(),
-            text = styledText,
-            style = style,
-        )
-    }
+    // if (annotations.isNotEmpty()) {
+    //     ClickableText(
+    //         modifier = modifier
+    //             .padding(
+    //                 start = 12.dp,
+    //                 end = 12.dp,
+    //                 top = 8.dp,
+    //                 bottom = 8.dp,
+    //             ),
+    //         text = styledText,
+    //         style = style,
+    //         onLongPress = { onLongItemClick(message) },
+    //     ) { position ->
+    //         val targetUrl = annotations.firstOrNull {
+    //             position in it.start..it.end
+    //         }?.item
+    //
+    //         if (targetUrl != null && targetUrl.isNotEmpty()) {
+    //             context.startActivity(
+    //                 Intent(
+    //                     Intent.ACTION_VIEW,
+    //                     Uri.parse(targetUrl),
+    //                 ),
+    //             )
+    //         }
+    //     }
+    // } else {
+    //     val horizontalPadding = if (message.isEmojiOnlyWithoutBubble()) 0.dp else 12.dp
+    //     val verticalPadding = if (message.isEmojiOnlyWithoutBubble()) 0.dp else 8.dp
+    //     Text(
+    //         modifier = modifier
+    //             .padding(
+    //                 horizontal = horizontalPadding,
+    //                 vertical = verticalPadding,
+    //             )
+    //             .clipToBounds(),
+    //         text = styledText,
+    //         style = style,
+    //     )
+    // }
+    val horizontalPadding = 12.dp
+    val verticalPadding = 8.dp
+    Text(
+        modifier = modifier
+            .padding(
+                horizontal = horizontalPadding,
+                vertical = verticalPadding,
+            )
+            .clipToBounds(),
+        text = message.text,
+        color = textColor
+    )
 }
 
 /**
@@ -180,7 +193,7 @@ private fun MessageTextPreview() {
         MessageText(
             message = Message(text = "Hello World!"),
             currentUser = null,
-            onLongItemClick = {},
+            // onLongItemClick = {},
         )
     }
 }
