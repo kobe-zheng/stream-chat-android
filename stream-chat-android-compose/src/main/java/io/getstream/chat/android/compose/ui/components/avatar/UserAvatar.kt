@@ -17,18 +17,24 @@
 package io.getstream.chat.android.compose.ui.components.avatar
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
@@ -97,12 +103,29 @@ public fun IconPlaceholder(
     Box(
         modifier = modifier.size(32.dp)
     ) {
-        Image(
-            modifier = modifier.clip(shape),
-            contentScale = ContentScale.FillBounds,
-            painter = painterResource(id = R.drawable.stream_compose_preview_avatar),
-            contentDescription = "Avatar Icon",
-        )
+        val avatarOffset = DpOffset(8.dp, 8.dp)
+        Box(
+            modifier = modifier
+                .clip(shape)
+                .background(color = Color(0xFF0068EF)),
+        ) {
+            Text(
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .offset(avatarOffset.x, avatarOffset.y)
+                    .fillMaxSize(),
+                text = "P+",
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+
+            )
+        }
+        // Image(
+        //     modifier = modifier.clip(shape),
+        //     contentScale = ContentScale.FillBounds,
+        //     painter = painterResource(id = R.drawable.stream_compose_preview_avatar),
+        //     contentDescription = "Avatar Icon",
+        // )
     }
     // Box(
     //     modifier = modifier

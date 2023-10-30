@@ -19,7 +19,6 @@ package io.getstream.chat.android.compose.ui.messages.list
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.AnimationConstants
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
@@ -37,7 +36,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -517,7 +515,7 @@ internal fun RegularMessageContent(
     // }
     // TODO: Change theme color of message bubbles
     val messageBubbleColor = when (ownsMessage) {
-        true -> Color.Blue
+        true -> Color(0xFF0068EF)
         else -> Color(0xFFD3D3D3)
     }
 

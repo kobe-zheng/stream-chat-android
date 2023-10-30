@@ -41,7 +41,7 @@ import io.getstream.chat.android.ui.common.utils.extensions.isMine
 /**
  * Default text element for messages, with extra styling and padding for the chat bubble.
  *
- * It detects if we have any annotations/links in the message, and if so, it uses the [ClickableText]
+ // * It detects if we have any annotations/links in the message, and if so, it uses the [ClickableText]
  * component to allow for clicks on said links, that will open the link.
  *
  * Alternatively, it just shows a basic [Text] element.
@@ -60,11 +60,12 @@ public fun MessageText(
 ) {
     // val context = LocalContext.current
 
-    // TODO: Make sure to change text color
-    val textColor = if (message.isMine(currentUser)) {
-        Color.White
-    } else {
+    // TODO: Make sure to change text color and handle message owner
+    val textColor = if (message.text.contains("from bot")) {
+        // BOT'S MESSAGE
         Color.Black
+    } else {
+        Color.White
     }
     // val styledText = buildAnnotatedMessageText(message.text, textColor)
     // val annotations = styledText.getStringAnnotations(0, styledText.lastIndex)
