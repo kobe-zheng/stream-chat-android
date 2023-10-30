@@ -24,6 +24,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -38,6 +39,7 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -45,7 +47,7 @@ import androidx.compose.ui.Alignment.Companion.BottomEnd
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.client.utils.message.isDeleted
 import io.getstream.chat.android.client.utils.message.isGiphyEphemeral
@@ -54,7 +56,6 @@ import io.getstream.chat.android.compose.ui.components.avatar.UserAvatar
 import io.getstream.chat.android.compose.ui.components.messages.MessageBubble
 import io.getstream.chat.android.compose.ui.components.messages.MessageContent
 import io.getstream.chat.android.compose.ui.components.messages.MessageFooter
-import io.getstream.chat.android.compose.ui.components.messages.MessageHeaderLabel
 import io.getstream.chat.android.compose.ui.components.messages.MessageText
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.ui.util.isFailed
@@ -182,7 +183,9 @@ public fun MessageItem(
         ) {
             leadingContent(messageItem)
 
-            Column(horizontalAlignment = messageAlignment.contentAlignment) {
+            Column(
+                horizontalAlignment = messageAlignment.contentAlignment,
+                verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 headerContent(messageItem)
 
                 centerContent(messageItem)
@@ -242,40 +245,40 @@ internal fun DefaultMessageItemHeaderContent(
     messageItem: MessageItemState,
     // onReactionsClick: (Message) -> Unit = {},
 ) {
-    val message = messageItem.message
-    val currentUser = messageItem.currentUser
+    // val message = messageItem.message
+    // val currentUser = messageItem.currentUser
 
-    if (message.pinned) {
-        val pinnedByUser = if (message.pinnedBy?.id == currentUser?.id) {
-            stringResource(id = R.string.stream_compose_message_list_you)
-        } else {
-            message.pinnedBy?.name
-        }
+    // if (message.pinned) {
+    //     val pinnedByUser = if (message.pinnedBy?.id == currentUser?.id) {
+    //         stringResource(id = R.string.stream_compose_message_list_you)
+    //     } else {
+    //         message.pinnedBy?.name
+    //     }
+    //
+    //     val pinnedByText = if (pinnedByUser != null) {
+    //         stringResource(id = R.string.stream_compose_pinned_to_channel_by, pinnedByUser)
+    //     } else {
+    //         null
+    //     }
+    //
+    //     MessageHeaderLabel(
+    //         painter = painterResource(id = R.drawable.stream_compose_ic_message_pinned),
+    //         text = pinnedByText,
+    //     )
+    // }
 
-        val pinnedByText = if (pinnedByUser != null) {
-            stringResource(id = R.string.stream_compose_pinned_to_channel_by, pinnedByUser)
-        } else {
-            null
-        }
-
-        MessageHeaderLabel(
-            painter = painterResource(id = R.drawable.stream_compose_ic_message_pinned),
-            text = pinnedByText,
-        )
-    }
-
-    if (message.showInChannel) {
-        val alsoSendToChannelTextRes = if (messageItem.isInThread) {
-            R.string.stream_compose_also_sent_to_channel
-        } else {
-            R.string.stream_compose_replied_to_thread
-        }
-
-        MessageHeaderLabel(
-            painter = painterResource(id = R.drawable.stream_compose_ic_thread),
-            text = stringResource(alsoSendToChannelTextRes),
-        )
-    }
+    // if (message.showInChannel) {
+    //     val alsoSendToChannelTextRes = if (messageItem.isInThread) {
+    //         R.string.stream_compose_also_sent_to_channel
+    //     } else {
+    //         R.string.stream_compose_replied_to_thread
+    //     }
+    //
+    //     MessageHeaderLabel(
+    //         painter = painterResource(id = R.drawable.stream_compose_ic_thread),
+    //         text = stringResource(alsoSendToChannelTextRes),
+    //     )
+    // }
 
     // if (!message.isDeleted()) {
     //     val ownReactions = message.ownReactions
@@ -307,6 +310,16 @@ internal fun DefaultMessageItemHeaderContent(
     //             )
     //         }
     // }
+
+    if (!messageItem.isMine) {
+        Text(
+            text = "Penny",
+            color = ChatTheme.colors.textLowEmphasis,
+            style = ChatTheme.typography.footnote,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
+    }
 }
 
 /**
