@@ -22,7 +22,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
@@ -39,44 +38,28 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.BottomEnd
-import androidx.compose.ui.Alignment.Companion.End
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import io.getstream.chat.android.client.utils.message.isDeleted
 import io.getstream.chat.android.client.utils.message.isGiphyEphemeral
-import io.getstream.chat.android.client.utils.message.isThreadStart
 import io.getstream.chat.android.compose.R
-import io.getstream.chat.android.compose.state.mediagallerypreview.MediaGalleryPreviewResult
-import io.getstream.chat.android.compose.state.reactionoptions.ReactionOptionItemState
 import io.getstream.chat.android.compose.ui.components.avatar.UserAvatar
 import io.getstream.chat.android.compose.ui.components.messages.MessageBubble
 import io.getstream.chat.android.compose.ui.components.messages.MessageContent
 import io.getstream.chat.android.compose.ui.components.messages.MessageFooter
 import io.getstream.chat.android.compose.ui.components.messages.MessageHeaderLabel
-import io.getstream.chat.android.compose.ui.components.messages.MessageReactions
 import io.getstream.chat.android.compose.ui.components.messages.MessageText
-import io.getstream.chat.android.compose.ui.components.messages.OwnedMessageVisibilityContent
-import io.getstream.chat.android.compose.ui.components.messages.QuotedMessage
-import io.getstream.chat.android.compose.ui.components.messages.UploadingFooter
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
-import io.getstream.chat.android.compose.ui.util.isEmojiOnlyWithoutBubble
 import io.getstream.chat.android.compose.ui.util.isFailed
-import io.getstream.chat.android.compose.ui.util.isUploading
 import io.getstream.chat.android.models.Message
 import io.getstream.chat.android.models.User
-import io.getstream.chat.android.ui.common.state.messages.list.DeletedMessageVisibility
-import io.getstream.chat.android.ui.common.state.messages.list.GiphyAction
 import io.getstream.chat.android.ui.common.state.messages.list.MessageFocused
 import io.getstream.chat.android.ui.common.state.messages.list.MessageItemState
 import io.getstream.chat.android.ui.common.state.messages.list.MessagePosition
@@ -141,9 +124,9 @@ public fun MessageItem(
             // onQuotedMessageClick = onQuotedMessageClick,
         )
     },
-    footerContent: @Composable ColumnScope.(MessageItemState) -> Unit = {
-        DefaultMessageItemFooterContent(messageItem = it)
-    },
+    // footerContent: @Composable ColumnScope.(MessageItemState) -> Unit = {
+    //     DefaultMessageItemFooterContent(messageItem = it)
+    // },
     trailingContent: @Composable RowScope.(MessageItemState) -> Unit = {
         DefaultMessageItemTrailingContent(messageItem = it)
     },
@@ -151,16 +134,13 @@ public fun MessageItem(
     val message = messageItem.message
     val focusState = messageItem.focusState
 
-    // val clickModifier = if (message.isDeleted()) {
-    //     Modifier
-    // } else {
-    //     Modifier.combinedClickable(
-    //         interactionSource = remember { MutableInteractionSource() },
-    //         indication = null,
-    //         onClick = { if (message.isThreadStart()) onThreadClick(message) },
-    //         onLongClick = { if (!message.isUploading()) onLongItemClick(message) },
-    //     )
-    // }
+    val clickModifier =
+        Modifier.combinedClickable(
+            interactionSource = remember { MutableInteractionSource() },
+            indication = null,
+            onClick = { },
+            onLongClick = { onLongItemClick(message) },
+        )
 
     val backgroundColor =
         if (focusState is MessageFocused || message.pinned) ChatTheme.colors.highlight else Color.Transparent
@@ -176,27 +156,29 @@ public fun MessageItem(
                     HighlightFadeOutDurationMillis
                 },
             ),
+            label = "",
         ).value
     } else {
         backgroundColor
     }
 
     val messageAlignment = ChatTheme.messageAlignmentProvider.provideMessageAlignment(messageItem)
-    val description = stringResource(id = R.string.stream_compose_cd_message_item)
+    // val description = stringResource(id = R.string.stream_compose_cd_message_item)
 
     Box(
         modifier = Modifier
-            .testTag("Stream_MessageItem")
+            // .testTag("Stream_MessageItem")
             .fillMaxWidth()
             .wrapContentHeight()
             .background(color = color)
-            .semantics { contentDescription = description },
+            // .semantics { contentDescription = description }
+            ,
         contentAlignment = messageAlignment.itemAlignment,
     ) {
         Row(
             modifier
                 .widthIn(max = 300.dp)
-                // .then(clickModifier),
+                .then(clickModifier),
         ) {
             leadingContent(messageItem)
 
@@ -205,7 +187,7 @@ public fun MessageItem(
 
                 centerContent(messageItem)
 
-                footerContent(messageItem)
+                // footerContent(messageItem)
             }
 
             trailingContent(messageItem)
@@ -338,25 +320,26 @@ internal fun DefaultMessageItemHeaderContent(
  * @param messageItem The message item to show the content for.
  */
 @Composable
-internal fun ColumnScope.DefaultMessageItemFooterContent(
+internal fun DefaultMessageItemFooterContent(
     messageItem: MessageItemState,
 ) {
-    val message = messageItem.message
-    when {
-        message.isUploading() -> {
-            UploadingFooter(
-                modifier = Modifier.align(End),
-                message = message,
-            )
-        }
-        message.isDeleted() &&
-            messageItem.deletedMessageVisibility == DeletedMessageVisibility.VISIBLE_FOR_CURRENT_USER -> {
-            OwnedMessageVisibilityContent(message = message)
-        }
-        else -> {
-            MessageFooter(messageItem = messageItem)
-        }
-    }
+    // val message = messageItem.message
+    // when {
+    //     message.isUploading() -> {
+    //         UploadingFooter(
+    //             modifier = Modifier.align(End),
+    //             message = message,
+    //         )
+    //     }
+    //     message.isDeleted() &&
+    //         messageItem.deletedMessageVisibility == DeletedMessageVisibility.VISIBLE_FOR_CURRENT_USER -> {
+    //         OwnedMessageVisibilityContent(message = message)
+    //     }
+    //     else -> {
+    //         MessageFooter(messageItem = messageItem)
+    //     }
+    // }
+    MessageFooter(messageItem = messageItem)
 
     val position = messageItem.groupPosition
     val spacerSize =
