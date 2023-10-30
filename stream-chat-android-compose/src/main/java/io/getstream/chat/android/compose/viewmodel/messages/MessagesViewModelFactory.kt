@@ -96,15 +96,15 @@ public class MessagesViewModelFactory(
     private val factories: Map<Class<*>, () -> ViewModel> = mapOf(
         MessageComposerViewModel::class.java to {
             MessageComposerViewModel(
-                MessageComposerController(
-                    chatClient = chatClient,
-                    mediaRecorder = mediaRecorder,
-                    fileToUri = fileToUriConverter,
-                    channelId = channelId,
-                    maxAttachmentCount = maxAttachmentCount,
-                    maxAttachmentSize = maxAttachmentSize,
-                    messageId = messageId,
-                ),
+                // MessageComposerController(
+                //     chatClient = chatClient,
+                //     mediaRecorder = mediaRecorder,
+                //     fileToUri = fileToUriConverter,
+                //     channelId = channelId,
+                //     maxAttachmentCount = maxAttachmentCount,
+                //     maxAttachmentSize = maxAttachmentSize,
+                //     messageId = messageId,
+                // ),
             )
         },
         MessageListViewModel::class.java to {

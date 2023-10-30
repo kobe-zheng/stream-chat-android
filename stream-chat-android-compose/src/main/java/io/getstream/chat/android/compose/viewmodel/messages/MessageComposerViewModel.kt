@@ -20,7 +20,6 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import io.getstream.chat.android.models.Attachment
 import io.getstream.chat.android.models.Message
-import io.getstream.chat.android.ui.common.feature.messages.composer.MessageComposerController
 import io.getstream.chat.android.ui.common.state.messages.composer.MessageComposerState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -33,10 +32,10 @@ import kotlinx.coroutines.flow.update
  * Additionally, all the core data that can be reused across our SDKs is available through shared data sources, while
  * implementation-specific data is stored in respective in the [ViewModel].
  *
- * @param messageComposerController The controller used to relay all the actions and fetch all the state.
+ // * @param messageComposerController The controller used to relay all the actions and fetch all the state.
  */
 public class MessageComposerViewModel(
-    private val messageComposerController: MessageComposerController,
+    // private val messageComposerController: MessageComposerController,
 ) : ViewModel() {
 
     private val _messageComposerState: MutableStateFlow<MessageComposerState> = MutableStateFlow(MessageComposerState())
@@ -207,7 +206,14 @@ public class MessageComposerViewModel(
     public fun buildNewMessage(
         message: String,
         attachments: List<Attachment> = emptyList(),
-    ): Message = messageComposerController.buildNewMessage(message, attachments)
+    ): Message {
+        Log.d("DEBUG", attachments.toString())
+        val trimmedMessage = message.trim()
+        return Message(
+            text = trimmedMessage,
+        )
+    }
+        // messageComposerController.buildNewMessage(message, attachments)
 
     // /**
     //  * Updates the UI state when leaving the thread, to switch back to the [MessageMode.Normal] message mode, by
@@ -250,13 +256,23 @@ public class MessageComposerViewModel(
     /**
      * Clears the input and the current state of the composer.
      */
-    public fun clearData(): Unit = messageComposerController.clearData()
-
-    /**
-     * Disposes the inner [MessageComposerController].
-     */
-    override fun onCleared() {
-        super.onCleared()
-        messageComposerController.onCleared()
+    public fun clearData() {
+        this._input.update {
+            ""
+        }
+        this._messageComposerState.update {
+            it.copy(
+                inputValue = ""
+            )
+        }
+        // messageComposerController.clearData()
     }
+
+    // /**
+    //  * Disposes the inner [MessageComposerController].
+    //  */
+    // override fun onCleared() {
+    //     super.onCleared()
+    //     messageComposerController.onCleared()
+    // }
 }
