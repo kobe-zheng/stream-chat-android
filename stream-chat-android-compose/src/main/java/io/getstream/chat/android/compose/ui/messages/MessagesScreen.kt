@@ -181,7 +181,7 @@ public fun MessagesScreen(
                 )
             },
         ) {
-            val currentState = listViewModel.currentMessagesState
+            // val currentState = listViewModel.currentMessagesState
 
             MessageList(
                 modifier = Modifier
@@ -190,7 +190,7 @@ public fun MessagesScreen(
                     .background(ChatTheme.colors.appBackground)
                     .padding(it),
                 viewModel = listViewModel,
-                messagesLazyListState = rememberMessageListState(parentMessageId = currentState.parentMessageId),
+                messagesLazyListState = rememberMessageListState(parentMessageId = null),
                 threadMessagesStart = threadMessagesStart,
                 // onThreadClick = remember(composerViewModel, listViewModel) {
                 //     {

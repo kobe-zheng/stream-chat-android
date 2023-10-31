@@ -54,7 +54,7 @@ public class MessageListViewModel(
     /**
      * State handler for the UI, which holds all the information the UI needs to render messages.
      *
-     * It chooses between [threadMessagesState] and [messagesState] based on if we're in a thread or not.
+     // * It chooses between [threadMessagesState] and [messagesState] based on if we're in a thread or not.
      */
     public val currentMessagesState: MessageListState
         // get() = if (isInThread) threadMessagesState else messagesState

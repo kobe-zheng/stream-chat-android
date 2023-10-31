@@ -90,14 +90,14 @@ private object MessageListHandlingActionsSnippet {
                     MessageList(
                         viewModel = listViewModel,
                         // Actions
-                        onThreadClick = { message -> },
-                        onLongItemClick = { message -> },
-                        onReactionsClick = { message -> },
+                        // onThreadClick = { message -> },
+                        // onLongItemClick = { message -> },
+                        // onReactionsClick = { message -> },
                         onMessagesPageStartReached = { },
                         onLastVisibleMessageChanged = { message -> },
                         onScrollToBottom = { },
-                        onGiphyActionClick = { giphyAction -> },
-                        onMediaGalleryPreviewResult = { mediaGalleryPreviewResult -> },
+                        // onGiphyActionClick = { giphyAction -> },
+                        // onMediaGalleryPreviewResult = { mediaGalleryPreviewResult -> },
                     )
                 }
             }
@@ -125,8 +125,8 @@ private object MessageListControllingScrollStateSnippet {
 
             setContent {
                 ChatTheme {
-                    val state = listViewModel.currentMessagesState
-                    val myListState = rememberMessageListState(parentMessageId = state.parentMessageId)
+                    // val state = listViewModel.currentMessagesState
+                    val myListState = rememberMessageListState(parentMessageId = null)
 
                     MessageList(
                         viewModel = listViewModel,

@@ -77,7 +77,7 @@ public fun MessageList(
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(vertical = 16.dp),
     messagesLazyListState: MessagesLazyListState =
-        rememberMessageListState(parentMessageId = viewModel.currentMessagesState.parentMessageId),
+        rememberMessageListState(parentMessageId = null),
     threadMessagesStart: ThreadMessagesStart = ThreadMessagesStart.BOTTOM,
     // onThreadClick: (Message) -> Unit = { viewModel.openMessageThread(it) },
     // onLongItemClick: (Message) -> Unit = { viewModel.selectMessage(it) },
@@ -249,7 +249,7 @@ public fun MessageList(
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(vertical = 16.dp),
     messagesLazyListState: MessagesLazyListState =
-        rememberMessageListState(parentMessageId = currentState.parentMessageId),
+        rememberMessageListState(parentMessageId = null),
     onMessagesPageStartReached: () -> Unit = {},
     onLastVisibleMessageChanged: (Message) -> Unit = {},
     onScrolledToBottom: () -> Unit = {},
