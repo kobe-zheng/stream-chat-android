@@ -173,7 +173,7 @@ public class MessageListViewModel(
 
     internal fun onBottomEndRegionReached(
         baseMessageId: String,
-        messageLimit: Int = messageListController.messageLimit,
+        messageLimit: Int = DEFAULT_MESSAGE_LIMIT,
     ) {
         // logger.i { "[onBottomEndRegionReached] baseMessageId: $baseMessageId, messageLimit: $messageLimit" }
         loadNewerMessages(baseMessageId, messageLimit)
@@ -186,7 +186,7 @@ public class MessageListViewModel(
      * @param messageId The id of the newest [Message] inside the messages list.
      * @param messageLimit The limit of messages to be loaded in the page.
      */
-    public fun loadNewerMessages(messageId: String, messageLimit: Int = messageListController.messageLimit) {
+    public fun loadNewerMessages(messageId: String, messageLimit: Int = DEFAULT_MESSAGE_LIMIT) {
         messageListController.loadNewerMessages(messageId, messageLimit)
     }
 
@@ -196,7 +196,7 @@ public class MessageListViewModel(
      *
      * @param messageLimit The limit of messages to be loaded in the page.
      */
-    public fun loadOlderMessages(messageLimit: Int = messageListController.messageLimit) {
+    public fun loadOlderMessages(messageLimit: Int = DEFAULT_MESSAGE_LIMIT) {
         messageListController.loadOlderMessages(messageLimit)
     }
 
@@ -435,7 +435,7 @@ public class MessageListViewModel(
      * @param scrollToBottom Notifies the ui to scroll to the bottom if the newest messages are in the list or have been
      * loaded from the API.
      */
-    public fun scrollToBottom(messageLimit: Int = messageListController.messageLimit, scrollToBottom: () -> Unit) {
+    public fun scrollToBottom(messageLimit: Int = DEFAULT_MESSAGE_LIMIT, scrollToBottom: () -> Unit) {
         messageListController.scrollToBottom(messageLimit, scrollToBottom)
     }
 
@@ -503,5 +503,9 @@ public class MessageListViewModel(
     override fun onCleared() {
         messageListController.onCleared()
         super.onCleared()
+    }
+
+    public companion object {
+        public const val DEFAULT_MESSAGE_LIMIT: Int = 30
     }
 }
