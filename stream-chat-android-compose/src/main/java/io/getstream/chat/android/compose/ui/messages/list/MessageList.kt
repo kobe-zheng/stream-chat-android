@@ -82,7 +82,7 @@ public fun MessageList(
     // onThreadClick: (Message) -> Unit = { viewModel.openMessageThread(it) },
     // onLongItemClick: (Message) -> Unit = { viewModel.selectMessage(it) },
     // onReactionsClick: (Message) -> Unit = { viewModel.selectReactions(it) },
-    onMessagesPageStartReached: () -> Unit = { viewModel.loadOlderMessages() },
+    onMessagesPageStartReached: () -> Unit = { /*viewModel.loadOlderMessages()*/ },
     onLastVisibleMessageChanged: (Message) -> Unit = { viewModel.updateLastSeenMessage(it) },
     onScrollToBottom: () -> Unit = { viewModel.clearNewMessageState() },
     // onGiphyActionClick: (GiphyAction) -> Unit = { viewModel.performGiphyAction(it) },

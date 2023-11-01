@@ -176,29 +176,30 @@ public class MessageListViewModel(
         messageLimit: Int = DEFAULT_MESSAGE_LIMIT,
     ) {
         // logger.i { "[onBottomEndRegionReached] baseMessageId: $baseMessageId, messageLimit: $messageLimit" }
-        loadNewerMessages(baseMessageId, messageLimit)
+        // loadNewerMessages(baseMessageId, messageLimit)
+
     }
 
-    /**
-     * Loads newer messages of a channel following the currently newest loaded message. In case of threads this will
-     * do nothing.
-     *
-     * @param messageId The id of the newest [Message] inside the messages list.
-     * @param messageLimit The limit of messages to be loaded in the page.
-     */
-    public fun loadNewerMessages(messageId: String, messageLimit: Int = DEFAULT_MESSAGE_LIMIT) {
-        messageListController.loadNewerMessages(messageId, messageLimit)
-    }
+    // /**
+    //  * Loads newer messages of a channel following the currently newest loaded message. In case of threads this will
+    //  * do nothing.
+    //  *
+    //  * @param messageId The id of the newest [Message] inside the messages list.
+    //  * @param messageLimit The limit of messages to be loaded in the page.
+    //  */
+    // public fun loadNewerMessages(messageId: String, messageLimit: Int = DEFAULT_MESSAGE_LIMIT) {
+    //     messageListController.loadNewerMessages(messageId, messageLimit)
+    // }
 
-    /**
-     * Loads older messages of a channel following the currently oldest loaded message. Also will load older messages
-     * of a thread.
-     *
-     * @param messageLimit The limit of messages to be loaded in the page.
-     */
-    public fun loadOlderMessages(messageLimit: Int = DEFAULT_MESSAGE_LIMIT) {
-        messageListController.loadOlderMessages(messageLimit)
-    }
+    // /**
+    //  * Loads older messages of a channel following the currently oldest loaded message. Also will load older messages
+    //  * of a thread.
+    //  *
+    //  * @param messageLimit The limit of messages to be loaded in the page.
+    //  */
+    // public fun loadOlderMessages(messageLimit: Int = DEFAULT_MESSAGE_LIMIT) {
+    //     messageListController.loadOlderMessages(messageLimit)
+    // }
 
     // /**
     //  * Triggered when the user long taps on and selects a message.
