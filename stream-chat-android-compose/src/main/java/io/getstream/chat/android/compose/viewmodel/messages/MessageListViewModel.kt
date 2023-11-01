@@ -20,21 +20,12 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.getstream.chat.android.compose.util.extensions.asState
-import io.getstream.chat.android.models.Channel
 import io.getstream.chat.android.models.ConnectionState
 import io.getstream.chat.android.models.Message
-import io.getstream.chat.android.models.User
-import io.getstream.chat.android.ui.common.feature.messages.list.MessageListController
-import io.getstream.chat.android.ui.common.state.messages.MessageAction
 import io.getstream.chat.android.ui.common.state.messages.MessageMode
-import io.getstream.chat.android.ui.common.state.messages.list.DeletedMessageVisibility
-import io.getstream.chat.android.ui.common.state.messages.list.MessageFooterVisibility
 import io.getstream.chat.android.ui.common.state.messages.list.MessageItemState
 import io.getstream.chat.android.ui.common.state.messages.list.MessageListItemState
 import io.getstream.chat.android.ui.common.state.messages.list.MessageListState
-import io.getstream.chat.android.ui.common.state.messages.list.NewMessageState
-import io.getstream.log.taggedLogger
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
@@ -42,11 +33,11 @@ import kotlinx.coroutines.flow.map
 /**
  * ViewModel responsible for handling all the business logic & state for the list of messages.
  *
- * @param messageListController Controller used to relay the logic and fetch the state.
+ // * @param messageListController Controller used to relay the logic and fetch the state.
  */
 @Suppress("TooManyFunctions", "LargeClass", "TooManyFunctions")
 public class MessageListViewModel(
-    internal val messageListController: MessageListController,
+    // internal val messageListController: MessageListController,
 ) : ViewModel() {
 
     // private val logger by taggedLogger("Chat:MessageListVM")
@@ -130,19 +121,24 @@ public class MessageListViewModel(
     //     get() = currentMessagesState.selectedMessageState != null
 
     /**
+     * Current state of the message list.
+     */
+    private val _connectionState: MutableStateFlow<ConnectionState> =
+        MutableStateFlow(ConnectionState.Connected)
+    /**
      * Gives us information about the online state of the device.
      */
-    public val connectionState: StateFlow<ConnectionState> = messageListController.connectionState
+    public val connectionState: StateFlow<ConnectionState> = _connectionState
 
     // /**
     //  * Gives us information about the online state of the device.
     //  */
     // public val isOnline: Flow<Boolean> = messageListController.connectionState.map { it is ConnectionState.Connected }
 
-    /**
-     * Gives us information about the logged in user state.
-     */
-    public val user: StateFlow<User?> = messageListController.user
+    // /**
+    //  * Gives us information about the logged in user state.
+    //  */
+    // public val user: StateFlow<User?> = messageListController.user
 
     // /**
     //  * Determines whether we should show system messages or not.
@@ -497,13 +493,13 @@ public class MessageListViewModel(
     //     messageListController.setSystemMessageVisibility(areSystemMessagesVisible)
     // }
 
-    /**
-     * Clears the [MessageListController] coroutine scope.
-     */
-    override fun onCleared() {
-        messageListController.onCleared()
-        super.onCleared()
-    }
+    // /**
+    //  * Clears the [MessageListController] coroutine scope.
+    //  */
+    // override fun onCleared() {
+    //     messageListController.onCleared()
+    //     super.onCleared()
+    // }
 
     public companion object {
         public const val DEFAULT_MESSAGE_LIMIT: Int = 30

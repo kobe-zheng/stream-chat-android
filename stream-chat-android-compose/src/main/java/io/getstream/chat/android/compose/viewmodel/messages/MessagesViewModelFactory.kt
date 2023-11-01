@@ -25,7 +25,6 @@ import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.setup.state.ClientState
 import io.getstream.chat.android.compose.ui.util.StorageHelperWrapper
 import io.getstream.chat.android.models.Message
-import io.getstream.chat.android.ui.common.feature.messages.composer.MessageComposerController
 import io.getstream.chat.android.ui.common.feature.messages.list.DateSeparatorHandler
 import io.getstream.chat.android.ui.common.feature.messages.list.MessageListController
 import io.getstream.chat.android.ui.common.feature.messages.list.MessagePositionHandler
@@ -109,23 +108,23 @@ public class MessagesViewModelFactory(
         },
         MessageListViewModel::class.java to {
             MessageListViewModel(
-                MessageListController(
-                    cid = channelId,
-                    clipboardHandler = clipboardHandler,
-                    messageId = messageId,
-                    parentMessageId = parentMessageId,
-                    messageLimit = messageLimit,
-                    chatClient = chatClient,
-                    clientState = clientState,
-                    enforceUniqueReactions = enforceUniqueReactions,
-                    showSystemMessages = showSystemMessages,
-                    deletedMessageVisibility = deletedMessageVisibility,
-                    messageFooterVisibility = messageFooterVisibility,
-                    dateSeparatorHandler = dateSeparatorHandler,
-                    threadDateSeparatorHandler = threadDateSeparatorHandler,
-                    messagePositionHandler = messagePositionHandler,
-                    showDateSeparatorInEmptyThread = showDateSeparatorInEmptyThread,
-                ),
+                // MessageListController(
+                //     cid = channelId,
+                //     clipboardHandler = clipboardHandler,
+                //     messageId = messageId,
+                //     parentMessageId = parentMessageId,
+                //     messageLimit = messageLimit,
+                //     chatClient = chatClient,
+                //     clientState = clientState,
+                //     enforceUniqueReactions = enforceUniqueReactions,
+                //     showSystemMessages = showSystemMessages,
+                //     deletedMessageVisibility = deletedMessageVisibility,
+                //     messageFooterVisibility = messageFooterVisibility,
+                //     dateSeparatorHandler = dateSeparatorHandler,
+                //     threadDateSeparatorHandler = threadDateSeparatorHandler,
+                //     messagePositionHandler = messagePositionHandler,
+                //     showDateSeparatorInEmptyThread = showDateSeparatorInEmptyThread,
+                // ),
             )
         },
         AttachmentsPickerViewModel::class.java to {

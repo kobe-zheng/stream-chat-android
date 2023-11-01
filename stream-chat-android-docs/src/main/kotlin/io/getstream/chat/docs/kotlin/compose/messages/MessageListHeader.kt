@@ -26,6 +26,7 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 import io.getstream.chat.android.compose.viewmodel.messages.MessageListViewModel
 import io.getstream.chat.android.compose.viewmodel.messages.MessagesViewModelFactory
 import io.getstream.chat.android.models.Channel
+import io.getstream.chat.android.models.User
 import io.getstream.chat.docs.R
 
 /**
@@ -139,7 +140,7 @@ private object MessageListHeaderCustomizationSnippet {
             setContent {
                 ChatTheme {
                     // val channel = listViewModel.channel
-                    val currentUser by listViewModel.user.collectAsState()
+                    // val currentUser by listViewModel.user.collectAsState()
                     val connectionState by listViewModel.connectionState.collectAsState()
 
                     MessageListHeader(
@@ -149,7 +150,7 @@ private object MessageListHeaderCustomizationSnippet {
                             ChannelAvatar(
                                 modifier = Modifier.size(40.dp),
                                 channel = Channel(),
-                                currentUser = currentUser,
+                                currentUser = User(),
                             )
                         },
                         trailingContent = { InfoButton() },
