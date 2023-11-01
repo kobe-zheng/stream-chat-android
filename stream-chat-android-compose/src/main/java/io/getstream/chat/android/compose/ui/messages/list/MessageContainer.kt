@@ -299,18 +299,25 @@ internal fun DefaultTypingIndicatorItem(
             offsetY = animatedOffsetY.dp
         }
 
-        Column (
-            verticalArrangement = Arrangement.Bottom,
-        ){
-            Spacer(modifier = Modifier.height(offsetY))
-            Text(
+
+        Box(
+            modifier = Modifier.height(25.dp),
+            contentAlignment = Alignment.BottomStart
+        ) {
+            Column (
+                verticalArrangement = Arrangement.Bottom,
+            ){
+                Text(
                     text = "typing . . .",
                     color = ChatTheme.colors.textLowEmphasis,
                     style = ChatTheme.typography.footnote,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
+                Spacer(modifier = Modifier.height(offsetY))
+            }
         }
+
     },
     centerContent: @Composable ColumnScope.() -> Unit = {
         MessageBubble(
