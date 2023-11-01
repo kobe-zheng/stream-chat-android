@@ -26,6 +26,7 @@ import io.getstream.chat.android.ui.common.state.messages.MessageMode
 import io.getstream.chat.android.ui.common.state.messages.list.MessageItemState
 import io.getstream.chat.android.ui.common.state.messages.list.MessageListItemState
 import io.getstream.chat.android.ui.common.state.messages.list.MessageListState
+import io.getstream.chat.android.ui.common.state.messages.list.TypingItemState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
@@ -55,7 +56,10 @@ public class MessageListViewModel(
      * Current state of the message list.
      */
     private val _messageListState: MutableStateFlow<MessageListState> =
-        MutableStateFlow(MessageListState(isLoading = false))
+        MutableStateFlow(MessageListState(
+            isLoading = false,
+            messageItems = listOf(TypingItemState(typingUsers = emptyList()))
+        ))
     private val messageListState: StateFlow<MessageListState> = _messageListState
 
     /**
