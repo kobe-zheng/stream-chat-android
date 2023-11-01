@@ -88,14 +88,14 @@ public fun Messages(
     onLastVisibleMessageChanged: (Message) -> Unit,
     onScrolledToBottom: () -> Unit,
     onMessagesEndReached: (String) -> Unit,
-    onScrollToBottom: (() -> Unit) -> Unit,
+    // onScrollToBottom: (() -> Unit) -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(vertical = 16.dp),
     helperContent: @Composable BoxScope.() -> Unit = {
         DefaultMessagesHelperContent(
             messagesState = messagesState,
             messagesLazyListState = messagesLazyListState,
-            scrollToBottom = onScrollToBottom,
+            // scrollToBottom = onScrollToBottom,
         )
     },
     loadingMoreContent: @Composable () -> Unit = { DefaultMessagesLoadingMoreIndicator() },
@@ -240,7 +240,7 @@ private fun OnLastVisibleItemChanged(lazyListState: LazyListState, onChanged: (f
 internal fun BoxScope.DefaultMessagesHelperContent(
     messagesState: MessageListState,
     messagesLazyListState: MessagesLazyListState,
-    scrollToBottom: (() -> Unit) -> Unit,
+    // scrollToBottom: (() -> Unit) -> Unit,
 ) {
     val lazyListState = messagesLazyListState.lazyListState
 
@@ -293,14 +293,14 @@ internal fun BoxScope.DefaultMessagesHelperContent(
             unreadCount = messagesState.unreadCount,
             modifier = Modifier.align(Alignment.BottomEnd),
             onClick = {
-                scrollToBottom {
+                // scrollToBottom {
                     coroutineScope.launch {
                         if (firstVisibleItemIndex.value > 5) {
                             lazyListState.scrollToItem(5)
                         }
                         lazyListState.animateScrollToItem(0)
                     }
-                }
+                // }
             },
         )
     }

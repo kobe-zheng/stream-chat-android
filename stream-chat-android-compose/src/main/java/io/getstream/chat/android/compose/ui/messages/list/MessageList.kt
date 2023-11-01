@@ -103,14 +103,14 @@ public fun MessageList(
     },
      */
     onMessagesPageEndReached: (String) -> Unit = { viewModel.onBottomEndRegionReached(it) },
-    onScrollToBottomClicked: (() -> Unit) -> Unit = { viewModel.scrollToBottom(scrollToBottom = it) },
+    onScrollToBottomClicked: (() -> Unit) -> Unit = { /* viewModel.scrollToBottom(scrollToBottom = it)*/ },
     loadingContent: @Composable () -> Unit = { DefaultMessageListLoadingIndicator(modifier) },
     emptyContent: @Composable () -> Unit = { DefaultMessageListEmptyContent(modifier) },
     helperContent: @Composable BoxScope.() -> Unit = {
         DefaultMessagesHelperContent(
             messagesState = viewModel.currentMessagesState,
             messagesLazyListState = messagesLazyListState,
-            scrollToBottom = onScrollToBottomClicked,
+            // scrollToBottom = onScrollToBottomClicked,
         )
     },
     loadingMoreContent: @Composable () -> Unit = { DefaultMessagesLoadingMoreIndicator() },
@@ -145,7 +145,7 @@ public fun MessageList(
         emptyContent = emptyContent,
         // onQuotedMessageClick = onQuotedMessageClick,
         onMessagesPageEndReached = onMessagesPageEndReached,
-        onScrollToBottom = onScrollToBottomClicked,
+        // onScrollToBottom = onScrollToBottomClicked,
     )
 }
 
@@ -260,14 +260,14 @@ public fun MessageList(
     // onGiphyActionClick: (GiphyAction) -> Unit = {},
     // onQuotedMessageClick: (Message) -> Unit = {},
     onMessagesPageEndReached: (String) -> Unit = {},
-    onScrollToBottom: (() -> Unit) -> Unit = {},
+    // onScrollToBottom: (() -> Unit) -> Unit = {},
     loadingContent: @Composable () -> Unit = { DefaultMessageListLoadingIndicator(modifier) },
     emptyContent: @Composable () -> Unit = { DefaultMessageListEmptyContent(modifier) },
     helperContent: @Composable BoxScope.() -> Unit = {
         DefaultMessagesHelperContent(
             messagesState = currentState,
             messagesLazyListState = messagesLazyListState,
-            scrollToBottom = onScrollToBottom,
+            // scrollToBottom = onScrollToBottom,
         )
     },
     loadingMoreContent: @Composable () -> Unit = { DefaultMessagesLoadingMoreIndicator() },
@@ -301,7 +301,7 @@ public fun MessageList(
             loadingMoreContent = loadingMoreContent,
             itemContent = itemContent,
             onMessagesEndReached = onMessagesPageEndReached,
-            onScrollToBottom = onScrollToBottom,
+            // onScrollToBottom = onScrollToBottom,
         )
         else -> emptyContent()
     }

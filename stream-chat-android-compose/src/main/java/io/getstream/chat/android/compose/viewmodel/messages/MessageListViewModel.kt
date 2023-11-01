@@ -410,35 +410,35 @@ public class MessageListViewModel(
     //     messageListController.performGiphyAction(action)
     // }
 
-    /**
-     * Scrolls to message if in list otherwise get the message from backend. Does not work for threads.
-     *
-     * @param messageId The [Message] id we wish to scroll to.
-     * @param parentMessageId The ID of the parent [Message] if the message we want to scroll to is in a thread. If the
-     * message we want to scroll to is not in a thread, you can pass in a null value.
-     */
-    public fun scrollToMessage(
-        messageId: String,
-        parentMessageId: String?,
-    ) {
-        messageListController.scrollToMessage(
-            messageId = messageId,
-            parentMessageId = parentMessageId,
-        )
-    }
+    // /**
+    //  * Scrolls to message if in list otherwise get the message from backend. Does not work for threads.
+    //  *
+    //  * @param messageId The [Message] id we wish to scroll to.
+    //  * @param parentMessageId The ID of the parent [Message] if the message we want to scroll to is in a thread. If the
+    //  * message we want to scroll to is not in a thread, you can pass in a null value.
+    //  */
+    // public fun scrollToMessage(
+    //     messageId: String,
+    //     parentMessageId: String?,
+    // ) {
+    //     messageListController.scrollToMessage(
+    //         messageId = messageId,
+    //         parentMessageId = parentMessageId,
+    //     )
+    // }
 
-    /**
-     * Requests that the list scrolls to the bottom to the newest messages. If the newest messages are loaded will set
-     * scroll the list to the bottom. If they are not loaded will request the newest data and once loaded will scroll
-     * to the bottom of the list.
-     *
-     * @param messageLimit The message count we wish to load from the API when loading new messages.
-     * @param scrollToBottom Notifies the ui to scroll to the bottom if the newest messages are in the list or have been
-     * loaded from the API.
-     */
-    public fun scrollToBottom(messageLimit: Int = DEFAULT_MESSAGE_LIMIT, scrollToBottom: () -> Unit) {
-        messageListController.scrollToBottom(messageLimit, scrollToBottom)
-    }
+    // /**
+    //  * Requests that the list scrolls to the bottom to the newest messages. If the newest messages are loaded will set
+    //  * scroll the list to the bottom. If they are not loaded will request the newest data and once loaded will scroll
+    //  * to the bottom of the list.
+    //  *
+    //  * @param messageLimit The message count we wish to load from the API when loading new messages.
+    //  * @param scrollToBottom Notifies the ui to scroll to the bottom if the newest messages are in the list or have been
+    //  * loaded from the API.
+    //  */
+    // public fun scrollToBottom(messageLimit: Int = DEFAULT_MESSAGE_LIMIT, scrollToBottom: () -> Unit) {
+    //     messageListController.scrollToBottom(messageLimit, scrollToBottom)
+    // }
 
     // /**
     //  * Sets a handler which determines the position of a message inside a group.
