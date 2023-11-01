@@ -161,24 +161,23 @@ public class MessageListViewModel(
     // public val deletedMessageVisibilityState: DeletedMessageVisibility by messageListController
     //     .deletedMessageVisibilityState.asState(viewModelScope)
 
-    /**
-     * Attempts to update the last seen message in the channel or thread. We only update the last seen message the first
-     * time the data loads and whenever we see a message that's newer than the current last seen message.
-     *
-     * @param message The message that is currently seen by the user.
-     */
-    public fun updateLastSeenMessage(message: Message) {
-        messageListController.updateLastSeenMessage(message)
-    }
-
-    internal fun onBottomEndRegionReached(
-        baseMessageId: String,
-        messageLimit: Int = DEFAULT_MESSAGE_LIMIT,
-    ) {
-        // logger.i { "[onBottomEndRegionReached] baseMessageId: $baseMessageId, messageLimit: $messageLimit" }
-        // loadNewerMessages(baseMessageId, messageLimit)
-
-    }
+    // /**
+    //  * Attempts to update the last seen message in the channel or thread. We only update the last seen message the first
+    //  * time the data loads and whenever we see a message that's newer than the current last seen message.
+    //  *
+    //  * @param message The message that is currently seen by the user.
+    //  */
+    // public fun updateLastSeenMessage(message: Message) {
+    //     messageListController.updateLastSeenMessage(message)
+    // }
+    //
+    // internal fun onBottomEndRegionReached(
+    //     baseMessageId: String,
+    //     messageLimit: Int = DEFAULT_MESSAGE_LIMIT,
+    // ) {
+    //     logger.i { "[onBottomEndRegionReached] baseMessageId: $baseMessageId, messageLimit: $messageLimit" }
+    //     loadNewerMessages(baseMessageId, messageLimit)
+    // }
 
     // /**
     //  * Loads newer messages of a channel following the currently newest loaded message. In case of threads this will
@@ -383,13 +382,13 @@ public class MessageListViewModel(
     //     messageListController.removeOverlay()
     // }
 
-    /**
-     * Clears the [NewMessageState] from our UI state, after the user taps on the "Scroll to bottom"
-     * or "New Message" actions in the list or simply scrolls to the bottom.
-     */
-    public fun clearNewMessageState() {
-        messageListController.clearNewMessageState()
-    }
+    // /**
+    //  * Clears the [NewMessageState] from our UI state, after the user taps on the "Scroll to bottom"
+    //  * or "New Message" actions in the list or simply scrolls to the bottom.
+    //  */
+    // public fun clearNewMessageState() {
+    //     messageListController.clearNewMessageState()
+    // }
 
     // /**
     //  * Returns a message with the given ID from the [currentMessagesState].

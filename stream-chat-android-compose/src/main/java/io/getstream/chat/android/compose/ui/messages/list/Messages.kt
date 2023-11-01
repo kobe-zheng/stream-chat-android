@@ -84,10 +84,10 @@ public fun Messages(
     messagesState: MessageListState,
     messagesLazyListState: MessagesLazyListState,
     threadMessagesStart: ThreadMessagesStart = ThreadMessagesStart.BOTTOM,
-    onMessagesStartReached: () -> Unit,
-    onLastVisibleMessageChanged: (Message) -> Unit,
-    onScrolledToBottom: () -> Unit,
-    onMessagesEndReached: (String) -> Unit,
+    // onMessagesStartReached: () -> Unit,
+    // onLastVisibleMessageChanged: (Message) -> Unit,
+    // onScrolledToBottom: () -> Unit,
+    // onMessagesEndReached: (String) -> Unit,
     // onScrollToBottom: (() -> Unit) -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(vertical = 16.dp),
@@ -159,26 +159,26 @@ public fun Messages(
                 Box(modifier = messageItemModifier) {
                     itemContent(item)
 
-                    if (index == 0 && lazyListState.isScrollInProgress) {
-                        onScrolledToBottom()
-                    }
+                    // if (index == 0 && lazyListState.isScrollInProgress) {
+                    //     onScrolledToBottom()
+                    // }
 
-                    if (!endOfMessages &&
-                        index == messages.lastIndex &&
-                        messages.isNotEmpty() &&
-                        lazyListState.isScrollInProgress
-                    ) {
-                        onMessagesStartReached()
-                    }
+                    // if (!endOfMessages &&
+                    //     index == messages.lastIndex &&
+                    //     messages.isNotEmpty() &&
+                    //     lazyListState.isScrollInProgress
+                    // ) {
+                    //     onMessagesStartReached()
+                    // }
 
-                    val newestMessageItem = (messages.firstOrNull { it is MessageItemState } as? MessageItemState)
-                    if (!startOfMessages &&
-                        index == 0 &&
-                        messages.isNotEmpty() &&
-                        lazyListState.isScrollInProgress
-                    ) {
-                        newestMessageItem?.message?.id?.let(onMessagesEndReached)
-                    }
+                    // val newestMessageItem = (messages.firstOrNull { it is MessageItemState } as? MessageItemState)
+                    // if (!startOfMessages &&
+                    //     index == 0 &&
+                    //     messages.isNotEmpty() &&
+                    //     lazyListState.isScrollInProgress
+                    // ) {
+                    //     newestMessageItem?.message?.id?.let(onMessagesEndReached)
+                    // }
                 }
             }
 
@@ -192,14 +192,14 @@ public fun Messages(
         helperContent()
     }
 
-    /** Marks the bottom most item as read every time it changes. **/
-    OnLastVisibleItemChanged(lazyListState) { messageIndex ->
-        val message = messagesState.messageItems.getOrNull(messageIndex)
-
-        if (message is MessageItemState) {
-            onLastVisibleMessageChanged(message.message)
-        }
-    }
+    // /** Marks the bottom most item as read every time it changes. **/
+    // OnLastVisibleItemChanged(lazyListState) { messageIndex ->
+    //     val message = messagesState.messageItems.getOrNull(messageIndex)
+    //
+    //     if (message is MessageItemState) {
+    //         onLastVisibleMessageChanged(message.message)
+    //     }
+    // }
 }
 
 /**
