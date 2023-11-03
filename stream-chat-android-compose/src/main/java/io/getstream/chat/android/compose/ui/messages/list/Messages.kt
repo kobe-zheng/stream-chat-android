@@ -131,7 +131,7 @@ public fun Messages(
                 },
             state = lazyListState,
             horizontalAlignment = Alignment.Start,
-            verticalArrangement = threadMessagesStart.from(messagesState),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
             reverseLayout = true,
             contentPadding = contentPadding,
         ) {
