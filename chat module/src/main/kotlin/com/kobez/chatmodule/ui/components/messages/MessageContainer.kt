@@ -36,6 +36,7 @@ import com.kobez.chatmodule.state.MessageItemState
 import com.kobez.chatmodule.state.MessageListItemState
 import com.kobez.chatmodule.state.TypingItemState
 import com.kobez.chatmodule.theme.ChatTheme
+import com.kobez.chatmodule.ui.components.IconPlaceholder
 
 /**
  * Represents the message item container that allows us to customize each type of item in the MessageList.

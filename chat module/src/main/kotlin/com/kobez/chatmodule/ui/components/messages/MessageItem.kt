@@ -26,6 +26,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.kobez.chatmodule.state.MessageItemState
 import com.kobez.chatmodule.theme.ChatTheme
+import com.kobez.chatmodule.ui.components.IconPlaceholder
 
 /**
  * The default message container for all messages in the Conversation/Messages screen.
