@@ -1,4 +1,4 @@
-package com.kobez.chatmodule.ui.components.messages
+package com.kobez.chatmodule.ui.messages
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -17,6 +17,10 @@ import com.kobez.chatmodule.state.MessageListState
 import com.kobez.chatmodule.state.MessagesLazyListState
 import com.kobez.chatmodule.theme.ChatTheme
 import com.kobez.chatmodule.ui.components.LoadingIndicator
+import com.kobez.chatmodule.ui.components.messages.DefaultMessagesHelperContent
+import com.kobez.chatmodule.ui.components.messages.DefaultMessagesLoadingMoreIndicator
+import com.kobez.chatmodule.ui.components.messages.MessageContainer
+import com.kobez.chatmodule.ui.components.messages.Messages
 import com.kobez.chatmodule.util.rememberMessageListState
 import com.kobez.chatmodule.viewmodels.MessageListViewModel
 
@@ -32,20 +36,6 @@ import com.kobez.chatmodule.viewmodels.MessageListViewModel
  * @param contentPadding Padding values to be applied to the message list surrounding the content inside.
  * @param messagesLazyListState State of the lazy list that represents the list of messages. Useful for controlling the
  * scroll state and focused message offset.
- * @param threadMessagesStart Thread messages start at the bottom or top of the screen.
- * Default: [ThreadMessagesStart.BOTTOM].
- * @param onThreadClick Handler when the user taps on the message, while there's a thread going.
- * @param onLongItemClick Handler for when the user long taps on a message and selects it.
- * @param onReactionsClick Handler when the user taps on message reactions and selects them.
- * @param onMessagesPageStartReached Handler for pagination when the end of the oldest messages has been reached.
- * @param onLastVisibleMessageChanged Handler that notifies us when the user scrolls and the last visible message
- * changes.
- * @param onScrollToBottom Handler when the user reaches the bottom.
- * @param onGiphyActionClick Handler when the user clicks on a giphy action such as shuffle, send or cancel.
- * @param onQuotedMessageClick Handler for quoted message click action.
- * @param onMediaGalleryPreviewResult Handler when the user selects an option in the Media Gallery Preview screen.
- * @param onMessagesPageEndReached Handler for pagination when the end of newest messages have been reached.
- * @param onScrollToBottomClicked Handler when the user requests to scroll to the bottom of the messages list.
  * @param loadingContent Composable that represents the loading content, when we're loading the initial data.
  * @param emptyContent Composable that represents the empty content if there are no messages.
  * @param helperContent Composable that, by default, represents the helper content featuring scrolling behavior based
@@ -68,7 +58,6 @@ public fun MessageList(
         DefaultMessagesHelperContent(
             messagesState = viewModel.currentMessagesState,
             messagesLazyListState = messagesLazyListState,
-            // scrollToBottom = onScrollToBottomClicked,
         )
     },
     loadingMoreContent: @Composable () -> Unit = { DefaultMessagesLoadingMoreIndicator() },

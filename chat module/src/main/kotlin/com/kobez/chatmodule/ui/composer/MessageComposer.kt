@@ -1,4 +1,4 @@
-package com.kobez.chatmodule.ui.messages.composer
+package com.kobez.chatmodule.ui.composer
 
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
