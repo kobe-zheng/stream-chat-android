@@ -37,6 +37,7 @@ dependencies {
     // Android Material
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.compose.material3:material3:1.1.2")
+    implementation("androidx.compose.material:material-android:1.5.2")
 
     // compose
     implementation("androidx.compose.runtime:runtime:1.5.4")

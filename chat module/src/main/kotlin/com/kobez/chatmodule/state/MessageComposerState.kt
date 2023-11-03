@@ -11,4 +11,5 @@ import com.kobez.chatmodule.models.User
 public data class MessageComposerState @JvmOverloads constructor(
     val inputValue: String = "",
     val currentUser: User? = null,
+    val coolDownTime: Int = 0,
 )
