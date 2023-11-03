@@ -41,6 +41,7 @@ dependencies {
 
     // compose
     implementation("androidx.compose.runtime:runtime:1.5.4")
+    implementation("androidx.compose.ui:ui-tooling-android:1.5.4")
 
 
     testImplementation("junit:junit:4.13.2")
