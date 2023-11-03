@@ -45,6 +45,7 @@ buildscript {
         classpath Dependencies.spotlessGradlePlugin
         classpath Dependencies.ksp
         classpath Dependencies.detektPlugin
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0'
     }
 }
 

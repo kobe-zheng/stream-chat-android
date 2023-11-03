@@ -61,3 +61,4 @@ gradleEnterprise {
 		termsOfServiceAgree = "yes"
 	}
 }
+include ':chat module'
